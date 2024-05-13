@@ -22,7 +22,6 @@ const authClient = asyncHandler(async (req, res) => {
     res.status(401);
     throw new Error('Invalid email or password');
   }
-  res.status(200).json({ message: 'Auth client' });
 });
 
 // @desc    Register a new client

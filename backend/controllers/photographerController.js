@@ -23,8 +23,6 @@ const authPhotographer = asyncHandler(async (req, res) => {
     res.status(401);
     throw new Error('Invalid email or password');
   }
-
-  res.status(200).json({ message: 'Login photographer' });
 });
 
 // @desc    Register a new photographer
