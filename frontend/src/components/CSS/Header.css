@@ -3,6 +3,10 @@
     width: 100%;
 }
 
+.logo {
+    /* background-color: red; */
+}
+
 .logoSection {
     margin-top: -60px;
     cursor: pointer;
@@ -10,4 +14,17 @@
 
 .toggle, .linkSection {
     margin-top: -70px;
+}
+
+@media(max-width: 1024px) {
+    .logoSection {
+        margin-top: 20px;
+    }
+    .logo {
+        width: 20%;
+    }
+    .toggle {
+        
+        margin-top: 20px;
+    }
 }

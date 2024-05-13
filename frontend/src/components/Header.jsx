@@ -28,7 +28,7 @@ const Header = () => {
   };
 
   return (
-    <header className="header">
+    <div className="header">
       <Navbar bg="transparent" variant="dark" expand="lg" collapseOnSelect>
         <Container fluid style={{ marginLeft: '50px', marginRight: '50px' }}>
           <LinkContainer to="/" className="logoSection">
@@ -63,9 +63,9 @@ const Header = () => {
                     }
                     id="username"
                   >
-                    {/* <LinkContainer to="/profile">
+                    <LinkContainer to="/profile">
                       <NavDropdown.Item>Profile</NavDropdown.Item>
-                    </LinkContainer> */}
+                    </LinkContainer>
                     <NavDropdown.Item onClick={logoutHandler}>
                       Logout
                     </NavDropdown.Item>
@@ -89,7 +89,7 @@ const Header = () => {
           </Navbar.Collapse>
         </Container>
       </Navbar>
-    </header>
+    </div>
   );
 };
 
