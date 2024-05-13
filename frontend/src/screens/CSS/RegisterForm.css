@@ -1,0 +1,11 @@
+
+.registerForm {
+   width: 100%;
+}
+
+@media(max-width: 768px) {
+    .registerForm {
+        position: absolute;
+        margin-top: 30%;
+    }
+}

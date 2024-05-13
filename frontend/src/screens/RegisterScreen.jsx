@@ -9,6 +9,7 @@ import { useRegisterOwnerMutation } from '../slices/locationOwnerApiSlices';
 import { useRegisterClientMutation } from '../slices/clientApiSlices';
 import { setCredentials } from '../slices/authSlice';
 import { toast } from 'react-toastify';
+import './CSS/RegisterForm.css';
 
 const RegisterScreen = () => {
   const [firstName, setFirstName] = useState('');
@@ -138,184 +139,191 @@ const RegisterScreen = () => {
     }
   };
   return (
-    <FormContainer>
-      <h1>Register</h1>
-      <Row className="mb-4">
-        <p>I'm signing as a</p>
-        <Col>
-          <input
-            type="radio"
-            onClick={handlePhotographer}
-            name="loginUsers"
-            id=""
-          />{' '}
-          <label htmlFor="">Photographer</label>
-        </Col>
-
-        <Col>
-          <input type="radio" onClick={handleClient} name="loginUsers" id="" />{' '}
-          <label htmlFor="">Client</label>
-        </Col>
-
-        <Col>
-          <input
-            type="radio"
-            onClick={handleLocationOwner}
-            name="loginUsers"
-            id=""
-          />{' '}
-          <label htmlFor="">Location owner</label>
-        </Col>
-      </Row>
-      <Form onSubmit={submitHandler}>
-        <Row>
+    <div className="registerForm">
+      <FormContainer>
+        <h1>Register</h1>
+        <Row className="mb-4">
+          <p>I'm signing as a</p>
           <Col>
-            <Form.Group className="my-2" controlId="firstName">
-              <Form.Label>First Name</Form.Label>
-              <Form.Control
-                type="firstName"
-                placeholder="Enter first name"
-                value={firstName}
-                onChange={(e) => setFirstName(e.target.value)}
-              ></Form.Control>
-            </Form.Group>
+            <input
+              type="radio"
+              onClick={handlePhotographer}
+              name="loginUsers"
+              id=""
+            />{' '}
+            <label htmlFor="">Photographer</label>
           </Col>
 
           <Col>
-            <Form.Group className="my-2" controlId="lastName">
-              <Form.Label>Last Name</Form.Label>
-              <Form.Control
-                type="name"
-                placeholder="Enter last name"
-                value={lastName}
-                onChange={(e) => setLastName(e.target.value)}
-              ></Form.Control>
-            </Form.Group>
+            <input
+              type="radio"
+              onClick={handleClient}
+              name="loginUsers"
+              id=""
+            />{' '}
+            <label htmlFor="">Client</label>
+          </Col>
+
+          <Col>
+            <input
+              type="radio"
+              onClick={handleLocationOwner}
+              name="loginUsers"
+              id=""
+            />{' '}
+            <label htmlFor="">Location owner</label>
           </Col>
         </Row>
-
-        <Form.Group className="my-2" controlId="email">
-          <Form.Label>Email Address</Form.Label>
-          <Form.Control
-            type="email"
-            placeholder="Enter email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          ></Form.Control>
-        </Form.Group>
-        <Row>
-          <Col>
-            <Form.Group className="my-2" controlId="password">
-              <Form.Label>Password</Form.Label>
-              <Form.Control
-                type="password"
-                placeholder="Enter password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-              ></Form.Control>
-            </Form.Group>
-          </Col>
-
-          <Col>
-            <Form.Group className="my-2" controlId="confirmPassword">
-              <Form.Label>Confirm Password</Form.Label>
-              <Form.Control
-                type="password"
-                placeholder="Confirm password"
-                value={confirmPassword}
-                onChange={(e) => setConfirmPassword(e.target.value)}
-              ></Form.Control>
-            </Form.Group>
-          </Col>
-        </Row>
-        {status !== 'client' && (
+        <Form onSubmit={submitHandler}>
           <Row>
             <Col>
-              <Form.Group className="my-2" controlId="whatsAppNumber">
-                <Form.Label>Whatsapp Number</Form.Label>
+              <Form.Group className="my-2" controlId="firstName">
+                <Form.Label>First Name</Form.Label>
                 <Form.Control
-                  type="tel"
-                  placeholder="Enter whatsapp number"
-                  value={whatsAppNumber}
-                  onChange={(e) => setWhatsAppNumber(e.target.value)}
+                  type="firstName"
+                  placeholder="Enter first name"
+                  value={firstName}
+                  onChange={(e) => setFirstName(e.target.value)}
                 ></Form.Control>
               </Form.Group>
             </Col>
 
             <Col>
-              <Form.Group className="my-2" controlId="instagramLink">
-                <Form.Label>Instagram Link</Form.Label>
+              <Form.Group className="my-2" controlId="lastName">
+                <Form.Label>Last Name</Form.Label>
                 <Form.Control
                   type="name"
-                  placeholder="Enter instagram link"
-                  value={instagramLink}
-                  onChange={(e) => setInstagramLink(e.target.value)}
-                ></Form.Control>
-              </Form.Group>
-            </Col>
-
-            <Col>
-              <Form.Group className="my-2" controlId="faceBookLink">
-                <Form.Label>Facebook Link</Form.Label>
-                <Form.Control
-                  type="name"
-                  placeholder="Enter facebook link"
-                  value={faceBookLink}
-                  onChange={(e) => setFaceBookLink(e.target.value)}
+                  placeholder="Enter last name"
+                  value={lastName}
+                  onChange={(e) => setLastName(e.target.value)}
                 ></Form.Control>
               </Form.Group>
             </Col>
           </Row>
-        )}
 
-        {status === 'photographer' ? (
-          <Form.Group className="my-2" controlId="name">
-            <Form.Label>Your Portfolio</Form.Label>
+          <Form.Group className="my-2" controlId="email">
+            <Form.Label>Email Address</Form.Label>
             <Form.Control
-              type="file"
-              onChange={(e) => setFile(e.target.files[0])}
-            />
+              type="email"
+              placeholder="Enter email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            ></Form.Control>
           </Form.Group>
-        ) : status === 'locationOwner' ? (
-          <Form.Group className="my-2" controlId="name">
-            <Form.Label>Photos of Location (maximum 5 images)</Form.Label>
-            <Form.Control type="file" onChange={handleFileChange} multiple />
-            {files.length === 5 && (
-              <Form.Text className="text-muted">
-                You have reached the maximum limit of 5 images.
-              </Form.Text>
-            )}
-          </Form.Group>
-        ) : (
-          <div></div>
-        )}
+          <Row>
+            <Col>
+              <Form.Group className="my-2" controlId="password">
+                <Form.Label>Password</Form.Label>
+                <Form.Control
+                  type="password"
+                  placeholder="Enter password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                ></Form.Control>
+              </Form.Group>
+            </Col>
 
-        <Button
-          type="submit"
-          variant="primary"
-          style={{
-            backgroundColor: '#B77A5B',
-            color: 'FFFFFF',
-            borderRadius: '13px',
-            padding: '6px 17px 6px 17px',
-            border: 'none',
-          }}
-          className="mt-2"
-        >
-          Register
-        </Button>
+            <Col>
+              <Form.Group className="my-2" controlId="confirmPassword">
+                <Form.Label>Confirm Password</Form.Label>
+                <Form.Control
+                  type="password"
+                  placeholder="Confirm password"
+                  value={confirmPassword}
+                  onChange={(e) => setConfirmPassword(e.target.value)}
+                ></Form.Control>
+              </Form.Group>
+            </Col>
+          </Row>
+          {status !== 'client' && (
+            <Row>
+              <Col>
+                <Form.Group className="my-2" controlId="whatsAppNumber">
+                  <Form.Label>Whatsapp Number</Form.Label>
+                  <Form.Control
+                    type="tel"
+                    placeholder="Enter whatsapp number"
+                    value={whatsAppNumber}
+                    onChange={(e) => setWhatsAppNumber(e.target.value)}
+                  ></Form.Control>
+                </Form.Group>
+              </Col>
 
-        {loadingPhotographer && <Loader />}
-        {loadingOwner && <Loader />}
-        {loadingClient && <Loader />}
-      </Form>
+              <Col>
+                <Form.Group className="my-2" controlId="instagramLink">
+                  <Form.Label>Instagram Link</Form.Label>
+                  <Form.Control
+                    type="name"
+                    placeholder="Enter instagram link"
+                    value={instagramLink}
+                    onChange={(e) => setInstagramLink(e.target.value)}
+                  ></Form.Control>
+                </Form.Group>
+              </Col>
 
-      <Row className="py-3">
-        <Col>
-          Already have an account? <Link to={`/login`}>Login</Link>
-        </Col>
-      </Row>
-    </FormContainer>
+              <Col>
+                <Form.Group className="my-2" controlId="faceBookLink">
+                  <Form.Label>Facebook Link</Form.Label>
+                  <Form.Control
+                    type="name"
+                    placeholder="Enter facebook link"
+                    value={faceBookLink}
+                    onChange={(e) => setFaceBookLink(e.target.value)}
+                  ></Form.Control>
+                </Form.Group>
+              </Col>
+            </Row>
+          )}
+
+          {status === 'photographer' ? (
+            <Form.Group className="my-2" controlId="name">
+              <Form.Label>Your Portfolio</Form.Label>
+              <Form.Control
+                type="file"
+                onChange={(e) => setFile(e.target.files[0])}
+              />
+            </Form.Group>
+          ) : status === 'locationOwner' ? (
+            <Form.Group className="my-2" controlId="name">
+              <Form.Label>Photos of Location (maximum 5 images)</Form.Label>
+              <Form.Control type="file" onChange={handleFileChange} multiple />
+              {files.length === 5 && (
+                <Form.Text className="text-muted">
+                  You have reached the maximum limit of 5 images.
+                </Form.Text>
+              )}
+            </Form.Group>
+          ) : (
+            <div></div>
+          )}
+
+          <Button
+            type="submit"
+            variant="primary"
+            style={{
+              backgroundColor: '#B77A5B',
+              color: 'FFFFFF',
+              borderRadius: '13px',
+              padding: '6px 17px 6px 17px',
+              border: 'none',
+            }}
+            className="mt-2"
+          >
+            Register
+          </Button>
+
+          {loadingPhotographer && <Loader />}
+          {loadingOwner && <Loader />}
+          {loadingClient && <Loader />}
+        </Form>
+
+        <Row className="py-3">
+          <Col>
+            Already have an account? <Link to={`/login`}>Login</Link>
+          </Col>
+        </Row>
+      </FormContainer>
+    </div>
   );
 };
 

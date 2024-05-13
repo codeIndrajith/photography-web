@@ -1,0 +1,13 @@
+.header {
+    position: absolute;
+    width: 100%;
+}
+
+.logoSection {
+    margin-top: -60px;
+    cursor: pointer;
+}
+
+.toggle, .linkSection {
+    margin-top: -70px;
+}

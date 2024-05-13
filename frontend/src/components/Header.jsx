@@ -6,6 +6,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { useLogoutMutation } from '../slices/photographerApiSlices';
 import { logout } from '../slices/authSlice';
+import logo from '../images/logo.png';
+import './CSS/Header.css';
 
 const Header = () => {
   const { userInfo } = useSelector((state) => state.auth);
@@ -26,17 +28,34 @@ const Header = () => {
   };
 
   return (
-    <header>
-      <Navbar bg="dark" variant="dark" expand="lg" collapseOnSelect>
+    <header className="header">
+      <Navbar bg="transparent" variant="dark" expand="lg" collapseOnSelect>
         <Container fluid style={{ marginLeft: '50px', marginRight: '50px' }}>
-          <LinkContainer to="/">
-            <Navbar.Brand>Travel Web</Navbar.Brand>
+          <LinkContainer to="/" className="logoSection">
+            <img className="logo" src={logo} alt="Logo" />
           </LinkContainer>
-          <Navbar.Toggle aria-controls="basic-navbar-nav" />
-          <Navbar.Collapse id="basic-navbar-nav">
+          <Navbar.Toggle className="toggle" aria-controls="basic-navbar-nav" />
+          <Navbar.Collapse className="linkSection" id="basic-navbar-nav">
             <Nav className="ms-auto">
               {userInfo ? (
                 <>
+                  <Nav className="ms-auto">
+                    <LinkContainer to="/">
+                      <Nav.Link>Home</Nav.Link>
+                    </LinkContainer>
+
+                    <LinkContainer to="/photographers">
+                      <Nav.Link>Photographers</Nav.Link>
+                    </LinkContainer>
+
+                    <LinkContainer to="/locations">
+                      <Nav.Link>Locations</Nav.Link>
+                    </LinkContainer>
+
+                    <LinkContainer to="/about">
+                      <Nav.Link>About us</Nav.Link>
+                    </LinkContainer>
+                  </Nav>
                   <NavDropdown
                     title={
                       userInfo.name ||
