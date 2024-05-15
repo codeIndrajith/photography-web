@@ -30,7 +30,7 @@ const Header = () => {
   return (
     <div className="header">
       <Navbar bg="black" variant="dark" expand="lg" collapseOnSelect>
-        <Container fluid style={{ marginLeft: '50px', marginRight: '50px' }}>
+        <Container fluid>
           <LinkContainer to="/" className="logoSection">
             <img className="logo" src={logo} alt="Logo" />
           </LinkContainer>
@@ -50,10 +50,6 @@ const Header = () => {
 
                     <LinkContainer to="/locations">
                       <Nav.Link>Locations</Nav.Link>
-                    </LinkContainer>
-
-                    <LinkContainer to="/about">
-                      <Nav.Link>About us</Nav.Link>
                     </LinkContainer>
                   </Nav>
                   <NavDropdown

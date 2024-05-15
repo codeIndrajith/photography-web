@@ -1,16 +1,7 @@
-
-
 body {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    width: 100%;
-    height: 100%;
-    background: rgb(180,137,63);
-background: linear-gradient(90deg, rgba(180,137,63,1) 0%, rgba(134,77,27,1) 53%, rgba(27,15,3,1) 96%);
-
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
 }
-
-
-
-  

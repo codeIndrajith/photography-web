@@ -16,15 +16,21 @@ import LoginScreen from './screens/LoginScreen.jsx';
 import RegisterScreen from './screens/RegisterScreen.jsx';
 import ProfileScreen from './screens/ProfileScreen.jsx';
 import PrivateRoute from './components/PrivateRoute.jsx';
+import Locations from './components/Locations.jsx';
+import LocationPlaceScreen from './screens/LocationPlaceScreen.jsx';
+import PhotographerAbout from './screens/PhotographerAbout.jsx';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
-    <Route path='/' element={<App />}>
-      <Route index={true} path='/' element={<HomeScreen />} />
-      <Route path='/login' element={<LoginScreen />} />
-      <Route path='/register' element={<RegisterScreen />} />
-      <Route path='' element={<PrivateRoute />}>
-        <Route path='/profile' element={<ProfileScreen />} />
+    <Route path="/" element={<App />}>
+      <Route index={true} path="/" element={<HomeScreen />} />
+      <Route path="/login" element={<LoginScreen />} />
+      <Route path="/register" element={<RegisterScreen />} />
+      <Route path="/locations" element={<Locations />} />
+      <Route path="/locations/:id" element={<LocationPlaceScreen />} />
+      <Route path="/photographers" element={<PhotographerAbout />} />
+      <Route path="" element={<PrivateRoute />}>
+        <Route path="/profile" element={<ProfileScreen />} />
       </Route>
     </Route>
   )

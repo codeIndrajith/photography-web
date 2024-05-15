@@ -15,7 +15,7 @@ const Portfolio = () => {
         <h1>Featured Photographer</h1>
       </div>
       <div className="row">
-        <div className="col-md-6">
+        <div className="col-md-6 mb-4">
           <div className="details">
             <h2>Find Your Photographer</h2>
             <p>Check it out</p>
