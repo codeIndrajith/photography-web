@@ -29,7 +29,7 @@ const Header = () => {
 
   return (
     <div className="header">
-      <Navbar bg="transparent" variant="dark" expand="lg" collapseOnSelect>
+      <Navbar bg="black" variant="dark" expand="lg" collapseOnSelect>
         <Container fluid style={{ marginLeft: '50px', marginRight: '50px' }}>
           <LinkContainer to="/" className="logoSection">
             <img className="logo" src={logo} alt="Logo" />

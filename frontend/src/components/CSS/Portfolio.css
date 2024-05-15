@@ -1,4 +1,109 @@
-.portfolio {
+.container {
     width: 100%;
     height: 100vh;
 }
+
+
+.swiper {
+  width: 350px !important;
+  height: 320px !important;
+  margin-top: 20px;
+}
+
+.swiper-slide {
+  /* width: 150% !important; */
+  height: 160% !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 18px;
+  font-size: 22px;
+  font-weight: bold;
+  color: #fff;
+}
+
+.swiper-slide:nth-child(1n) {
+  background-color: rgb(206, 17, 17);
+}
+
+.swiper-slide:nth-child(2n) {
+  background-color: rgb(0, 140, 255);
+}
+
+.swiper-slide:nth-child(3n) {
+  background-color: rgb(10, 184, 111);
+}
+
+.swiper-slide:nth-child(4n) {
+  background-color: rgb(211, 122, 7);
+}
+
+.swiper-slide:nth-child(5n) {
+  background-color: rgb(118, 163, 12);
+}
+
+.swiper-slide:nth-child(6n) {
+  background-color: rgb(180, 10, 47);
+}
+
+.swiper-slide:nth-child(7n) {
+  background-color: rgb(35, 99, 19);
+}
+
+.swiper-slide:nth-child(8n) {
+  background-color: rgb(0, 68, 255);
+}
+
+.swiper-slide:nth-child(9n) {
+  background-color: rgb(218, 12, 218);
+}
+
+.swiper-slide:nth-child(10n) {
+  background-color: rgb(54, 94, 77);
+}
+
+.sideImage {
+  width: 100%;
+  transition: transform 0.5s ease, filter 0.5s ease;
+}
+
+.details {
+  position: relative;
+  top: 60%;
+  left: 60%;
+  transform: translate(-50%, -50%);
+  color: #fff;
+  opacity: 0;
+  transition: opacity 0.5s ease; /* Smooth transition effect */
+}
+
+
+.details h2 {
+  font-size: 2.5rem;
+}
+
+.line {
+  width: 100%;
+  height: 4px;
+  background-color: rgb(6, 35, 97);
+}
+
+
+.details p {
+  font-size: 1.2em;
+  color: rgb(61, 212, 129);
+}
+
+.col-md-6:hover .sideImage {
+  filter: brightness(0.4) blur(1px); /* Darken the image and add a slight blur on hover */
+}
+
+.col-md-6:hover .details {
+  opacity: 1; /* Show the details on hover */
+  z-index: 2;
+}
+
+
+
+
+

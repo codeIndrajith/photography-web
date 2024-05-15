@@ -1,19 +1,18 @@
 .header {
-    position: absolute;
     width: 100%;
 }
 
 .logo {
-    /* background-color: red; */
+    width: 10%;
+    margin-top: -20px;
 }
 
 .logoSection {
-    margin-top: -60px;
     cursor: pointer;
 }
 
 .toggle, .linkSection {
-    margin-top: -70px;
+    margin-top: -30px;
 }
 
 @media(max-width: 1024px) {
