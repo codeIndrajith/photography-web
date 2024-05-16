@@ -2,3 +2,77 @@
     text-decoration: none;
     color: black;
 }
+
+
+.cardContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  
+
+  .information {
+    color: rgb(255, 251, 251);
+    padding: 10px;
+    margin: 20% 0 9% 10%;
+    width: 80%;
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.7);
+  }
+  
+  .information h2 {
+    color: white;
+    font-size: 30px;
+    text-align: center;
+    padding-bottom: 8px;
+  }
+  
+  .information p {
+    font-size: 20px;
+  }
+  
+
+  .info-all {
+    opacity: 0;
+  }
+  
+
+  .btn-all {
+    background-color: rgba(0, 0, 0, 0.9);
+    padding: 16px 1px;
+    text-align: center;
+    margin: 80px 0 0 0;
+    outline: none;
+    border: none;
+  }
+  
+  .btn-all a {
+    color: white;
+    text-decoration: none;
+    padding: 19px 32px;
+    font-size: 20px;
+  }
+  
+
+  .card-all {
+    width: 300px;
+    height: 400px;
+    margin: 50px;
+    transition: 0.8s ease-in-out;
+    background-size: cover;
+    box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;
+    transition: transform 0.4s ease-in-out, opacity 0.4s ease-in-out;
+  }
+  
+
+  .card-all:hover {
+    transform: scale(1.05);
+    cursor: pointer;
+    background-size: cover;
+    opacity: 0.9;
+  }
+  
+  .card-all:hover .info-all {
+    opacity: 1;
+  }

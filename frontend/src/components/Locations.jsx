@@ -9,7 +9,12 @@ const Locations = () => {
 
   // Dummy data
   const locationsData = [
-    { id: 1, name: 'Location Name 1', address: 'No 3/2 Vales, Korea' },
+    {
+      id: 1,
+      name: 'Location Name 1',
+      address: 'No 3/2 Vales, Korea',
+      url: 'https://images.unsplash.com/photo-1613725194245-d8e21cf5d42e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=764&q=80',
+    },
     { id: 2, name: 'Location Name 2', address: 'No 3/2 Vales, Korea' },
     { id: 3, name: 'Location Name 3', address: 'No 3/2 Vales, Korea' },
     { id: 4, name: 'Location Name 4', address: 'No 3/2 Vales, Korea' },
@@ -54,22 +59,24 @@ const Locations = () => {
         </div>
       </div>
 
-      {/* Locations */}
-      <div className="row">
+      <div class="cardContainer row">
         {locationsData.slice(startIndex, endIndex).map((location) => (
-          <div className="col-md-3" key={location.id}>
-            <Link className="location" to={`/locations/${location.id}`}>
-              <div className="card mb-4">
-                <img src={location1} className="card-img-top" alt="" />
-                <div className="card-overlay">
-                  <MdLocationOn className="location-icon" />
-                </div>
-                <div className="card-body">
-                  <h5 className="card-title">{location.name}</h5>
-                  <p>{location.address}</p>
-                </div>
+          <div className="col-md-3">
+            <div
+              class="card-all card"
+              style={{ backgroundImage: `url(${location.url})` }}
+              key={location.id}
+            >
+              <div class="information info-all">
+                <p>{location.name}</p>
+                <p>{location.address}</p>
               </div>
-            </Link>
+              <button class="btn-all info-all">
+                <a href="#" target="blank">
+                  See More
+                </a>
+              </button>
+            </div>
           </div>
         ))}
       </div>
