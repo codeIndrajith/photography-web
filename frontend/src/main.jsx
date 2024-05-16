@@ -19,6 +19,7 @@ import PrivateRoute from './components/PrivateRoute.jsx';
 import Locations from './components/Locations.jsx';
 import LocationPlaceScreen from './screens/LocationPlaceScreen.jsx';
 import PhotographerAbout from './screens/PhotographerAbout.jsx';
+import Photographers from './screens/Photographers.jsx';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -29,6 +30,7 @@ const router = createBrowserRouter(
       <Route path="/locations" element={<Locations />} />
       <Route path="/locations/:id" element={<LocationPlaceScreen />} />
       <Route path="/photographers/:id" element={<PhotographerAbout />} />
+      <Route path="/photographers" element={<Photographers />} />
       <Route path="" element={<PrivateRoute />}>
         <Route path="/profile" element={<ProfileScreen />} />
       </Route>

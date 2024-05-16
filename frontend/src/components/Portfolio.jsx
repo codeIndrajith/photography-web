@@ -18,7 +18,11 @@ const Portfolio = () => {
         <div className="col-md-6 mb-4">
           <div className="details">
             <h2>Find Your Photographer</h2>
-            <p>Check it out</p>
+            <p className="section">
+              <Link className="check" to="/photographers">
+                Check it out
+              </Link>
+            </p>
           </div>
           <div className="">
             <img
@@ -37,7 +41,7 @@ const Portfolio = () => {
             className="mySwiper"
           >
             <SwiperSlide>
-              <Link to="photographer">Slide 1</Link>
+              <Link to="/photographers/:id">Slide 1</Link>
             </SwiperSlide>
             <SwiperSlide>Slide 2</SwiperSlide>
             <SwiperSlide>Slide 3</SwiperSlide>
