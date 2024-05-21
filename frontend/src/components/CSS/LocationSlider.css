@@ -1,137 +1,116 @@
-
-.btn {
-  width: 11.5%;
-  border: none;
-  padding: 10px;
-  background-color: rgb(102, 147, 206);
-  color: #000;
-  margin-left: 10px;
+/* General container styling */
+.container {
+  width: 100%;
+  margin: 0 auto;
+  padding: 20px;
 }
 
-
-.card-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.5);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-  cursor: pointer;
+/* Location section styling */
+.locationSec {
+  padding: 40px 20px;
+  border-radius: 8px;
 }
 
-.card:hover .card-overlay {
-  opacity: 1;
+.locationSec h1 {
+  text-align: center;
+  font-size: 2.5rem;
+  color: #333;
+  margin-bottom: 20px;
 }
 
-.card-body {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  background-color: rgb(241, 199, 159);
-  position: relative; /* Ensure that card-overlay stays on top */
-  z-index: 1;
-}
-
-.location-icon {
-  color: #fff;
-  font-size: 2rem;
-}
-
+/* Cards container styling */
 .cards {
-  display: grid;
-  grid-template-columns: auto auto auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
 }
 
-
+/* Card container styling */
 .cardContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 25px;
+  justify-content: center;
   width: 100%;
   margin-left: -50px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-wrap: wrap;
 }
 
-
-.information {
-  color: rgb(255, 251, 251);
-  padding: 10px;
-  margin: 20% 0 9% 10%;
-  width: 80%;
-  text-align: center;
-  background-color: rgba(0, 0, 0, 0.7);
-}
-
-.information h2 {
-  color: white;
-  font-size: 30px;
-  text-align: center;
-  padding-bottom: 8px;
-}
-
-.information p {
-  font-size: 20px;
-}
-
-
-.info-all {
-  opacity: 0;
-}
-
-
-.btn-all {
-  background-color: rgba(0, 0, 0, 0.9);
-  padding: 16px 1px;
-  text-align: center;
-  margin: 80px 0 0 0;
-  outline: none;
-  border: none;
-}
-
-.seeMore {
-  width: 20%;
-}
-
-.seeMore button {
-  width: 100%;
-  border: none;
-  padding: 20px;
-  background-color: black;
-  color: white;
-}
-
-.btn-all a {
-  color: white;
-  text-decoration: none;
-  padding: 19px 32px;
-  font-size: 20px;
-}
-
-
+/* Individual card styling */
 .card-all {
-  width: 300px;
-  height: 400px;
-  margin: 50px;
-  transition: 0.8s ease-in-out;
+  position: relative;
   background-size: cover;
-  box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;
-  transition: transform 0.4s ease-in-out, opacity 0.4s ease-in-out;
+  background-position: center;
+  border-radius: 8px;
+  overflow: hidden;
+  width: 100%;
+  height: 200px;
+  transition: transform 0.3s ease;
 }
-
 
 .card-all:hover {
   transform: scale(1.05);
+}
+
+.information {
+  position: absolute;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  color: white;
+  width: 100%;
+  padding: 10px;
+  text-align: center;
+}
+
+/* Column styling for different screen sizes */
+.col-md-3 {
+  flex: 1 1 calc(25% - 20px);
+  max-width: calc(25% - 20px);
+  box-sizing: border-box;
+}
+
+@media (max-width: 1400px) {
+  .col-md-3 {
+    flex: 1 1 calc(50% - 20px);
+    max-width: calc(50% - 20px);
+  }
+
+  .cardContainer {
+    margin-left: -30px;
+  }
+}
+
+@media (max-width: 768px) {
+  .col-md-3 {
+    flex: 1 1 100%;
+    max-width: 100%;
+  }
+
+  .cardContainer {
+    margin-left: 35px;
+  }
+}
+
+@media (min-width: 1000px) {
+  .cardContainer {
+    margin-left: -35px;
+  }
+}
+
+/* See More button styling */
+.seeMore {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.seeMore button {
+  padding: 10px 50px;
+  background-color: #d89127;
+  color: rgb(19, 18, 18);
+  border: none;
   cursor: pointer;
-  background-size: cover;
-  opacity: 0.9;
+  font-size: 1rem;
 }
 
-.card-all:hover .info-all {
-  opacity: 1;
+.seeMore button:hover {
+  background-color: #d6960c;
 }
-

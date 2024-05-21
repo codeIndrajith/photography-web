@@ -34,18 +34,18 @@
         background-position: -250px;
     }
     .content {
-        margin-top: -30px;
-        width: 100%;
-        margin-left: 20%;
+        margin-top: -50px;
+        width: 90%;
+        margin-left: 30%;
         padding: 19px;
     }
 
     .content h1 {
-        font-size: 50px;
+        font-size: 35px;
     }
 
     .content p {
-        font-size: 20px;
+        font-size: 16px;
     }
 }
 

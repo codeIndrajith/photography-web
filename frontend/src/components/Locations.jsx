@@ -71,11 +71,6 @@ const Locations = () => {
                 <p>{location.name}</p>
                 <p>{location.address}</p>
               </div>
-              <button class="btn-all info-all">
-                <a href="#" target="blank">
-                  See More
-                </a>
-              </button>
             </div>
           </div>
         ))}
@@ -85,19 +80,13 @@ const Locations = () => {
         <div className="col-md-12 d-flex justify-content-end">
           {/* Next button */}
           {endIndex < locationsData.length && (
-            <button
-              className="btn bg-primary text-white"
-              onClick={handleNextClick}
-            >
+            <button className="nextBtn" onClick={handleNextClick}>
               Next
             </button>
           )}
           {/* Back button */}
           {startIndex > 0 && (
-            <button
-              className="btn bg-secondary text-white"
-              onClick={handleBackClick}
-            >
+            <button className="backBtn" onClick={handleBackClick}>
               Back
             </button>
           )}

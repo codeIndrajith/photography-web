@@ -33,7 +33,7 @@ const LocationsSlider = () => {
   const startIndex = (currentPage - 1) * 4;
   const endIndex = Math.min(startIndex + 4, locationsData.length);
   return (
-    <div className="container fluid mt-5">
+    <div className="container mt-5 locationSec">
       <div className="row">
         <div className="col">
           <h1>Explore Place</h1>
@@ -42,7 +42,7 @@ const LocationsSlider = () => {
       </div>
 
       {/* Card section */}
-      <div className="row cards">
+      <div className="cards">
         <div class="cardContainer">
           {locationsData.slice(startIndex, endIndex).map((location) => (
             <div className="col-md-3">

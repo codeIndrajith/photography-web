@@ -69,27 +69,8 @@ const Photographers = () => {
           </p>
         </div>
 
-        {/* body */}
-        {/* <div className="row">
-          {PhotographerData.slice(startIndex, endIndex).map((location) => (
-            <div className="col-md-3" key={location.id}>
-              <Link className="location" to={`/photographers/${location.id}`}>
-                <div className="card mb-4">
-                  <img src={location1} className="card-img-top" alt="" />
-                  <div className="card-overlay">
-                    <MdLocationOn className="location-icon" />
-                  </div>
-                  <div className="card-body">
-                    <h5 className="card-title">{location.name}</h5>
-                    <p>{location.address}</p>
-                  </div>
-                </div>
-              </Link>
-            </div>
-          ))}
-        </div> */}
-
-        <div className="row">
+        {/* Card body */}
+        <div className="row mt-5 conSection">
           {PhotographerData.slice(startIndex, endIndex).map((photographer) => (
             <div className="col-md-3" key={photographer.id}>
               <div class="card00 card0">
@@ -109,22 +90,16 @@ const Photographers = () => {
         </div>
 
         <div className="row">
-          <div className="col-md-12 d-flex justify-content-end">
+          <div className="btnSection">
             {/* Next button */}
             {endIndex < PhotographerData.length && (
-              <button
-                className="btn bg-primary text-white"
-                onClick={handleNextClick}
-              >
+              <button className="nextBtnn" onClick={handleNextClick}>
                 Next
               </button>
             )}
             {/* Back button */}
             {startIndex > 0 && (
-              <button
-                className="btn bg-secondary text-white"
-                onClick={handleBackClick}
-              >
+              <button className="backBtnn" onClick={handleBackClick}>
                 Back
               </button>
             )}

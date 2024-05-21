@@ -5,11 +5,11 @@ import LocationsSlider from '../components/LocationsSlider';
 
 const HomeScreen = () => {
   return (
-    <>
+    <div className="">
       <Hero />
-      {/* <Portfolio /> */}
-      {/* <LocationsSlider /> */}
-    </>
+      <Portfolio />
+      <LocationsSlider />
+    </div>
   );
 };
 export default HomeScreen;

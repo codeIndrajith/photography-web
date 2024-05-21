@@ -3,6 +3,11 @@
     height: 100vh;
 }
 
+.conSection {
+  width: 100%;
+  padding-left: 20px;
+}
+
 
 .swiper {
   width: 350px !important;
@@ -38,8 +43,38 @@
 }
 
 @media(max-width: 768px) {
+  .conSection {
+    width: 100%;
+    margin-top: -130px;
+  }
+
+  .details {
+    margin-top: -30px;
+  }
+
+  .carouselSec {
+    width: 100%;
+    padding: 20px;
+    margin-left: -20px;
+  }
+
+  .sideImageCon {
+    width: 100%;
+    padding: 30px;
+  }
+
+  .sideImage {
+    width: 100% !important;
+  }
+
+  .swiper {
+    width: 70% !important;
+  }
+
   .swiper-slide {
-    height: 90% !important;
+    height: 70% !important;
+    width: 90% !important;
+    margin-left: 6% !important;
     display: flex;
     align-items: center;
     justify-content: center;
