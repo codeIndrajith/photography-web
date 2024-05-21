@@ -15,6 +15,7 @@
     transform: translate(-50%, -50%); 
     text-align: start;
     z-index: 1; 
+    /* background-color: red; */
 }
 
 .content h1 {
@@ -25,5 +26,26 @@
 .content p {
     font-size: 1.2em;
     color: rgb(144, 235, 235);
+}
+
+@media(max-width: 768px) {
+    .mainSection {
+        background-size: cover;
+        background-position: -250px;
+    }
+    .content {
+        margin-top: -30px;
+        width: 100%;
+        margin-left: 20%;
+        padding: 19px;
+    }
+
+    .content h1 {
+        font-size: 50px;
+    }
+
+    .content p {
+        font-size: 20px;
+    }
 }
 

@@ -7,8 +7,8 @@ const HomeScreen = () => {
   return (
     <>
       <Hero />
-      <Portfolio />
-      <LocationsSlider />
+      {/* <Portfolio /> */}
+      {/* <LocationsSlider /> */}
     </>
   );
 };
