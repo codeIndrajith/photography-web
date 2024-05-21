@@ -1,0 +1,21 @@
+.locationsDetails {
+    height: 700px;
+}
+
+.locationContent {
+    background-color: green;
+    padding: 20px;
+}
+
+.locationContent h1 {
+    text-align: center;
+}
+
+.locationContent p {
+    font-size: 17px;
+}
+
+.map {
+    background-color: yellow;
+    padding: 20px;
+}

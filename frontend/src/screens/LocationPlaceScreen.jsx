@@ -1,5 +1,6 @@
 import React from 'react';
 import locationImage from '../images/location1.jpg';
+import './CSS/LocationPlace.css';
 
 const LocationPlaceScreen = () => {
   return (
@@ -14,12 +15,12 @@ const LocationPlaceScreen = () => {
       </div>
 
       <div className="container">
-        <div className="row mt-5">
-          <div className="col-md-6">
-            <h2>Location Name</h2>
+        <div className="row mt-5 locationsDetails">
+          <div className="col-md-6 locationContent">
+            <h1>Location Name</h1>
             <p>Location Address</p>
           </div>
-          <div className="col-md-6">
+          <div className="col-md-6 map">
             <h1>Location map here</h1>
           </div>
         </div>
