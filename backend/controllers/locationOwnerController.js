@@ -18,6 +18,7 @@ const authLocationOwner = asyncHandler(async (req, res) => {
       _id: locationOwner._id,
       name: locationOwner.firstName + ' ' + locationOwner.lastName,
       email: locationOwner.email,
+      status: locationOwner.status,
     });
   } else {
     res.status(401);
@@ -37,6 +38,7 @@ const registerLocationOwner = asyncHandler(async (req, res) => {
     whatsAppNumber,
     instagramLink,
     faceBookLink,
+    status,
   } = req.body;
 
   const imagesUrls = [];
@@ -68,6 +70,7 @@ const registerLocationOwner = asyncHandler(async (req, res) => {
     instagramLink,
     faceBookLink,
     images: imagesUrls,
+    status,
   });
 
   if (locationOwner) {
@@ -77,6 +80,7 @@ const registerLocationOwner = asyncHandler(async (req, res) => {
       _id: locationOwner._id,
       name: locationOwner.firstName + ' ' + locationOwner.lastName,
       email: locationOwner.email,
+      status: locationOwner.status,
     });
   } else {
     res.status(400);

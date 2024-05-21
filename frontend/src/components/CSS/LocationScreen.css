@@ -10,6 +10,26 @@
     align-items: center;
     flex-wrap: wrap;
   }
+
+  .mainImageSec {
+    height: 100vh;
+    width: 100%;
+    background-image: url('../.././images/mainImage.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center; 
+    animation: zoomIn 10s ease-in-out infinite alternate;
+  }
+
+  @keyframes zoomIn {
+    0% {
+      transform: scale(1.009);
+      
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
   
 
   .information {
@@ -108,14 +128,6 @@
   @media(max-width: 1400px) {
     .cardContainer {
       margin-left: 120px;
-    }
-
-    .nextBtn {
-      width: 100%;
-    }
-
-    .backBtn {
-      width: 100%;
     }
   }
 

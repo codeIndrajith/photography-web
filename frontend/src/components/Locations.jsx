@@ -3,6 +3,7 @@ import location1 from '../images/location1.jpg';
 import { MdLocationOn } from 'react-icons/md';
 import { Link } from 'react-router-dom';
 import './CSS/LocationScreen.css';
+import mainImage from '../images/mainImage.jpg';
 
 const Locations = () => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -45,54 +46,57 @@ const Locations = () => {
   const endIndex = Math.min(startIndex + 4, locationsData.length);
 
   return (
-    <div className="container fluid mt-5">
-      {/* Header */}
-      <div className="row">
-        <div className="col text-center">
-          <h1 className="mb-4 display-4">
-            <strong>Discover Amazing Places</strong>
-          </h1>
-          <hr className="w-25 mx-auto mb-4" />
-          <p className="lead">
-            Embark on a journey to breathtaking destinations
-          </p>
+    <>
+      <div className="container-fluid mainImageSec"></div>
+      <div className="container mt-5">
+        {/* Header */}
+        <div className="row">
+          <div className="col text-center">
+            <h1 className="mb-4 display-4">
+              <strong>Discover Amazing Places</strong>
+            </h1>
+            <hr className="w-25 mx-auto mb-4" />
+            <p className="lead">
+              Embark on a journey to breathtaking destinations
+            </p>
+          </div>
         </div>
-      </div>
 
-      <div class="cardContainer row">
-        {locationsData.slice(startIndex, endIndex).map((location) => (
-          <div className="col-md-3">
-            <div
-              class="card-all card"
-              style={{ backgroundImage: `url(${location.url})` }}
-              key={location.id}
-            >
-              <div class="information info-all">
-                <p>{location.name}</p>
-                <p>{location.address}</p>
+        <div class="cardContainer row">
+          {locationsData.slice(startIndex, endIndex).map((location) => (
+            <div className="col-md-3">
+              <div
+                class="card-all card"
+                style={{ backgroundImage: `url(${location.url})` }}
+                key={location.id}
+              >
+                <div class="information info-all">
+                  <p>{location.name}</p>
+                  <p>{location.address}</p>
+                </div>
               </div>
             </div>
-          </div>
-        ))}
-      </div>
+          ))}
+        </div>
 
-      <div className="row">
-        <div className="col-md-12 d-flex justify-content-end">
-          {/* Next button */}
-          {endIndex < locationsData.length && (
-            <button className="nextBtn" onClick={handleNextClick}>
-              Next
-            </button>
-          )}
-          {/* Back button */}
-          {startIndex > 0 && (
-            <button className="backBtn" onClick={handleBackClick}>
-              Back
-            </button>
-          )}
+        <div className="row">
+          <div className="col-md-12 d-flex justify-content-end">
+            {/* Next button */}
+            {endIndex < locationsData.length && (
+              <button className="nextBtn" onClick={handleNextClick}>
+                Next
+              </button>
+            )}
+            {/* Back button */}
+            {startIndex > 0 && (
+              <button className="backBtn" onClick={handleBackClick}>
+                Back
+              </button>
+            )}
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

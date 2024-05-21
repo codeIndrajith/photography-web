@@ -36,9 +36,8 @@ const LocationsSlider = () => {
     <div className="container mt-5 locationSec">
       <div className="row">
         <div className="col">
-          <h1>Explore Place</h1>
+          <h1>Explore Our Place</h1>
         </div>
-        <div className="col"></div>
       </div>
 
       {/* Card section */}

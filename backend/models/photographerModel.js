@@ -36,13 +36,9 @@ const photographerSchema = mongoose.Schema(
       type: String,
       required: true,
     },
-    client: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'Client',
-    },
-    owner: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'Owner',
+    status: {
+      type: String,
+      require: true,
     },
   },
   {

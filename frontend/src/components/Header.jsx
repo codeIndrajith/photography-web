@@ -30,7 +30,7 @@ const Header = () => {
   return (
     <div className="header">
       <Navbar bg="black" variant="dark" expand="lg" collapseOnSelect>
-        <Container fluid>
+        <Container fluid className="px-5">
           <LinkContainer to="/" className="logoSection">
             <img className="logo" src={logo} alt="Logo" />
           </LinkContainer>
@@ -62,6 +62,19 @@ const Header = () => {
                     <LinkContainer to="/profile">
                       <NavDropdown.Item>Profile</NavDropdown.Item>
                     </LinkContainer>
+                    {userInfo.status === 'photographer' ? (
+                      <LinkContainer to="/photographer-dashboard">
+                        <NavDropdown.Item>Dashboard</NavDropdown.Item>
+                      </LinkContainer>
+                    ) : userInfo.status === 'client' ? (
+                      <LinkContainer to="/client-dashboard">
+                        <NavDropdown.Item>Dashboard</NavDropdown.Item>
+                      </LinkContainer>
+                    ) : (
+                      <LinkContainer to="/owner-dashboard">
+                        <NavDropdown.Item>Dashboard</NavDropdown.Item>
+                      </LinkContainer>
+                    )}
                     <NavDropdown.Item onClick={logoutHandler}>
                       Logout
                     </NavDropdown.Item>

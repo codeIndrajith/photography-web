@@ -104,6 +104,7 @@
 
 .seeMore button {
   padding: 10px 50px;
+  font-weight: 600;
   background-color: #d89127;
   color: rgb(19, 18, 18);
   border: none;

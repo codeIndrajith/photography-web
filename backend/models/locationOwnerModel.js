@@ -36,9 +36,9 @@ const locationOwnerSchema = mongoose.Schema(
       type: [String],
       required: true,
     },
-    photographer: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'Photographer',
+    status: {
+      type: String,
+      required: true,
     },
   },
   {

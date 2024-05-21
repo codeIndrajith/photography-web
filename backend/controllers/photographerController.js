@@ -18,6 +18,7 @@ const authPhotographer = asyncHandler(async (req, res) => {
       _id: photographer._id,
       name: photographer.firstName + ' ' + photographer.lastName,
       email: photographer.email,
+      status: photographer.status,
     });
   } else {
     res.status(401);
@@ -37,6 +38,7 @@ const registerPhotographer = asyncHandler(async (req, res) => {
     whatsAppNumber,
     instagramLink,
     faceBookLink,
+    status,
   } = req.body;
 
   const portfolio = req.file.path;
@@ -59,6 +61,7 @@ const registerPhotographer = asyncHandler(async (req, res) => {
     instagramLink,
     faceBookLink,
     portfolio: portfolioUrl,
+    status,
   });
 
   if (photographer) {
@@ -70,6 +73,7 @@ const registerPhotographer = asyncHandler(async (req, res) => {
       lastName: photographer.lastName,
       email: photographer.email,
       portfolio: photographer.portfolio,
+      status: photographer.status,
     });
   } else {
     res.status(400);

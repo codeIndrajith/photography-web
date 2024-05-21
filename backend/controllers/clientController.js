@@ -17,6 +17,7 @@ const authClient = asyncHandler(async (req, res) => {
       _id: client._id,
       name: client.firstName + ' ' + client.lastName,
       email: client.email,
+      status: client.status,
     });
   } else {
     res.status(401);
@@ -28,7 +29,7 @@ const authClient = asyncHandler(async (req, res) => {
 // @route   POST /api/client
 // @access  Public
 const registerClient = asyncHandler(async (req, res) => {
-  const { firstName, lastName, email, password } = req.body;
+  const { firstName, lastName, email, password, status } = req.body;
 
   const clientExists = await Client.findOne({ email });
 
@@ -42,6 +43,7 @@ const registerClient = asyncHandler(async (req, res) => {
     lastName,
     email,
     password,
+    status,
   });
 
   if (client) {
@@ -51,6 +53,7 @@ const registerClient = asyncHandler(async (req, res) => {
       _id: client._id,
       name: client.firstName + ' ' + client.lastName,
       email: client.email,
+      status: client.status,
     });
   } else {
     res.status(400);

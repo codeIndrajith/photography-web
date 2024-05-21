@@ -1,7 +1,7 @@
 
 .border {
-    height: 369px;
-    width: 290px;
+    height: 379px;
+    width: 390px;
     background: transparent;
     border-radius: 10px;
     transition: border 1s;
@@ -19,7 +19,7 @@
     border: 1px solid #fff;
   }
   .card00 {
-    height: 370px;
+    height: 330px;
     width: 100%;
     background-color: #808080;
     border-radius: 10px;

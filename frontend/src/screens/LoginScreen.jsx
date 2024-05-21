@@ -35,15 +35,15 @@ const LoginScreen = () => {
     e.preventDefault();
     try {
       if (status === 'photographer') {
-        const res = await login({ email, password }).unwrap();
+        const res = await login({ email, password, status }).unwrap();
         dispatch(setCredentials({ ...res }));
         navigate('/');
       } else if (status === 'client') {
-        const res = await loginClient({ email, password }).unwrap();
+        const res = await loginClient({ email, password, status }).unwrap();
         dispatch(setCredentials({ ...res }));
         navigate('/');
       } else {
-        const res = await loginOwner({ email, password }).unwrap();
+        const res = await loginOwner({ email, password, status }).unwrap();
         dispatch(setCredentials({ ...res }));
         navigate('/');
       }

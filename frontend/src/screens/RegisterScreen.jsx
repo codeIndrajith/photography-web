@@ -84,6 +84,7 @@ const RegisterScreen = () => {
           formData.append('instagramLink', instagramLink);
           formData.append('faceBookLink', faceBookLink);
           formData.append('portfolio', file);
+          formData.append('status', status);
 
           const res = await register(formData).unwrap();
           dispatch(setCredentials({ ...res }));
@@ -102,6 +103,7 @@ const RegisterScreen = () => {
             lastName,
             email,
             password,
+            status,
           }).unwrap();
           dispatch(setCredentials({ ...res }));
           navigate('/');
@@ -124,6 +126,7 @@ const RegisterScreen = () => {
           formData.append('whatsAppNumber', whatsAppNumber);
           formData.append('instagramLink', instagramLink);
           formData.append('faceBookLink', faceBookLink);
+          formData.append('status', status);
 
           files.forEach((file, index) => {
             formData.append(`images`, file);

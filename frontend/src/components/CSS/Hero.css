@@ -15,7 +15,6 @@
     transform: translate(-50%, -50%); 
     text-align: start;
     z-index: 1; 
-    /* background-color: red; */
 }
 
 .content h1 {
