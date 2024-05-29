@@ -30,6 +30,19 @@ export const locationOwnerApiSlice = apiSlice.injectEndpoints({
         body: data,
       }),
     }),
+    addLocation: builder.mutation({
+      query: (data) => ({
+        url: `${LOCATION_OWNER_URL}/addLocation`,
+        method: 'POST',
+        body: data,
+      }),
+    }),
+    getLocationsByOwners: builder.query({
+      query: (id) => ({
+        url: `${LOCATION_OWNER_URL}/getLocations/${id}`,
+      }),
+      keepUnusedDataFor: 5,
+    }),
   }),
 });
 
@@ -38,4 +51,6 @@ export const {
   useLogoutOwnerMutation,
   useRegisterOwnerMutation,
   useUpdateOwnerMutation,
+  useAddLocationMutation,
+  useGetLocationsByOwnersQuery,
 } = locationOwnerApiSlice;

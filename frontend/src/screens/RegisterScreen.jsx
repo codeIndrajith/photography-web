@@ -66,7 +66,7 @@ const RegisterScreen = () => {
   const submitHandler = async (e) => {
     e.preventDefault();
 
-    console.log(file);
+    // console.log(file);
 
     if (status === 'photographer') {
       if (password !== confirmPassword) {

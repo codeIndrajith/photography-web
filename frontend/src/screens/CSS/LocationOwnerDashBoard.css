@@ -1,0 +1,36 @@
+.addBtn {
+    padding: 10px 50px;
+  font-weight: 600;
+  background-color: #d89127;
+  color: rgb(19, 18, 18);
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+  margin-left: 220px;
+  margin-top: 20px;
+}
+
+.addBtn:hover {
+    background-color: #d6960c;
+
+}
+
+@media only screen and (max-width: 767px) {
+    .addBtn {
+        margin-left: 0;
+        width: 100%;
+    }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+    .addBtn {
+        margin-left: 0;
+        width: 100%;
+    }
+}
+
+@media only screen and (min-width: 992px) and (max-width: 1199px) {
+    .addBtn {
+        margin-left: 160px;
+    }
+}

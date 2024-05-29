@@ -1,5 +1,6 @@
 import asyncHandler from 'express-async-handler';
 import LocationOwner from '../models/locationOwnerModel.js';
+import Locations from '../models/locationsModel.js';
 import generateToken from '../utils/generateToken.js';
 import cloudinary from 'cloudinary';
 
@@ -41,18 +42,18 @@ const registerLocationOwner = asyncHandler(async (req, res) => {
     status,
   } = req.body;
 
-  const imagesUrls = [];
+  // const imagesUrls = [];
 
-  for (const file of req.files) {
-    try {
-      const result = await cloudinary.uploader.upload(file.path);
-      imagesUrls.push(result.secure_url);
-    } catch (error) {
-      console.error('Error uploading image to Cloudinary:', error);
-      res.status(500);
-      throw new Error('Error uploading image to Cloudinary');
-    }
-  }
+  // for (const file of req.files) {
+  //   try {
+  //     const result = await cloudinary.uploader.upload(file.path);
+  //     imagesUrls.push(result.secure_url);
+  //   } catch (error) {
+  //     console.error('Error uploading image to Cloudinary:', error);
+  //     res.status(500);
+  //     throw new Error('Error uploading image to Cloudinary');
+  //   }
+  // }
 
   const userExists = await LocationOwner.findOne({ email });
 
@@ -69,7 +70,7 @@ const registerLocationOwner = asyncHandler(async (req, res) => {
     whatsAppNumber,
     instagramLink,
     faceBookLink,
-    images: imagesUrls,
+    // images: imagesUrls,
     status,
   });
 
@@ -99,4 +100,76 @@ const logoutLocationOwner = (req, res) => {
   res.status(200).json({ message: 'Logged out successfully' });
 };
 
-export { authLocationOwner, registerLocationOwner, logoutLocationOwner };
+// @desc    Add locations by owner
+// @route   POST /api/addLocation
+// @access  Public
+const addLocationByOwner = async (req, res) => {
+  const { locationName, locationAddress, locationOwnerId } = req.body;
+
+  const imagesUrls = [];
+
+  for (const file of req.files) {
+    try {
+      const result = await cloudinary.uploader.upload(file.path);
+      imagesUrls.push(result.secure_url);
+    } catch (error) {
+      console.error('Error uploading image to Cloudinary:', error);
+      res.status(500);
+      throw new Error('Error uploading image to Cloudinary');
+    }
+  }
+
+  const location = await Locations.create({
+    locationName,
+    locationAddress,
+    images: imagesUrls,
+    locationOwnerId,
+  });
+
+  if (location) {
+    res.status(201).json({
+      _id: location._id,
+      locationName: location.locationName,
+      locationAddress: location.locationAddress,
+    });
+  } else {
+    res.status(400);
+    throw new Error('Invalid location details');
+  }
+};
+
+// @desc    Get locations by owner
+// @route   GET /api/getLocation/:locationOwnerId
+// @access  Public
+const getLocationsByOwner = async (req, res) => {
+  const { locationOwnerId } = req.params;
+
+  try {
+    const locations = await Locations.find({
+      locationOwnerId: locationOwnerId,
+    });
+
+    if (locations.length > 0) {
+      res.status(200).json(
+        locations.map((location) => ({
+          _id: location._id,
+          locationName: location.locationName,
+          locationAddress: location.locationAddress,
+        }))
+      );
+    } else {
+      res.status(404).json({ message: 'No locations found' });
+    }
+  } catch (error) {
+    res.status(500);
+    throw new Error('Internal server error', error);
+  }
+};
+
+export {
+  authLocationOwner,
+  registerLocationOwner,
+  logoutLocationOwner,
+  addLocationByOwner,
+  getLocationsByOwner,
+};
