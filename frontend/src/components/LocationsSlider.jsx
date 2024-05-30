@@ -42,15 +42,14 @@ const LocationsSlider = () => {
 
       {/* Card section */}
       <div className="cards">
-        <div class="cardContainer">
+        <div className="cardContainer">
           {locationsData.slice(startIndex, endIndex).map((location) => (
-            <div className="col-md-3">
+            <div className="col-md-3" key={location.id}>
               <div
-                class="card-all card"
+                className="card-all card"
                 style={{ backgroundImage: `url(${location.url})` }}
-                key={location.id}
               >
-                <div class="information info-all">
+                <div className="information info-all">
                   <p>{location.name}</p>
                   <p>{location.address}</p>
                 </div>

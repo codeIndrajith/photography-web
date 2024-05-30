@@ -11,9 +11,12 @@ import whatsAppIcon from '../images/whatsapp.png';
 import facebookIcon from '../images/facebook.png';
 import gmailIcon from '../images/gmail.png';
 import './CSS/PhotographyAbout.css';
+import BookingPhotographerForm from '../components/bookingPhotographerForm';
+import { useSelector } from 'react-redux';
 
 const PhotographerAbout = () => {
   const [activeIndex, setActiveIndex] = useState(0);
+  const { userInfo } = useSelector((state) => state.auth);
 
   const images = [sample1, sample2, sample3];
 
@@ -28,6 +31,7 @@ const PhotographerAbout = () => {
       prevIndex === images.length - 1 ? 0 : prevIndex + 1
     );
   };
+
   return (
     <>
       <div
@@ -103,9 +107,11 @@ const PhotographerAbout = () => {
                 velit suscipit voluptatum, cum aspernatur, explicabo dolor ipsum
                 obcaecati! Corrupti asperiores dolore sequi beatae.
               </p>
-              <button className="button">
-                <a href={`https://wa.me/+94${123}`}>Hire Me</a>
-              </button>
+              {userInfo.status === 'client' && (
+                <div style={{ width: '100%' }}>
+                  <BookingPhotographerForm clientId={userInfo._id} />
+                </div>
+              )}
             </div>
           </div>
         </div>

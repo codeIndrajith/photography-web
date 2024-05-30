@@ -30,6 +30,13 @@ export const clientApiSlice = apiSlice.injectEndpoints({
         body: data,
       }),
     }),
+    bookingPhotographer: builder.mutation({
+      query: (data) => ({
+        url: `${CLIENT_URL}/hire-photographer`,
+        method: 'POST',
+        body: data,
+      }),
+    }),
   }),
 });
 
@@ -38,4 +45,5 @@ export const {
   useLogoutClientMutation,
   useRegisterClientMutation,
   useUpdateClientMutation,
+  useBookingPhotographerMutation,
 } = clientApiSlice;

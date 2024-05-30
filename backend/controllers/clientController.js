@@ -1,6 +1,7 @@
 import asyncHandler from 'express-async-handler';
 import Client from '../models/clientModel.js';
 import generateToken from '../utils/generateToken.js';
+import bookingPhotographer from '../models/bookingPhotographerModel.js';
 
 // @desc    Auth client & get token
 // @route   POST /api/client/auth
@@ -72,4 +73,27 @@ const logoutClient = (req, res) => {
   res.status(200).json({ message: 'Logged out successfully' });
 };
 
-export { authClient, registerClient, logoutClient };
+// @desc    Hire a photographer
+// @route   POST /api/hire-photographer
+// @access  Public
+const hirePhotographer = asyncHandler(async (req, res) => {
+  const { description, clientId, photographerId } = req.body;
+
+  const hire_photographer = await bookingPhotographer.create({
+    description,
+    clientId,
+    photographerId,
+  });
+
+  if (hire_photographer) {
+    res.status(201).json({
+      _id: hire_photographer._id,
+      time: hire_photographer.createdAt,
+    });
+  } else {
+    res.status(400);
+    throw new Error('Invalid Hiring data');
+  }
+});
+
+export { authClient, registerClient, logoutClient, hirePhotographer };
