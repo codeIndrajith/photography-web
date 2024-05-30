@@ -30,6 +30,18 @@ export const photographerApiSlice = apiSlice.injectEndpoints({
         body: data,
       }),
     }),
+    addPortfolioL: builder.mutation({
+      query: (data) => ({
+        url: `${PHOTOGRAPHER_URL}/addPortfolio`,
+        method: 'POST',
+        body: data,
+      }),
+    }),
+    getPortfolio: builder.query({
+      query: (photographerId) => ({
+        url: `${PHOTOGRAPHER_URL}/getPortfolio/${photographerId}`,
+      }),
+    }),
   }),
 });
 
@@ -38,4 +50,6 @@ export const {
   useLogoutMutation,
   useRegisterMutation,
   useUpdateUserMutation,
+  useAddPortfolioLMutation,
+  useGetPortfolioQuery,
 } = photographerApiSlice;

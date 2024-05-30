@@ -2,6 +2,7 @@ import asyncHandler from 'express-async-handler';
 import Photographer from '../models/photographerModel.js';
 import generateToken from '../utils/generateToken.js';
 import cloudinary from 'cloudinary';
+import Portfolio from '../models/portfolioModel.js';
 
 // @desc    Auth photographer & get token
 // @route   POST /api/photographer/auth
@@ -41,9 +42,9 @@ const registerPhotographer = asyncHandler(async (req, res) => {
     status,
   } = req.body;
 
-  const portfolio = req.file.path;
-  const result = await cloudinary.uploader.upload(portfolio);
-  const portfolioUrl = result.secure_url;
+  // const portfolio = req.file.path;
+  // const result = await cloudinary.uploader.upload(portfolio);
+  // const portfolioUrl = result.secure_url;
 
   const userExists = await Photographer.findOne({ email });
 
@@ -60,7 +61,7 @@ const registerPhotographer = asyncHandler(async (req, res) => {
     whatsAppNumber,
     instagramLink,
     faceBookLink,
-    portfolio: portfolioUrl,
+    // portfolio: portfolioUrl,
     status,
   });
 
@@ -92,4 +93,69 @@ const logoutPhotographer = (req, res) => {
   res.status(200).json({ message: 'Logged out successfully' });
 };
 
-export { authPhotographer, registerPhotographer, logoutPhotographer };
+// @desc    Add portfolio
+// @route   POST /api/photographer/portfolio
+// @access  Public
+const addPortfolioByPhotographer = asyncHandler(async (req, res) => {
+  const { description, photographerId } = req.body;
+
+  const image = req.files['profilePic'][0];
+
+  const result = await cloudinary.uploader.upload(image.path);
+  const coverImageUrl = result.secure_url;
+
+  const imageUrls = [];
+
+  for (const file of req.files['shootImageSamples']) {
+    const result = await cloudinary.uploader.upload(file.path);
+    imageUrls.push(result.secure_url);
+  }
+
+  const portfolio = await Portfolio.create({
+    profilePic: coverImageUrl,
+    shootImageSamples: imageUrls,
+    description,
+    photographerId,
+  });
+
+  if (portfolio) {
+    res.status(201).json({
+      _id: portfolio._id,
+    });
+  } else {
+    res.status(400);
+    throw new Error('Invalid portfolio details');
+  }
+});
+
+// @desc    Get portfolio
+// @route   GET /api/photographer/:id
+// @access  Public
+const getPortfolioByPhotographer = asyncHandler(async (req, res) => {
+  const { photographerId } = req.params;
+
+  const photographerDetails = await Portfolio.find({
+    photographerId: photographerId,
+  });
+
+  if (photographerDetails.length > 0) {
+    res.status(200).json(
+      photographerDetails.map((photographerDetail) => ({
+        _id: photographerDetail._id,
+        description: photographerDetail.description,
+        profilePic: photographerDetail.profilePic,
+        shootImageSamples: photographerDetail.shootImageSamples,
+      }))
+    );
+  } else {
+    res.status(404).json({ message: 'No photographer details found' });
+  }
+});
+
+export {
+  authPhotographer,
+  registerPhotographer,
+  logoutPhotographer,
+  addPortfolioByPhotographer,
+  getPortfolioByPhotographer,
+};
