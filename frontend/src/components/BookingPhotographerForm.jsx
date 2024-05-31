@@ -3,13 +3,15 @@ import { useBookingPhotographerMutation } from '../slices/clientApiSlices';
 import { toast } from 'react-toastify';
 import { useParams } from 'react-router-dom';
 import Loader from './Loader';
+import { useGetPhotographerQuery } from '../slices/photographerApiSlices';
 
 const BookingPhotographerForm = ({ clientId }) => {
   const [description, setDescription] = useState('');
+  const id = '66374ca898f0884c69a52efd';
+  const { data: photographer, isLoading, error } = useGetPhotographerQuery(id);
   const [booking, { isLoading: bookingLoading }] =
     useBookingPhotographerMutation();
   // const params = useParams();
-  const params = '66374ca898f0884c69a52efd';
 
   const submitHandler = async (e) => {
     e.preventDefault();
@@ -20,12 +22,14 @@ const BookingPhotographerForm = ({ clientId }) => {
     } else {
       try {
         const res = await booking({
+          photographerName:
+            photographer.firstName + ' ' + photographer.lastName,
           description,
           clientId: clientId,
-          photographerId: params,
+          photographerId: id,
         }).unwrap();
+        setDescription('');
         toast.success('Booking success');
-        console.log(res);
       } catch (error) {
         toast.error(`${error}`);
       }

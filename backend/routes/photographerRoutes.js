@@ -5,6 +5,7 @@ import {
   logoutPhotographer,
   addPortfolioByPhotographer,
   getPortfolioByPhotographer,
+  getPhotographer,
 } from '../controllers/photographerController.js';
 import upload from '../middleware/upload.js';
 
@@ -22,5 +23,6 @@ router.post(
   addPortfolioByPhotographer
 );
 router.get('/getPortfolio/:photographerId', getPortfolioByPhotographer);
+router.get('/:id', getPhotographer);
 
 export default router;

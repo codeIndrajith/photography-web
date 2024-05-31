@@ -77,9 +77,10 @@ const logoutClient = (req, res) => {
 // @route   POST /api/hire-photographer
 // @access  Public
 const hirePhotographer = asyncHandler(async (req, res) => {
-  const { description, clientId, photographerId } = req.body;
+  const { description, clientId, photographerId, photographerName } = req.body;
 
   const hire_photographer = await bookingPhotographer.create({
+    photographerName,
     description,
     clientId,
     photographerId,
@@ -87,6 +88,7 @@ const hirePhotographer = asyncHandler(async (req, res) => {
 
   if (hire_photographer) {
     res.status(201).json({
+      name: hire_photographer.photographerName,
       _id: hire_photographer._id,
       time: hire_photographer.createdAt,
     });
@@ -96,4 +98,32 @@ const hirePhotographer = asyncHandler(async (req, res) => {
   }
 });
 
-export { authClient, registerClient, logoutClient, hirePhotographer };
+// @desc    Get hire a photographers by client
+// @route   GET /api/hire-photographer/:clientId
+// @access  Public
+const getAllHirePhotographers = asyncHandler(async (req, res) => {
+  const { clientId } = req.params;
+
+  const photographers = await bookingPhotographer.find({ clientId: clientId });
+
+  if (photographers.length > 0) {
+    res.status(200).json(
+      photographers.map((photographer) => ({
+        _id: photographer._id,
+        photographerName: photographer.photographerName,
+        createdAt: photographer.createdAt,
+      }))
+    );
+  } else {
+    res.status(500);
+    throw new Error('Internal server error', error);
+  }
+});
+
+export {
+  authClient,
+  registerClient,
+  logoutClient,
+  hirePhotographer,
+  getAllHirePhotographers,
+};

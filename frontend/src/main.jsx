@@ -36,12 +36,15 @@ const router = createBrowserRouter(
       <Route path="/photographers" element={<Photographers />} />
       <Route path="" element={<PrivateRoute />}>
         <Route path="/profile" element={<ProfileScreen />} />
-        <Route path="/client-dashboard" element={<ClientDashBoard />} />
+        <Route path="/client-dashboard/:id" element={<ClientDashBoard />} />
         <Route
-          path="/photographer-dashboard"
+          path="/photographer-dashboard/:id"
           element={<PhotographerDashBoard />}
         />
-        <Route path="/owner-dashboard" element={<LocationOwnerDashBoard />} />
+        <Route
+          path="/owner-dashboard/:id"
+          element={<LocationOwnerDashBoard />}
+        />
       </Route>
     </Route>
   )

@@ -1,46 +1,71 @@
-import React from 'react';
+import React, { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { useSelector } from 'react-redux';
+import { useGetHirePhotographersQuery } from '../slices/clientApiSlices';
+import Loader from '../components/Loader';
 
 const ClientDashBoard = () => {
-  // Sample data for demonstration
-  const bookings = [
-    {
-      id: 1,
-      photographerName: 'John Doe',
-      date: '2024-06-01',
-      time: '10:00 AM',
-    },
-    {
-      id: 2,
-      photographerName: 'Jane Smith',
-      date: '2024-06-05',
-      time: '2:00 PM',
-    },
-  ];
+  const { userInfo } = useSelector((state) => state.auth);
+  const {
+    data: hirePhotographers,
+    isLoading,
+    error,
+  } = useGetHirePhotographersQuery(userInfo._id);
+
+  // Function to format date and time
+  const formatDateTime = (isoString) => {
+    const date = new Date(isoString);
+    const formattedDate = date.toLocaleDateString('en-US', {
+      year: 'numeric',
+      month: '2-digit',
+      day: '2-digit',
+    });
+    const formattedTime = date.toLocaleTimeString('en-US', {
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit',
+    });
+    return `${formattedDate}  |  ${formattedTime}`;
+  };
 
   return (
     <div className="container mt-5">
-      <h2>My Bookings</h2>
+      <h1 className="mb-5">My Bookings</h1>
       <div className="table-responsive">
         <table className="table table-bordered table-hover">
           <thead className="thead-dark">
             <tr>
-              <th scope="col">#</th>
               <th scope="col">Photographer Name</th>
-              <th scope="col">Date</th>
-              <th scope="col">Time</th>
+              <th scope="col">Booking Date & Time</th>
             </tr>
           </thead>
-          <tbody>
-            {bookings.map((booking) => (
-              <tr key={booking.id}>
-                <th scope="row">{booking.id}</th>
-                <td>{booking.photographerName}</td>
-                <td>{booking.date}</td>
-                <td>{booking.time}</td>
+
+          {isLoading ? (
+            <tbody>
+              <tr>
+                <td colSpan="2">
+                  <Loader />
+                </td>
               </tr>
-            ))}
-          </tbody>
+            </tbody>
+          ) : error ? (
+            <tbody>
+              <tr>
+                <td colSpan="2">
+                  <p>Cannot fetch data</p>
+                </td>
+              </tr>
+            </tbody>
+          ) : (
+            <tbody>
+              {hirePhotographers.map((photographer) => (
+                <tr key={photographer._id}>
+                  <td>{photographer.photographerName}</td>
+                  <td>{formatDateTime(photographer.createdAt)}</td>
+                </tr>
+              ))}
+            </tbody>
+          )}
         </table>
       </div>
     </div>

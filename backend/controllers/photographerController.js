@@ -152,10 +152,31 @@ const getPortfolioByPhotographer = asyncHandler(async (req, res) => {
   }
 });
 
+// @desc    Get Photographer
+// @route   GET /api/photographers/:id
+// @access  Public
+const getPhotographer = asyncHandler(async (req, res) => {
+  const id = req.params.id;
+
+  const photographer = await Photographer.findById(id);
+
+  if (photographer) {
+    res.status(201).json({
+      firstName: photographer.firstName,
+      lastName: photographer.lastName,
+      email: photographer.email,
+    });
+  } else {
+    res.status(404);
+    throw new Error('Photographer not found');
+  }
+});
+
 export {
   authPhotographer,
   registerPhotographer,
   logoutPhotographer,
   addPortfolioByPhotographer,
   getPortfolioByPhotographer,
+  getPhotographer,
 };

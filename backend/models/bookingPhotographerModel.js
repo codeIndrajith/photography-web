@@ -2,6 +2,10 @@ import mongoose from 'mongoose';
 
 const bookingPhotographerSchema = mongoose.Schema(
   {
+    photographerName: {
+      type: String,
+      required: true,
+    },
     clientId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Client',

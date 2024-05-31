@@ -37,6 +37,12 @@ export const clientApiSlice = apiSlice.injectEndpoints({
         body: data,
       }),
     }),
+    getHirePhotographers: builder.query({
+      query: (clientId) => ({
+        url: `${CLIENT_URL}/hire-photographers/${clientId}`,
+      }),
+      keepUnusedDataFor: 5,
+    }),
   }),
 });
 
@@ -46,4 +52,5 @@ export const {
   useRegisterClientMutation,
   useUpdateClientMutation,
   useBookingPhotographerMutation,
+  useGetHirePhotographersQuery,
 } = clientApiSlice;

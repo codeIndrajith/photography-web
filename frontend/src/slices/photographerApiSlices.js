@@ -42,6 +42,11 @@ export const photographerApiSlice = apiSlice.injectEndpoints({
         url: `${PHOTOGRAPHER_URL}/getPortfolio/${photographerId}`,
       }),
     }),
+    getPhotographer: builder.query({
+      query: (id) => ({
+        url: `${PHOTOGRAPHER_URL}/${id}`,
+      }),
+    }),
   }),
 });
 
@@ -52,4 +57,5 @@ export const {
   useUpdateUserMutation,
   useAddPortfolioLMutation,
   useGetPortfolioQuery,
+  useGetPhotographerQuery,
 } = photographerApiSlice;

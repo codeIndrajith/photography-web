@@ -73,15 +73,15 @@ const Photographers = () => {
         <div className="row mt-5 conSection">
           {PhotographerData.slice(startIndex, endIndex).map((photographer) => (
             <div className="col-md-3" key={photographer.id}>
-              <div class="card00 card0">
-                <div class="border">
+              <div className="card00 card0">
+                <div className="border">
                   <h2>{photographer.name}</h2>
-                  <div class="icons">
-                    <i class="fa fa-codepen" aria-hidden="true"></i>
-                    <i class="fa fa-instagram" aria-hidden="true"></i>
-                    <i class="fa fa-dribbble" aria-hidden="true"></i>
-                    <i class="fa fa-twitter" aria-hidden="true"></i>
-                    <i class="fa fa-facebook" aria-hidden="true"></i>
+                  <div className="icons">
+                    <i className="fa fa-codepen" aria-hidden="true"></i>
+                    <i className="fa fa-instagram" aria-hidden="true"></i>
+                    <i className="fa fa-dribbble" aria-hidden="true"></i>
+                    <i className="fa fa-twitter" aria-hidden="true"></i>
+                    <i className="fa fa-facebook" aria-hidden="true"></i>
                   </div>
                 </div>
               </div>
