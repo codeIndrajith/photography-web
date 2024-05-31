@@ -197,6 +197,27 @@ const addBookingLocation = asyncHandler(async (req, res) => {
     throw new Error('Invalid booking location details');
   }
 });
+
+// @desc    Get booking locations
+// @route   GET /api/photographers/get-booking/:id
+// @access  Private
+const getBookingByPhotographer = asyncHandler(async (req, res) => {
+  const photographerId = req.params;
+
+  const getBookings = await bookingLocation.find(photographerId);
+
+  if (getBookings.length > 0) {
+    res.status(200).json(
+      getBookings.map((getBooking) => ({
+        _id: getBooking._id,
+        name: getBooking.name,
+        Date: getBooking.date,
+      }))
+    );
+  } else {
+    res.status(404).json({ message: 'No Booking details found' });
+  }
+});
 export {
   authPhotographer,
   registerPhotographer,
@@ -205,4 +226,5 @@ export {
   getPortfolioByPhotographer,
   getPhotographer,
   addBookingLocation,
+  getBookingByPhotographer,
 };

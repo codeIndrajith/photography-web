@@ -6,17 +6,13 @@ import Loader from '../components/Loader';
 import NotFound from '../components/NotFound';
 import {
   useAddPortfolioLMutation,
+  useGetBookingByPhotographerQuery,
   useGetPortfolioQuery,
 } from '../slices/photographerApiSlices';
 import PortfolioForms from '../components/PortfolioForms';
+import BookingDetails from '../components/BookingDetails';
 
 const PhotographerDashBoard = () => {
-  const [files, setFiles] = useState([]);
-  const [image, setImage] = useState();
-  const [description, setDescription] = useState('');
-
-  const [photographerDetails, { isLoading: loadingPhotographerDetails }] =
-    useAddPortfolioLMutation();
   const { userInfo } = useSelector((state) => state.auth);
 
   const {
@@ -25,6 +21,17 @@ const PhotographerDashBoard = () => {
     error,
     refetch,
   } = useGetPortfolioQuery(userInfo._id);
+  const {
+    data: bookingDetails,
+    isLoading: bookingDetailsLoading,
+    error: bookingError,
+  } = useGetBookingByPhotographerQuery(userInfo._id);
+  const [files, setFiles] = useState([]);
+  const [image, setImage] = useState();
+  const [description, setDescription] = useState('');
+
+  const [photographerDetails, { isLoading: loadingPhotographerDetails }] =
+    useAddPortfolioLMutation();
 
   const fileHandler = (e) => {
     const selectedFiles = Array.from(e.target.files).slice(0, 5);
@@ -111,23 +118,27 @@ const PhotographerDashBoard = () => {
       {/* Input details */}
       <div className="mt-5 p-3">
         <h3 className="text-center mb-4 border-bottom bg-secondary p-2 text-white">
-          Photographer Details
+          Photographer Details and Booking details
         </h3>
-        {isLoading ? (
+        {isLoading || bookingDetailsLoading ? (
           <>
             <Loader />
           </>
-        ) : error ? (
+        ) : error || bookingError ? (
           <NotFound />
         ) : (
-          <>
+          <div>
             {getPhotographerDetails.map((photographerDetail) => (
               <PortfolioForms
                 key={photographerDetail._id}
                 photographerDetail={photographerDetail}
               />
             ))}
-          </>
+
+            {bookingDetails.map((bookings) => (
+              <BookingDetails key={bookings._id} bookings={bookings} />
+            ))}
+          </div>
         )}
       </div>
     </div>

@@ -16,7 +16,12 @@ const PortfolioForms = ({ photographerDetail }) => {
               <img
                 src={photographerDetail.profilePic}
                 className="img-thumbnail"
-                alt="..."
+                style={{
+                  width: '120px',
+                  height: '120px',
+                  objectFit: 'cover',
+                }}
+                alt="profile picture"
               />
             </td>
             <td>{photographerDetail.description}</td>

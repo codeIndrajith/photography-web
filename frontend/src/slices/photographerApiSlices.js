@@ -41,11 +41,13 @@ export const photographerApiSlice = apiSlice.injectEndpoints({
       query: (photographerId) => ({
         url: `${PHOTOGRAPHER_URL}/getPortfolio/${photographerId}`,
       }),
+      keepUnusedDataFor: 5,
     }),
     getPhotographer: builder.query({
       query: (id) => ({
         url: `${PHOTOGRAPHER_URL}/${id}`,
       }),
+      keepUnusedDataFor: 5,
     }),
     addBookingRequest: builder.mutation({
       query: (data) => ({
@@ -53,6 +55,12 @@ export const photographerApiSlice = apiSlice.injectEndpoints({
         method: 'POST',
         body: data,
       }),
+    }),
+    getBookingByPhotographer: builder.query({
+      query: (photographerId) => ({
+        url: `${PHOTOGRAPHER_URL}/get-booking/${photographerId}`,
+      }),
+      keepUnusedDataFor: 5,
     }),
   }),
 });
@@ -66,4 +74,5 @@ export const {
   useGetPortfolioQuery,
   useGetPhotographerQuery,
   useAddBookingRequestMutation,
+  useGetBookingByPhotographerQuery,
 } = photographerApiSlice;
