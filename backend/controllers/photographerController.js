@@ -3,6 +3,7 @@ import Photographer from '../models/photographerModel.js';
 import generateToken from '../utils/generateToken.js';
 import cloudinary from 'cloudinary';
 import Portfolio from '../models/portfolioModel.js';
+import bookingLocation from '../models/bookingLocationModel.js';
 
 // @desc    Auth photographer & get token
 // @route   POST /api/photographer/auth
@@ -154,7 +155,7 @@ const getPortfolioByPhotographer = asyncHandler(async (req, res) => {
 
 // @desc    Get Photographer
 // @route   GET /api/photographers/:id
-// @access  Public
+// @access  Private
 const getPhotographer = asyncHandler(async (req, res) => {
   const id = req.params.id;
 
@@ -172,6 +173,30 @@ const getPhotographer = asyncHandler(async (req, res) => {
   }
 });
 
+// @desc    Add booking locations
+// @route   POST /api/photographers/add-booking
+// @access  Private
+const addBookingLocation = asyncHandler(async (req, res) => {
+  const { locationId, name, email, date, message, photographerId } = req.body;
+
+  const booking = await bookingLocation.create({
+    locationId,
+    photographerId,
+    name,
+    email,
+    date,
+    message,
+  });
+
+  if (booking) {
+    res.status(201).json({
+      _id: booking._id,
+    });
+  } else {
+    res.status(400);
+    throw new Error('Invalid booking location details');
+  }
+});
 export {
   authPhotographer,
   registerPhotographer,
@@ -179,4 +204,5 @@ export {
   addPortfolioByPhotographer,
   getPortfolioByPhotographer,
   getPhotographer,
+  addBookingLocation,
 };

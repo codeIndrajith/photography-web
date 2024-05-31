@@ -47,6 +47,13 @@ export const photographerApiSlice = apiSlice.injectEndpoints({
         url: `${PHOTOGRAPHER_URL}/${id}`,
       }),
     }),
+    addBookingRequest: builder.mutation({
+      query: (data) => ({
+        url: `${PHOTOGRAPHER_URL}/add-booking`,
+        method: 'POST',
+        body: data,
+      }),
+    }),
   }),
 });
 
@@ -58,4 +65,5 @@ export const {
   useAddPortfolioLMutation,
   useGetPortfolioQuery,
   useGetPhotographerQuery,
+  useAddBookingRequestMutation,
 } = photographerApiSlice;
