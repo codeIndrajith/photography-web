@@ -8,6 +8,7 @@ import {
   getPhotographer,
   addBookingLocation,
   getBookingByPhotographer,
+  getAllPhotographers,
 } from '../controllers/photographerController.js';
 import upload from '../middleware/upload.js';
 
@@ -28,5 +29,6 @@ router.get('/getPortfolio/:photographerId', getPortfolioByPhotographer);
 router.get('/:id', getPhotographer);
 router.post('/add-booking', addBookingLocation);
 router.get('/get-booking/:photographerId', getBookingByPhotographer);
+router.get('/photographers', getAllPhotographers);
 
 export default router;

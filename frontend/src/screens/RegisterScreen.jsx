@@ -18,8 +18,8 @@ const RegisterScreen = () => {
   const [whatsAppNumber, setWhatsAppNumber] = useState(0);
   const [instagramLink, setInstagramLink] = useState('');
   const [faceBookLink, setFaceBookLink] = useState('');
-  const [file, setFile] = useState();
-  const [files, setFiles] = useState([]);
+  // const [file, setFile] = useState();
+  // const [files, setFiles] = useState([]);
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [status, setStatus] = useState('');
@@ -53,15 +53,14 @@ const RegisterScreen = () => {
     setStatus('locationOwner');
   };
 
-  const handleFileChange = (e) => {
-    const selectedFiles = Array.from(e.target.files).slice(0, 5);
-    setFiles(selectedFiles);
+  // const handleFileChange = (e) => {
+  //   const selectedFiles = Array.from(e.target.files).slice(0, 5);
+  //   setFiles(selectedFiles);
 
-    // Disable the file input if 5 images are already selected
-    if (selectedFiles.length >= 5) {
-      e.target.disabled = true;
-    }
-  };
+  //   if (selectedFiles.length >= 5) {
+  //     e.target.disabled = true;
+  //   }
+  // };
 
   const submitHandler = async (e) => {
     e.preventDefault();
@@ -71,22 +70,19 @@ const RegisterScreen = () => {
     if (status === 'photographer') {
       if (password !== confirmPassword) {
         toast.error('Passwords do not match');
-      } else if (file === undefined) {
-        toast.error('Add portfolio');
       } else {
         try {
-          const formData = new FormData();
-          formData.append('firstName', firstName);
-          formData.append('lastName', lastName);
-          formData.append('email', email);
-          formData.append('password', password);
-          formData.append('whatsAppNumber', whatsAppNumber);
-          formData.append('instagramLink', instagramLink);
-          formData.append('faceBookLink', faceBookLink);
-          formData.append('portfolio', file);
-          formData.append('status', status);
-
-          const res = await register(formData).unwrap();
+          const res = await register({
+            firstName,
+            lastName,
+            email,
+            password,
+            confirmPassword,
+            whatsAppNumber,
+            instagramLink,
+            faceBookLink,
+            status,
+          }).unwrap();
           dispatch(setCredentials({ ...res }));
           navigate('/');
         } catch (err) {
@@ -114,25 +110,19 @@ const RegisterScreen = () => {
     } else if (status === 'locationOwner') {
       if (password !== confirmPassword) {
         toast.error('Passwords do not match');
-      } else if (files === undefined) {
-        toast.error('Add images');
       } else {
         try {
-          const formData = new FormData();
-          formData.append('firstName', firstName);
-          formData.append('lastName', lastName);
-          formData.append('email', email);
-          formData.append('password', password);
-          formData.append('whatsAppNumber', whatsAppNumber);
-          formData.append('instagramLink', instagramLink);
-          formData.append('faceBookLink', faceBookLink);
-          formData.append('status', status);
-
-          files.forEach((file, index) => {
-            formData.append(`images`, file);
-          });
-
-          const res = await registerOwner(formData).unwrap();
+          const res = await registerOwner({
+            firstName,
+            lastName,
+            email,
+            password,
+            confirmPassword,
+            whatsAppNumber,
+            instagramLink,
+            faceBookLink,
+            status,
+          }).unwrap();
           dispatch(setCredentials({ ...res }));
           navigate('/');
         } catch (err) {
@@ -278,7 +268,7 @@ const RegisterScreen = () => {
             </Row>
           )}
 
-          {status === 'photographer' ? (
+          {/* {status === 'photographer' ? (
             <Form.Group className="my-2" controlId="name">
               <Form.Label>Your Portfolio</Form.Label>
               <Form.Control
@@ -298,7 +288,7 @@ const RegisterScreen = () => {
             </Form.Group>
           ) : (
             <div></div>
-          )}
+          )} */}
 
           <Button
             type="submit"

@@ -74,7 +74,7 @@ const registerPhotographer = asyncHandler(async (req, res) => {
       firstName: photographer.firstName,
       lastName: photographer.lastName,
       email: photographer.email,
-      portfolio: photographer.portfolio,
+      // portfolio: photographer.portfolio,
       status: photographer.status,
     });
   } else {
@@ -218,6 +218,24 @@ const getBookingByPhotographer = asyncHandler(async (req, res) => {
     res.status(404).json({ message: 'No Booking details found' });
   }
 });
+
+// @desc    Get All photographers
+// @route   GET /api/photographers
+// @access  Public
+const getAllPhotographers = asyncHandler(async (req, res) => {
+  const photographers = await Photographer.findAll();
+
+  if (photographers) {
+    res.status(201).json({
+      _id: photographers._id,
+      fullName: photographers.firstName + ' ' + photographers.lastName,
+      email: photographers.email,
+      whatsAppNumber: photographers.whatsAppNumber,
+      instagramLink: photographers.instagramLink,
+      faceBookLink: photographers.faceBookLink,
+    });
+  }
+});
 export {
   authPhotographer,
   registerPhotographer,
@@ -227,4 +245,5 @@ export {
   getPhotographer,
   addBookingLocation,
   getBookingByPhotographer,
+  getAllPhotographers,
 };
