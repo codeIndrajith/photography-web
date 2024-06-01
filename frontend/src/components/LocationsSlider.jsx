@@ -36,7 +36,11 @@ const LocationsSlider = () => {
         <div className="cardContainer">
           <>
             {locationsData.slice(startIndex, endIndex).map((location) => (
-              <div className="col-md-3" key={location._id}>
+              <Link
+                to={`locations/${location._id}`}
+                className="col-md-3"
+                key={location._id}
+              >
                 <div
                   className="card-all card"
                   style={{ backgroundImage: `url(${location.images[0]})` }}
@@ -46,7 +50,7 @@ const LocationsSlider = () => {
                     <p>{location.locationAddress}</p>
                   </div>
                 </div>
-              </div>
+              </Link>
             ))}
           </>
         </div>
