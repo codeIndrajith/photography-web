@@ -32,10 +32,10 @@ const photographerSchema = mongoose.Schema(
       type: String,
       required: true,
     },
-    // portfolio: {
-    //   type: String,
-    //   required: true,
-    // },
+    profilePic: {
+      type: String,
+      required: true,
+    },
     status: {
       type: String,
       require: true,

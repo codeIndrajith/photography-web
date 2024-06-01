@@ -33,11 +33,11 @@
     position: relative;
   }
   .card0 {
-    background: url("https://i.pinimg.com/736x/8f/a0/51/8fa051251f5ac2d0b756027089fbffde--terry-o-neill-al-pacino.jpg") center center no-repeat;
+    background: center center no-repeat;
     background-size: 300px;
   }
   .card0:hover {
-    background: url("https://i.pinimg.com/736x/8f/a0/51/8fa051251f5ac2d0b756027089fbffde--terry-o-neill-al-pacino.jpg") left center no-repeat;
+    background: left center no-repeat;
     background-size: 600px;
   }
   .card0:hover h2 {
@@ -46,37 +46,14 @@
   .card0:hover .fa {
     opacity: 1;
   }
-  .card1 {
-    background: url("https://i.pinimg.com/originals/28/d2/e6/28d2e684e7859a0dd17fbd0cea00f8a9.jpg") center center no-repeat;
-    background-size: 300px;
-  }
-  .card1:hover {
-    background: url("https://i.pinimg.com/originals/28/d2/e6/28d2e684e7859a0dd17fbd0cea00f8a9.jpg") left center no-repeat;
-    background-size: 600px;
-  }
-  .card1:hover h2 {
-    opacity: 1;
-  }
-  .card1:hover .fa {
-    opacity: 1;
-  }
-  .card2 {
-    background: url("https://i.pinimg.com/originals/ee/85/08/ee850842e68cfcf6e3943c048f45c6d1.jpg") center center no-repeat;
-    background-size: 300px;
-  }
-  .card2:hover {
-    background: url("https://i.pinimg.com/originals/ee/85/08/ee850842e68cfcf6e3943c048f45c6d1.jpg") left center no-repeat;
-    background-size: 600px;
-  }
-  .card2:hover h2 {
-    opacity: 1;
-  }
-  .card2:hover .fa {
-    opacity: 1;
-  }
+
   h2 {
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    color: #fff;
+    color: #000000;
+    /* background-color: #fff; */
+    width: 100%;
+    padding: 10px;
+    border-radius: 10px;
     margin: 20px;
     opacity: 0;
     transition: opacity 1s;
@@ -87,8 +64,8 @@
   }
   .icons {
     position: absolute;
-    fill: #fff;
-    color: #fff;
+    fill: #000000;
+    color: #000000;
     height: 130px;
     top: 226px;
     width: 50px;
@@ -118,6 +95,7 @@
   .backBtnn {
     padding: 10px 50px;
   background-color: #d89127;
+  margin-right: 30px;
   color: rgb(19, 18, 18);
   border: none;
   cursor: pointer;

@@ -14,7 +14,7 @@ import upload from '../middleware/upload.js';
 
 const router = express.Router();
 
-router.post('/', upload.single('portfolio'), registerPhotographer);
+router.post('/', upload.single('profilePic'), registerPhotographer);
 router.post('/auth', authPhotographer);
 router.post('/logout', logoutPhotographer);
 router.post(
@@ -29,6 +29,6 @@ router.get('/getPortfolio/:photographerId', getPortfolioByPhotographer);
 router.get('/:id', getPhotographer);
 router.post('/add-booking', addBookingLocation);
 router.get('/get-booking/:photographerId', getBookingByPhotographer);
-router.get('/photographers', getAllPhotographers);
+router.get('/', getAllPhotographers);
 
 export default router;

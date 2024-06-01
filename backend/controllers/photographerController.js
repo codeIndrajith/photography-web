@@ -43,9 +43,9 @@ const registerPhotographer = asyncHandler(async (req, res) => {
     status,
   } = req.body;
 
-  // const portfolio = req.file.path;
-  // const result = await cloudinary.uploader.upload(portfolio);
-  // const portfolioUrl = result.secure_url;
+  const image = req.file.path;
+  const result = await cloudinary.uploader.upload(image);
+  const profilePicUrl = result.secure_url;
 
   const userExists = await Photographer.findOne({ email });
 
@@ -62,7 +62,7 @@ const registerPhotographer = asyncHandler(async (req, res) => {
     whatsAppNumber,
     instagramLink,
     faceBookLink,
-    // portfolio: portfolioUrl,
+    profilePic: profilePicUrl,
     status,
   });
 
@@ -74,7 +74,7 @@ const registerPhotographer = asyncHandler(async (req, res) => {
       firstName: photographer.firstName,
       lastName: photographer.lastName,
       email: photographer.email,
-      // portfolio: photographer.portfolio,
+      profilePic: photographer.profilePic,
       status: photographer.status,
     });
   } else {
@@ -223,17 +223,13 @@ const getBookingByPhotographer = asyncHandler(async (req, res) => {
 // @route   GET /api/photographers
 // @access  Public
 const getAllPhotographers = asyncHandler(async (req, res) => {
-  const photographers = await Photographer.findAll();
+  const photographers = await Photographer.find({});
 
   if (photographers) {
-    res.status(201).json({
-      _id: photographers._id,
-      fullName: photographers.firstName + ' ' + photographers.lastName,
-      email: photographers.email,
-      whatsAppNumber: photographers.whatsAppNumber,
-      instagramLink: photographers.instagramLink,
-      faceBookLink: photographers.faceBookLink,
-    });
+    res.status(200).json(photographers);
+  } else {
+    res.status(404);
+    throw new Error('Not found photographers');
   }
 });
 export {

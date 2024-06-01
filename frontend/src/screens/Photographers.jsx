@@ -1,49 +1,33 @@
 import React, { useState } from 'react';
-import location1 from '../images/location1.jpg';
-import { MdLocationOn } from 'react-icons/md';
 import { Link } from 'react-router-dom';
 import './CSS/Photographers.css';
+import { useGetAllPhotographersQuery } from '../slices/photographerApiSlices';
+import Loader from '../components/Loader';
+import NotFound from '../components/NotFound';
 
 const Photographers = () => {
   const [currentPage, setCurrentPage] = useState(1);
+  const perPage = 4;
+  const startIndex = (currentPage - 1) * perPage;
+  const endIndex = startIndex + perPage;
 
-  // Dummy data
-  // Dummy photographer data
-  const PhotographerData = [
-    { id: 1, name: 'John Doe', address: '123 Main St, New York, NY' },
-    { id: 2, name: 'Jane Smith', address: '456 Elm St, Los Angeles, CA' },
-    { id: 3, name: 'Michael Johnson', address: '789 Oak St, Chicago, IL' },
-    { id: 4, name: 'Emily Brown', address: '101 Pine St, San Francisco, CA' },
-    { id: 5, name: 'David Lee', address: '202 Maple St, Miami, FL' },
-    { id: 6, name: 'Jessica Wilson', address: '303 Birch St, Houston, TX' },
-    {
-      id: 7,
-      name: 'Matthew Taylor',
-      address: '404 Cedar St, Philadelphia, PA',
-    },
-    { id: 8, name: 'Sophia Martinez', address: '505 Walnut St, Phoenix, AZ' },
-    {
-      id: 9,
-      name: 'William Anderson',
-      address: '606 Spruce St, San Antonio, TX',
-    },
-    { id: 10, name: 'Olivia Rodriguez', address: '707 Cherry St, Dallas, TX' },
-    {
-      id: 11,
-      name: 'Ethan Hernandez',
-      address: '808 Pineapple St, Austin, TX',
-    },
-    { id: 12, name: 'Ava Lopez', address: '909 Peach St, Seattle, WA' },
-    { id: 13, name: 'Daniel Gonzalez', address: '1010 Lemon St, Denver, CO' },
-    { id: 14, name: 'Isabella Perez', address: '1111 Grape St, Boston, MA' },
-    {
-      id: 15,
-      name: 'Alexander Wilson',
-      address: '1212 Lime St, Washington, DC',
-    },
-    { id: 16, name: 'Mia Hernandez', address: '1313 Coconut St, Atlanta, GA' },
-    { id: 17, name: 'James Brown', address: '1414 Banana St, Orlando, FL' },
-  ];
+  const {
+    data: photographerData,
+    isLoading: photographerDataLoading,
+    error: photographerDataError,
+  } = useGetAllPhotographersQuery();
+
+  if (photographerDataLoading) {
+    return <Loader />;
+  }
+
+  if (photographerDataError) {
+    return <p>Failed to fetch photographer data. Please try again later.</p>;
+  }
+
+  if (!photographerData || photographerData.length === 0) {
+    return <NotFound />;
+  }
 
   const handleNextClick = () => {
     setCurrentPage(currentPage + 1);
@@ -53,8 +37,6 @@ const Photographers = () => {
     setCurrentPage(currentPage - 1);
   };
 
-  const startIndex = (currentPage - 1) * 4;
-  const endIndex = Math.min(startIndex + 4, PhotographerData.length);
   return (
     <div className="container mt-5">
       {/* Header */}
@@ -69,13 +51,23 @@ const Photographers = () => {
           </p>
         </div>
 
-        {/* Card body */}
         <div className="row mt-5 conSection">
-          {PhotographerData.slice(startIndex, endIndex).map((photographer) => (
-            <div className="col-md-3" key={photographer.id}>
-              <div className="card00 card0">
+          {photographerData.slice(startIndex, endIndex).map((photographer) => (
+            <Link
+              to={`/photographers/${photographer._id}`}
+              className="col-md-3"
+              key={photographer._id}
+            >
+              <div
+                className="card00 card0"
+                style={{
+                  backgroundImage: `url(${photographer.profilePic})`,
+                }}
+              >
                 <div className="border">
-                  <h2>{photographer.name}</h2>
+                  <h2>
+                    {photographer.firstName + ' ' + photographer.lastName}
+                  </h2>
                   <div className="icons">
                     <i className="fa fa-codepen" aria-hidden="true"></i>
                     <i className="fa fa-instagram" aria-hidden="true"></i>
@@ -85,22 +77,20 @@ const Photographers = () => {
                   </div>
                 </div>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
 
         <div className="row">
           <div className="btnSection">
-            {/* Next button */}
-            {endIndex < PhotographerData.length && (
-              <button className="nextBtnn" onClick={handleNextClick}>
-                Next
-              </button>
-            )}
-            {/* Back button */}
             {startIndex > 0 && (
               <button className="backBtnn" onClick={handleBackClick}>
                 Back
+              </button>
+            )}
+            {endIndex < photographerData.length && (
+              <button className="nextBtnn" onClick={handleNextClick}>
+                Next
               </button>
             )}
           </div>

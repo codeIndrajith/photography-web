@@ -62,6 +62,12 @@ export const photographerApiSlice = apiSlice.injectEndpoints({
       }),
       keepUnusedDataFor: 5,
     }),
+    getAllPhotographers: builder.query({
+      query: () => ({
+        url: `${PHOTOGRAPHER_URL}`,
+      }),
+      keepUnusedDataFor: 5,
+    }),
   }),
 });
 
@@ -75,4 +81,5 @@ export const {
   useGetPhotographerQuery,
   useAddBookingRequestMutation,
   useGetBookingByPhotographerQuery,
+  useGetAllPhotographersQuery,
 } = photographerApiSlice;

@@ -64,7 +64,7 @@ const Locations = () => {
 
         <div className="cardContainer row">
           {locationsData.slice(startIndex, endIndex).map((location) => (
-            <div className="col-md-3">
+            <div className="col-md-3" key={location.id}>
               <div
                 className="card-all card"
                 style={{ backgroundImage: `url(${location.url})` }}

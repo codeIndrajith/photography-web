@@ -18,7 +18,7 @@ const RegisterScreen = () => {
   const [whatsAppNumber, setWhatsAppNumber] = useState(0);
   const [instagramLink, setInstagramLink] = useState('');
   const [faceBookLink, setFaceBookLink] = useState('');
-  // const [file, setFile] = useState();
+  const [file, setFile] = useState();
   // const [files, setFiles] = useState([]);
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
@@ -65,24 +65,25 @@ const RegisterScreen = () => {
   const submitHandler = async (e) => {
     e.preventDefault();
 
-    // console.log(file);
+    console.log(file);
 
     if (status === 'photographer') {
       if (password !== confirmPassword) {
         toast.error('Passwords do not match');
       } else {
         try {
-          const res = await register({
-            firstName,
-            lastName,
-            email,
-            password,
-            confirmPassword,
-            whatsAppNumber,
-            instagramLink,
-            faceBookLink,
-            status,
-          }).unwrap();
+          const formData = new FormData();
+          formData.append('firstName', firstName);
+          formData.append('lastName', lastName);
+          formData.append('email', email);
+          formData.append('password', password);
+          formData.append('whatsAppNumber', whatsAppNumber);
+          formData.append('instagramLink', instagramLink);
+          formData.append('faceBookLink', faceBookLink);
+          formData.append('status', status);
+          formData.append('profilePic', file);
+
+          const res = await register(formData).unwrap();
           dispatch(setCredentials({ ...res }));
           navigate('/');
         } catch (err) {
@@ -268,27 +269,15 @@ const RegisterScreen = () => {
             </Row>
           )}
 
-          {/* {status === 'photographer' ? (
+          {status === 'photographer' && (
             <Form.Group className="my-2" controlId="name">
-              <Form.Label>Your Portfolio</Form.Label>
+              <Form.Label>Your Profile Picture</Form.Label>
               <Form.Control
                 type="file"
                 onChange={(e) => setFile(e.target.files[0])}
               />
             </Form.Group>
-          ) : status === 'locationOwner' ? (
-            <Form.Group className="my-2" controlId="name">
-              <Form.Label>Photos of Location (maximum 5 images)</Form.Label>
-              <Form.Control type="file" onChange={handleFileChange} multiple />
-              {files.length === 5 && (
-                <Form.Text className="text-muted">
-                  You have reached the maximum limit of 5 images.
-                </Form.Text>
-              )}
-            </Form.Group>
-          ) : (
-            <div></div>
-          )} */}
+          )}
 
           <Button
             type="submit"
