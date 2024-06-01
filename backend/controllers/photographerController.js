@@ -100,20 +100,20 @@ const logoutPhotographer = (req, res) => {
 const addPortfolioByPhotographer = asyncHandler(async (req, res) => {
   const { description, photographerId } = req.body;
 
-  const image = req.files['profilePic'][0];
+  // const image = req.files['profilePic'][0];
 
-  const result = await cloudinary.uploader.upload(image.path);
-  const coverImageUrl = result.secure_url;
+  // const result = await cloudinary.uploader.upload(image.path);
+  // const coverImageUrl = result.secure_url;
 
   const imageUrls = [];
 
-  for (const file of req.files['shootImageSamples']) {
+  for (const file of req.files) {
     const result = await cloudinary.uploader.upload(file.path);
     imageUrls.push(result.secure_url);
   }
 
   const portfolio = await Portfolio.create({
-    profilePic: coverImageUrl,
+    // profilePic: coverImageUrl,
     shootImageSamples: imageUrls,
     description,
     photographerId,
@@ -144,7 +144,7 @@ const getPortfolioByPhotographer = asyncHandler(async (req, res) => {
       photographerDetails.map((photographerDetail) => ({
         _id: photographerDetail._id,
         description: photographerDetail.description,
-        profilePic: photographerDetail.profilePic,
+        // profilePic: photographerDetail.profilePic,
         shootImageSamples: photographerDetail.shootImageSamples,
       }))
     );

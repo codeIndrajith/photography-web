@@ -19,10 +19,7 @@ router.post('/auth', authPhotographer);
 router.post('/logout', logoutPhotographer);
 router.post(
   '/addPortfolio',
-  upload.fields([
-    { name: 'profilePic', maxCount: 1 },
-    { name: 'shootImageSamples', maxCount: 5 },
-  ]),
+  upload.array('shootImageSamples', 5),
   addPortfolioByPhotographer
 );
 router.get('/getPortfolio/:photographerId', getPortfolioByPhotographer);

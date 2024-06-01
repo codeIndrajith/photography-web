@@ -21,13 +21,14 @@ const PhotographerDashBoard = () => {
     error,
     refetch,
   } = useGetPortfolioQuery(userInfo._id);
+  console.log(getPhotographerDetails);
   const {
     data: bookingDetails,
     isLoading: bookingDetailsLoading,
     error: bookingError,
   } = useGetBookingByPhotographerQuery(userInfo._id);
   const [files, setFiles] = useState([]);
-  const [image, setImage] = useState();
+  // const [image, setImage] = useState();
   const [description, setDescription] = useState('');
 
   const [photographerDetails, { isLoading: loadingPhotographerDetails }] =
@@ -46,16 +47,16 @@ const PhotographerDashBoard = () => {
   const submitHandler = async (e) => {
     e.preventDefault();
 
-    if (image === undefined) {
-      toast.error('Please add your Portfolio');
-      return;
-    }
+    // if (image === undefined) {
+    //   toast.error('Please add your Portfolio');
+    //   return;
+    // }
 
     try {
       const formData = new FormData();
       formData.append('description', description);
       formData.append('photographerId', userInfo._id);
-      formData.append('profilePic', image);
+      // formData.append('profilePic', image);
       files.forEach((file, index) => {
         formData.append(`shootImageSamples`, file);
       });
@@ -73,7 +74,7 @@ const PhotographerDashBoard = () => {
     <div className="container mt-5">
       <div>
         <form onSubmit={submitHandler}>
-          <div className="form-group row mt-3">
+          {/* <div className="form-group row mt-3">
             <label className="col-sm-2 col-form-label">Add your image</label>
             <div className="col-sm-10">
               <input
@@ -83,7 +84,7 @@ const PhotographerDashBoard = () => {
                 placeholder="Cover photo"
               />
             </div>
-          </div>
+          </div> */}
           <div className="form-group row mt-3">
             <label className="col-sm-2 col-form-label">Add Photos</label>
             <div className="col-sm-10">
@@ -118,14 +119,16 @@ const PhotographerDashBoard = () => {
       {/* Input details */}
       <div className="mt-5 p-3">
         <h3 className="text-center mb-4 border-bottom bg-secondary p-2 text-white">
-          Photographer Details and Booking details
+          Photographer Details
         </h3>
-        {isLoading || bookingDetailsLoading ? (
+        {isLoading ? (
           <>
             <Loader />
           </>
-        ) : error || bookingError ? (
-          <NotFound />
+        ) : error ? (
+          <>
+            <NotFound />
+          </>
         ) : (
           <div>
             {getPhotographerDetails.map((photographerDetail) => (
@@ -134,7 +137,24 @@ const PhotographerDashBoard = () => {
                 photographerDetail={photographerDetail}
               />
             ))}
+          </div>
+        )}
+      </div>
 
+      <div className="mt-5 p-3">
+        <h3 className="text-center mb-4 border-bottom bg-secondary p-2 text-white">
+          Booking details
+        </h3>
+        {bookingDetailsLoading ? (
+          <>
+            <Loader />
+          </>
+        ) : bookingError ? (
+          <>
+            <NotFound />
+          </>
+        ) : (
+          <div>
             {bookingDetails.map((bookings) => (
               <BookingDetails key={bookings._id} bookings={bookings} />
             ))}

@@ -37,7 +37,7 @@
     background-size: 300px;
   }
   .card0:hover {
-    background: left center no-repeat;
+    background: center center no-repeat;
     background-size: 600px;
   }
   .card0:hover h2 {

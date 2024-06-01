@@ -6,13 +6,13 @@ const PortfolioForms = ({ photographerDetail }) => {
       <table className="table mb-5" style={{ backgroundColor: '#E4DFD9' }}>
         <thead>
           <tr>
-            <th scope="col">Profile pic</th>
+            {/* <th scope="col">Profile pic</th> */}
             <th scope="col">Description</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td>
+            {/* <td>
               <img
                 src={photographerDetail.profilePic}
                 className="img-thumbnail"
@@ -23,7 +23,7 @@ const PortfolioForms = ({ photographerDetail }) => {
                 }}
                 alt="profile picture"
               />
-            </td>
+            </td> */}
             <td>{photographerDetail.description}</td>
           </tr>
         </tbody>
