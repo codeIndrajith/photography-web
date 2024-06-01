@@ -13,10 +13,48 @@ import gmailIcon from '../images/gmail.png';
 import './CSS/PhotographyAbout.css';
 import BookingPhotographerForm from '../components/bookingPhotographerForm';
 import { useSelector } from 'react-redux';
+import {
+  useGetPhotographerQuery,
+  useGetPortfolioQuery,
+} from '../slices/photographerApiSlices';
+import { useParams } from 'react-router-dom';
+import Loader from '../components/Loader';
+import NotFound from '../components/NotFound';
 
 const PhotographerAbout = () => {
   const [activeIndex, setActiveIndex] = useState(0);
+  const id = useParams();
+  const {
+    data: photographer,
+    isLoading,
+    error,
+  } = useGetPhotographerQuery(id.id);
+
+  const {
+    data: portFolio,
+    isLoading: portFolioLoading,
+    error: portFolioError,
+  } = useGetPortfolioQuery(id.id);
+  console.log(portFolio);
+
   const { userInfo } = useSelector((state) => state.auth);
+
+  if (isLoading || portFolioLoading) {
+    return <Loader />;
+  }
+
+  if (error || portFolioError) {
+    return <p>Failed to fetch photographer data. Please try again later.</p>;
+  }
+
+  if (
+    !photographer ||
+    photographer.length === 0 ||
+    !portFolio ||
+    portFolio.length === 0
+  ) {
+    return <NotFound />;
+  }
 
   const images = [sample1, sample2, sample3];
 
@@ -92,21 +130,21 @@ const PhotographerAbout = () => {
           <span className="visually-hidden">Next</span>
         </button>
       </div>
+
       <div className="container mt-5">
         <div className="col">
-          <h2 className="aboutText">About Me</h2> <hr />
+          <h1 className="aboutText">About Me</h1> <hr />
           <div className="aboutMe">
             <div className="card">
-              <img src={ph001} className="card-img-top" alt="" />
+              <img
+                src={photographer.profilePic}
+                className="card-img-top"
+                alt=""
+              />
             </div>
             <div className="aboutDetails">
-              <h1>I'am Jhone</h1>
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iure
-                amet voluptatibus adipisci nesciunt quas doloremque pariatur
-                velit suscipit voluptatum, cum aspernatur, explicabo dolor ipsum
-                obcaecati! Corrupti asperiores dolore sequi beatae.
-              </p>
+              <h1>{photographer.firstName + ' ' + photographer.lastName}</h1>
+              <p>description</p>
               {userInfo.status === 'client' && (
                 <div style={{ width: '100%' }}>
                   <BookingPhotographerForm clientId={userInfo._id} />
@@ -119,111 +157,113 @@ const PhotographerAbout = () => {
         <div className="contacts">
           <h4>Get in touch</h4>
           <div className="social">
-            <a href="#">
+            <a href={photographer.instagramLink}>
               <img className="insta" src={instagramIcon} alt="instagram" />
             </a>
-            <a href={`https://wa.me/+94${123}`}>
+            <a href={`https://wa.me/+94${photographer.whatsAppNumber}`}>
               <img className="whats" src={whatsAppIcon} alt="whatsapp" />
             </a>
-            <a href="#">
+            <a href={photographer.faceBookLink}>
               <img className="face" src={facebookIcon} alt="facebook" />
             </a>
-            <a href="#">
+            <a href={photographer.email}>
               <img className="gmail" src={gmailIcon} alt="gmail" />
             </a>
           </div>
-          <p className="rate">Ratings</p> <hr />
-          <div className="cont">
-            <div className="row">
-              <div className="rating-card">
-                <strong>Jhone deo</strong>
-                <h5>Data : 2024/02/03</h5>
-                <div className="col">
-                  <p>Best Photographer</p>
-                  <div className="rating-stars">
-                    <TiStar />
-                    <TiStar />
-                    <TiStar />
-                    <TiStar />
-                    <TiStarHalf />
-                  </div>
-                </div>
-              </div>
-
-              <div className="rating-card">
-                <strong>Jhone deo</strong>
-                <h5>Data : 2024/02/03</h5>
-                <div className="col">
-                  <p>Best Photographer</p>
-                  <div className="rating-stars">
-                    <TiStar />
-                    <TiStar />
-                    <TiStar />
-                    <TiStarOutline />
-                    <TiStarOutline />
-                  </div>
-                </div>
-              </div>
-
-              <div className="rating-card">
-                <strong>Jhone deo</strong>
-                <h5>Data : 2024/02/03</h5>
-                <div className="col">
-                  <p>Best Photographer</p>
-                  <div className="rating-stars">
-                    <TiStar />
-                    <TiStar />
-                    <TiStar />
-                    <TiStarOutline />
-                    <TiStarOutline />
-                  </div>
+        </div>
+      </div>
+      <div className="container mt-5">
+        <p className="rate">Ratings</p> <hr />
+        <div className="cont">
+          <div className="row">
+            <div className="rating-card">
+              <strong>Jhone deo</strong>
+              <h5>Data : 2024/02/03</h5>
+              <div className="col">
+                <p>Best Photographer</p>
+                <div className="rating-stars">
+                  <TiStar />
+                  <TiStar />
+                  <TiStar />
+                  <TiStar />
+                  <TiStarHalf />
                 </div>
               </div>
             </div>
 
-            <div className="row">
-              <div className="rating-card">
-                <strong>Jhone deo</strong>
-                <h5>Data : 2024/02/03</h5>
-                <div className="col">
-                  <p>Best Photographer</p>
-                  <div className="rating-stars">
-                    <TiStar />
-                    <TiStar />
-                    <TiStarHalf />
-                    <TiStarHalf />
-                    <TiStarOutline />
-                  </div>
+            <div className="rating-card">
+              <strong>Jhone deo</strong>
+              <h5>Data : 2024/02/03</h5>
+              <div className="col">
+                <p>Best Photographer</p>
+                <div className="rating-stars">
+                  <TiStar />
+                  <TiStar />
+                  <TiStar />
+                  <TiStarOutline />
+                  <TiStarOutline />
                 </div>
               </div>
+            </div>
 
-              <div className="rating-card">
-                <strong>Jhone deo</strong>
-                <h5>Data : 2024/02/03</h5>
-                <div className="col">
-                  <p>Best Photographer</p>
-                  <div className="rating-stars">
-                    <TiStar />
-                    <TiStar />
-                    <TiStar />
-                    <TiStar />
-                    <TiStarOutline />
-                  </div>
+            <div className="rating-card">
+              <strong>Jhone deo</strong>
+              <h5>Data : 2024/02/03</h5>
+              <div className="col">
+                <p>Best Photographer</p>
+                <div className="rating-stars">
+                  <TiStar />
+                  <TiStar />
+                  <TiStar />
+                  <TiStarOutline />
+                  <TiStarOutline />
                 </div>
               </div>
+            </div>
+          </div>
 
-              <div className="rating-card">
-                <strong>Jhone deo</strong>
-                <h5>Data : 2024/02/03</h5>
-                <div className="col">
-                  <p>Best Photographer</p>
-                  <div className="rating-stars">
-                    <TiStar />
-                    <TiStar />
-                    <TiStarOutline />
-                    <TiStarOutline />
-                    <TiStarOutline />
-                  </div>
+          <div className="row">
+            <div className="rating-card">
+              <strong>Jhone deo</strong>
+              <h5>Data : 2024/02/03</h5>
+              <div className="col">
+                <p>Best Photographer</p>
+                <div className="rating-stars">
+                  <TiStar />
+                  <TiStar />
+                  <TiStarHalf />
+                  <TiStarHalf />
+                  <TiStarOutline />
+                </div>
+              </div>
+            </div>
+
+            <div className="rating-card">
+              <strong>Jhone deo</strong>
+              <h5>Data : 2024/02/03</h5>
+              <div className="col">
+                <p>Best Photographer</p>
+                <div className="rating-stars">
+                  <TiStar />
+                  <TiStar />
+                  <TiStar />
+                  <TiStar />
+                  <TiStarOutline />
+                </div>
+              </div>
+            </div>
+
+            <div className="rating-card">
+              <strong>Jhone deo</strong>
+              <h5>Data : 2024/02/03</h5>
+              <div className="col">
+                <p>Best Photographer</p>
+                <div className="rating-stars">
+                  <TiStar />
+                  <TiStar />
+                  <TiStarOutline />
+                  <TiStarOutline />
+                  <TiStarOutline />
                 </div>
               </div>
             </div>

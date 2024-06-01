@@ -165,6 +165,10 @@ const getPhotographer = asyncHandler(async (req, res) => {
     res.status(201).json({
       firstName: photographer.firstName,
       lastName: photographer.lastName,
+      whatsAppNumber: photographer.whatsAppNumber,
+      faceBookLink: photographer.faceBookLink,
+      instagramLink: photographer.instagramLink,
+      profilePic: photographer.profilePic,
       email: photographer.email,
     });
   } else {
