@@ -166,10 +166,24 @@ const getLocationsByOwner = async (req, res) => {
   }
 };
 
+// @desc    Get All Location
+// @route   GET /api/getLocation
+// @access  Public
+const getAllLocations = asyncHandler(async (req, res) => {
+  const locations = await Locations.find({});
+  if (locations) {
+    res.status(200).json(locations);
+  } else {
+    res.status(404);
+    throw new Error('No locations found');
+  }
+});
+
 export {
   authLocationOwner,
   registerLocationOwner,
   logoutLocationOwner,
   addLocationByOwner,
   getLocationsByOwner,
+  getAllLocations,
 };
