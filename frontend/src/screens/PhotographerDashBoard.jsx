@@ -74,8 +74,9 @@ const PhotographerDashBoard = () => {
   return (
     <div className="container mt-5">
       <div>
-        <form onSubmit={submitHandler}>
-          {/* <div className="form-group row mt-3">
+        {!getPhotographerDetails && (
+          <form onSubmit={submitHandler}>
+            {/* <div className="form-group row mt-3">
             <label className="col-sm-2 col-form-label">Add your image</label>
             <div className="col-sm-10">
               <input
@@ -86,35 +87,36 @@ const PhotographerDashBoard = () => {
               />
             </div>
           </div> */}
-          <div className="form-group row mt-3">
-            <label className="col-sm-2 col-form-label">Add Photos</label>
-            <div className="col-sm-10">
-              <input
-                type="file"
-                className="form-control"
-                multiple
-                onChange={fileHandler}
-                placeholder="Portfolio"
-              />
+            <div className="form-group row mt-3">
+              <label className="col-sm-2 col-form-label">Add Photos</label>
+              <div className="col-sm-10">
+                <input
+                  type="file"
+                  className="form-control"
+                  multiple
+                  onChange={fileHandler}
+                  placeholder="Portfolio"
+                />
+              </div>
             </div>
-          </div>
-          <div className="form-group row mt-3">
-            <label className="col-sm-2 col-form-label">Tell About you</label>
-            <div className="col-sm-10">
-              <input
-                type="text"
-                className="form-control"
-                value={description}
-                onChange={(e) => setDescription(e.target.value)}
-                placeholder="Tell about you"
-              />
+            <div className="form-group row mt-3">
+              <label className="col-sm-2 col-form-label">Tell About you</label>
+              <div className="col-sm-10">
+                <input
+                  type="text"
+                  className="form-control"
+                  value={description}
+                  onChange={(e) => setDescription(e.target.value)}
+                  placeholder="Tell about you"
+                />
+              </div>
             </div>
-          </div>
-          <button className="addBtn" type="submit">
-            Add
-          </button>
-          {loadingPhotographerDetails && <Loader />}
-        </form>
+            <button className="addBtn" type="submit">
+              Add
+            </button>
+            {loadingPhotographerDetails && <Loader />}
+          </form>
+        )}
       </div>
 
       {/* Input details */}

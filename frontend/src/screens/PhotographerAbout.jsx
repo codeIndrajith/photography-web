@@ -155,7 +155,7 @@ const PhotographerAbout = () => {
                   <BookingPhotographerForm clientId={userInfo._id} />
                 </div>
               ) : (
-                <p>No Login</p>
+                <p></p>
               )}
             </div>
           </div>
