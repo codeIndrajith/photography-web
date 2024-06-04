@@ -14,6 +14,7 @@ import BookingDetails from '../components/BookingDetails';
 
 const PhotographerDashBoard = () => {
   const { userInfo } = useSelector((state) => state.auth);
+  console.log(userInfo._id);
 
   const {
     data: getPhotographerDetails,
@@ -21,7 +22,7 @@ const PhotographerDashBoard = () => {
     error,
     refetch,
   } = useGetPortfolioQuery(userInfo._id);
-  console.log(getPhotographerDetails);
+  // console.log(getPhotographerDetails);
   const {
     data: bookingDetails,
     isLoading: bookingDetailsLoading,

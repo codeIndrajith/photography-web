@@ -2,10 +2,6 @@ import React, { useState } from 'react';
 import { TiStar } from 'react-icons/ti';
 import { TiStarHalf } from 'react-icons/ti';
 import { TiStarOutline } from 'react-icons/ti';
-import sample1 from '../images/photography001.jpg';
-import sample2 from '../images/photography002.jpg';
-import sample3 from '../images/photography003.jpg';
-import ph001 from '../images/ph001.jpg';
 import instagramIcon from '../images/instagram.png';
 import whatsAppIcon from '../images/whatsapp.png';
 import facebookIcon from '../images/facebook.png';
@@ -35,7 +31,6 @@ const PhotographerAbout = () => {
     isLoading: portFolioLoading,
     error: portFolioError,
   } = useGetPortfolioQuery(id.id);
-  console.log(portFolio);
 
   const { userInfo } = useSelector((state) => state.auth);
 
@@ -43,20 +38,22 @@ const PhotographerAbout = () => {
     return <Loader />;
   }
 
-  if (error || portFolioError) {
+  if (error) {
     return <p>Failed to fetch photographer data. Please try again later.</p>;
   }
 
-  if (
-    !photographer ||
-    photographer.length === 0 ||
-    !portFolio ||
-    portFolio.length === 0
-  ) {
-    return <NotFound />;
+  if (portFolioError) {
+    return <p>Failed to fetch Portfolio data. Please try again later.</p>;
   }
 
-  const images = [sample1, sample2, sample3];
+  if (!photographer && !portFolio) {
+    return <NotFound />;
+  }
+  const images = [];
+
+  portFolio.forEach((element) => {
+    images.push(...element.shootImageSamples);
+  });
 
   const handlePrev = () => {
     setActiveIndex((prevIndex) =>
@@ -144,11 +141,21 @@ const PhotographerAbout = () => {
             </div>
             <div className="aboutDetails">
               <h1>{photographer.firstName + ' ' + photographer.lastName}</h1>
-              <p>description</p>
-              {userInfo.status === 'client' && (
+              {portFolio.length > 0 ? (
+                portFolio.map((item) => (
+                  <div key={item._id} className="portfolio-item">
+                    <p>{item.description}</p>
+                  </div>
+                ))
+              ) : (
+                <p>No portfolio items available.</p>
+              )}
+              {userInfo.status === 'client' ? (
                 <div style={{ width: '100%' }}>
                   <BookingPhotographerForm clientId={userInfo._id} />
                 </div>
+              ) : (
+                <p>No Login</p>
               )}
             </div>
           </div>
