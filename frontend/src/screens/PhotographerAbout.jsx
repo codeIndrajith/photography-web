@@ -1,7 +1,4 @@
 import React, { useState } from 'react';
-import { TiStar } from 'react-icons/ti';
-import { TiStarHalf } from 'react-icons/ti';
-import { TiStarOutline } from 'react-icons/ti';
 import instagramIcon from '../images/instagram.png';
 import whatsAppIcon from '../images/whatsapp.png';
 import facebookIcon from '../images/facebook.png';
@@ -16,6 +13,7 @@ import {
 import { useParams } from 'react-router-dom';
 import Loader from '../components/Loader';
 import NotFound from '../components/NotFound';
+import Ratings from '../components/Ratings';
 
 const PhotographerAbout = () => {
   const [activeIndex, setActiveIndex] = useState(0);
@@ -182,7 +180,7 @@ const PhotographerAbout = () => {
       <div className="container mt-5">
         <p className="rate">Ratings</p> <hr />
         <div className="cont">
-          <div className="row">
+          {/* <div className="row">
             <div className="rating-card">
               <strong>Jhone deo</strong>
               <h5>Data : 2024/02/03</h5>
@@ -274,7 +272,9 @@ const PhotographerAbout = () => {
                 </div>
               </div>
             </div>
-          </div>
+          </div> */}
+
+          <Ratings />
         </div>
       </div>
     </>
