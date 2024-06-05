@@ -1,8 +1,8 @@
 {
-  "name": "mern-auth",
+  "name": "Photography_web",
   "version": "1.0.0",
   "type": "module",
-  "description": "MERN authentication system",
+  "description": "Using MERN technology to develop application",
   "main": "server.js",
   "scripts": {
     "start": "node backend/server.js",

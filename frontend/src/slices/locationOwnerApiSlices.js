@@ -49,6 +49,12 @@ export const locationOwnerApiSlice = apiSlice.injectEndpoints({
       }),
       keepUnusedDataFor: 5,
     }),
+    getLocation: builder.query({
+      query: (id) => ({
+        url: `${LOCATION_OWNER_URL}/${id}`,
+      }),
+    }),
+    keepUnusedDataFor: 5,
   }),
 });
 
@@ -60,4 +66,5 @@ export const {
   useAddLocationMutation,
   useGetLocationsByOwnersQuery,
   useGetAllLocationsQuery,
+  useGetLocationQuery,
 } = locationOwnerApiSlice;

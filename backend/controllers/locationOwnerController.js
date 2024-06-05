@@ -179,6 +179,22 @@ const getAllLocations = asyncHandler(async (req, res) => {
   }
 });
 
+// @desc    Get Single Location
+// @route   GET /api/getLocation/:id
+// @access  Public
+const getLocation = asyncHandler(async (req, res) => {
+  const { id } = req.params;
+
+  const location = await Locations.findById(id);
+
+  if (location) {
+    res.status(201).json(location);
+  } else {
+    res.status(404);
+    throw new Error('Location not found');
+  }
+});
+
 export {
   authLocationOwner,
   registerLocationOwner,
@@ -186,4 +202,5 @@ export {
   addLocationByOwner,
   getLocationsByOwner,
   getAllLocations,
+  getLocation,
 };
