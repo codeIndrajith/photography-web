@@ -68,6 +68,12 @@ export const photographerApiSlice = apiSlice.injectEndpoints({
       }),
       keepUnusedDataFor: 5,
     }),
+    getRatings: builder.query({
+      query: (id) => ({
+        url: `${PHOTOGRAPHER_URL}/get-rating/${id}`,
+      }),
+      keepUnusedDataFor: 5,
+    }),
   }),
 });
 
@@ -82,4 +88,5 @@ export const {
   useAddBookingRequestMutation,
   useGetBookingByPhotographerQuery,
   useGetAllPhotographersQuery,
+  useGetRatingsQuery,
 } = photographerApiSlice;

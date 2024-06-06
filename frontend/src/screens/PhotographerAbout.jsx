@@ -9,6 +9,7 @@ import { useSelector } from 'react-redux';
 import {
   useGetPhotographerQuery,
   useGetPortfolioQuery,
+  useGetRatingsQuery,
 } from '../slices/photographerApiSlices';
 import { useParams } from 'react-router-dom';
 import Loader from '../components/Loader';
@@ -30,9 +31,15 @@ const PhotographerAbout = () => {
     error: portFolioError,
   } = useGetPortfolioQuery(id.id);
 
+  const {
+    data: ratings,
+    isLoading: ratingLoading,
+    error: ratingError,
+  } = useGetRatingsQuery(id.id);
+
   const { userInfo } = useSelector((state) => state.auth);
 
-  if (isLoading || portFolioLoading) {
+  if (isLoading || portFolioLoading || ratingLoading) {
     return <Loader />;
   }
 
@@ -44,9 +51,14 @@ const PhotographerAbout = () => {
     return <p>Failed to fetch Portfolio data. Please try again later.</p>;
   }
 
-  if (!photographer && !portFolio) {
+  if (ratingError) {
+    return <p>Failed to fetch Rating data. Please try again later.</p>;
+  }
+
+  if (!photographer && !portFolio && !ratings) {
     return <NotFound />;
   }
+
   const images = [];
 
   portFolio.forEach((element) => {
@@ -148,12 +160,12 @@ const PhotographerAbout = () => {
               ) : (
                 <p>No portfolio items available.</p>
               )}
-              {userInfo.status === 'client' ? (
+              {userInfo && userInfo.status === 'client' ? (
                 <div style={{ width: '100%' }}>
                   <BookingPhotographerForm clientId={userInfo._id} />
                 </div>
               ) : (
-                <p></p>
+                <></>
               )}
             </div>
           </div>
@@ -273,7 +285,7 @@ const PhotographerAbout = () => {
               </div>
             </div>
           </div> */}
-
+          <h3>Write a Review</h3>
           <Ratings />
         </div>
       </div>

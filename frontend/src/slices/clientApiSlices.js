@@ -43,6 +43,13 @@ export const clientApiSlice = apiSlice.injectEndpoints({
       }),
       keepUnusedDataFor: 5,
     }),
+    addRating: builder.mutation({
+      query: (data) => ({
+        url: `${CLIENT_URL}/add-rating`,
+        method: 'POST',
+        body: data,
+      }),
+    }),
   }),
 });
 
@@ -53,4 +60,5 @@ export const {
   useUpdateClientMutation,
   useBookingPhotographerMutation,
   useGetHirePhotographersQuery,
+  useAddRatingMutation,
 } = clientApiSlice;

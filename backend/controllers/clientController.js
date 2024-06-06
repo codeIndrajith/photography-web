@@ -2,6 +2,7 @@ import asyncHandler from 'express-async-handler';
 import Client from '../models/clientModel.js';
 import generateToken from '../utils/generateToken.js';
 import bookingPhotographer from '../models/bookingPhotographerModel.js';
+import Ratings from '../models/ratingsModel.js';
 
 // @desc    Auth client & get token
 // @route   POST /api/client/auth
@@ -120,10 +121,31 @@ const getAllHirePhotographers = asyncHandler(async (req, res) => {
   }
 });
 
+// @desc    Add rating to photographer
+// @route   POST /api/add-rating
+// @access  Private
+const addRating = asyncHandler(async (req, res) => {
+  const { clientId, photographerId, ratingCount } = req.body;
+
+  const rating = await Ratings.create({
+    clientId,
+    photographerId,
+    ratingCount,
+  });
+
+  if (rating) {
+    res.status(201).json({ rating });
+  } else {
+    res.status(400);
+    throw new Error('Error adding to rating');
+  }
+});
+
 export {
   authClient,
   registerClient,
   logoutClient,
   hirePhotographer,
   getAllHirePhotographers,
+  addRating,
 };

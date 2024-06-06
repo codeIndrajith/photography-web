@@ -4,6 +4,7 @@ import generateToken from '../utils/generateToken.js';
 import cloudinary from 'cloudinary';
 import Portfolio from '../models/portfolioModel.js';
 import bookingLocation from '../models/bookingLocationModel.js';
+import Ratings from '../models/ratingsModel.js';
 
 // @desc    Auth photographer & get token
 // @route   POST /api/photographer/auth
@@ -236,6 +237,26 @@ const getAllPhotographers = asyncHandler(async (req, res) => {
     throw new Error('Not found photographers');
   }
 });
+
+// @desc    Get Ratings
+// @route   GET /api/photographer/get-ratings/:id
+// @access  Private
+const getRatings = asyncHandler(async (req, res) => {
+  const { photographerId } = req.params;
+
+  const ratings = await Ratings.find(photographerId);
+
+  if (ratings.length > 0) {
+    res.status(200).json(
+      ratings.map((rating) => ({
+        _id: rating._id,
+        ratingCount: rating.ratingCount,
+      }))
+    );
+  } else {
+    res.status(404).json({ message: 'No Rating details found' });
+  }
+});
 export {
   authPhotographer,
   registerPhotographer,
@@ -246,4 +267,5 @@ export {
   addBookingLocation,
   getBookingByPhotographer,
   getAllPhotographers,
+  getRatings,
 };
