@@ -4,19 +4,19 @@ import { useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 import { useParams } from 'react-router-dom';
 
-const Ratings = () => {
+const Ratings = ({ refetch }) => {
   const [rating, setRating] = useState(0);
   const { userInfo } = useSelector((state) => state.auth);
   const phId = useParams();
   const [hasRated, setHasRated] = useState(false);
   const [addRating, { isLoading, error }] = useAddRatingMutation();
 
-  useEffect(() => {
-    const ratedUsers = JSON.parse(localStorage.getItem('ratedUsers')) || [];
-    if (ratedUsers.includes(userInfo._id)) {
-      setHasRated(true);
-    }
-  }, [userInfo._id]);
+  // useEffect(() => {
+  //   const ratedUsers = JSON.parse(localStorage.getItem('ratedUsers')) || [];
+  //   if (ratedUsers.includes(userInfo._id)) {
+  //     setHasRated(true);
+  //   }
+  // }, [userInfo._id]);
 
   const handleRating = async () => {
     if (rating <= 0) {
@@ -29,13 +29,14 @@ const Ratings = () => {
       ratingCount: rating,
     });
     toast.success('Add rating');
+    refetch();
     setRating(0);
-    setHasRated(true); // Set hasRated to true after rating is added successfully
-    const ratedUsers = JSON.parse(localStorage.getItem('ratedUsers')) || [];
-    localStorage.setItem(
-      'ratedUsers',
-      JSON.stringify([...ratedUsers, userInfo._id])
-    );
+    // setHasRated(true); // Set hasRated to true after rating is added successfully
+    // const ratedUsers = JSON.parse(localStorage.getItem('ratedUsers')) || [];
+    // localStorage.setItem(
+    //   'ratedUsers',
+    //   JSON.stringify([...ratedUsers, userInfo._id])
+    // );
   };
 
   return (

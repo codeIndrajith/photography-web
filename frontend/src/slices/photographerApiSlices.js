@@ -69,8 +69,8 @@ export const photographerApiSlice = apiSlice.injectEndpoints({
       keepUnusedDataFor: 5,
     }),
     getRatings: builder.query({
-      query: (id) => ({
-        url: `${PHOTOGRAPHER_URL}/get-rating/${id}`,
+      query: (photographerId) => ({
+        url: `${PHOTOGRAPHER_URL}/get-rating/${photographerId}`,
       }),
       keepUnusedDataFor: 5,
     }),

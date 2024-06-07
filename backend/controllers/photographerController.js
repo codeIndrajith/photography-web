@@ -244,7 +244,7 @@ const getAllPhotographers = asyncHandler(async (req, res) => {
 const getRatings = asyncHandler(async (req, res) => {
   const { photographerId } = req.params;
 
-  const ratings = await Ratings.find(photographerId);
+  const ratings = await Ratings.find({ photographerId });
 
   if (ratings.length > 0) {
     res.status(200).json(

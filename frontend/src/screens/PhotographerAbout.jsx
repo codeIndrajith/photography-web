@@ -15,6 +15,7 @@ import { useParams } from 'react-router-dom';
 import Loader from '../components/Loader';
 import NotFound from '../components/NotFound';
 import Ratings from '../components/Ratings';
+import RatingShow from '../components/RatingShow';
 
 const PhotographerAbout = () => {
   const [activeIndex, setActiveIndex] = useState(0);
@@ -35,6 +36,7 @@ const PhotographerAbout = () => {
     data: ratings,
     isLoading: ratingLoading,
     error: ratingError,
+    refetch,
   } = useGetRatingsQuery(id.id);
 
   const { userInfo } = useSelector((state) => state.auth);
@@ -60,6 +62,14 @@ const PhotographerAbout = () => {
   }
 
   const images = [];
+  let average = 0;
+  let total = 0;
+  {
+    ratings.map((rating) => {
+      total = total + rating.ratingCount;
+    });
+    average = Math.max(0, Math.min(total / ratings.length, 5));
+  }
 
   portFolio.forEach((element) => {
     images.push(...element.shootImageSamples);
@@ -148,6 +158,9 @@ const PhotographerAbout = () => {
                 className="card-img-top"
                 alt=""
               />
+              <div className="card card-body">
+                <RatingShow starRatingCount={Math.round(average)} />
+              </div>
             </div>
             <div className="aboutDetails">
               <h1>{photographer.firstName + ' ' + photographer.lastName}</h1>
@@ -189,105 +202,19 @@ const PhotographerAbout = () => {
           </div>
         </div>
       </div>
-      <div className="container mt-5">
-        <p className="rate">Ratings</p> <hr />
-        <div className="cont">
-          {/* <div className="row">
-            <div className="rating-card">
-              <strong>Jhone deo</strong>
-              <h5>Data : 2024/02/03</h5>
-              <div className="col">
-                <p>Best Photographer</p>
-                <div className="rating-stars">
-                  <TiStar />
-                  <TiStar />
-                  <TiStar />
-                  <TiStar />
-                  <TiStarHalf />
-                </div>
-              </div>
-            </div>
 
-            <div className="rating-card">
-              <strong>Jhone deo</strong>
-              <h5>Data : 2024/02/03</h5>
-              <div className="col">
-                <p>Best Photographer</p>
-                <div className="rating-stars">
-                  <TiStar />
-                  <TiStar />
-                  <TiStar />
-                  <TiStarOutline />
-                  <TiStarOutline />
-                </div>
-              </div>
-            </div>
-
-            <div className="rating-card">
-              <strong>Jhone deo</strong>
-              <h5>Data : 2024/02/03</h5>
-              <div className="col">
-                <p>Best Photographer</p>
-                <div className="rating-stars">
-                  <TiStar />
-                  <TiStar />
-                  <TiStar />
-                  <TiStarOutline />
-                  <TiStarOutline />
-                </div>
-              </div>
+      <div>
+        {userInfo.status === 'client' ? (
+          <div className="container mt-5">
+            <p className="rate">Ratings</p> <hr />
+            <div className="cont">
+              <h3>Write a Review</h3>
+              <Ratings refetch={refetch} />
             </div>
           </div>
-
-          <div className="row">
-            <div className="rating-card">
-              <strong>Jhone deo</strong>
-              <h5>Data : 2024/02/03</h5>
-              <div className="col">
-                <p>Best Photographer</p>
-                <div className="rating-stars">
-                  <TiStar />
-                  <TiStar />
-                  <TiStarHalf />
-                  <TiStarHalf />
-                  <TiStarOutline />
-                </div>
-              </div>
-            </div>
-
-            <div className="rating-card">
-              <strong>Jhone deo</strong>
-              <h5>Data : 2024/02/03</h5>
-              <div className="col">
-                <p>Best Photographer</p>
-                <div className="rating-stars">
-                  <TiStar />
-                  <TiStar />
-                  <TiStar />
-                  <TiStar />
-                  <TiStarOutline />
-                </div>
-              </div>
-            </div>
-
-            <div className="rating-card">
-              <strong>Jhone deo</strong>
-              <h5>Data : 2024/02/03</h5>
-              <div className="col">
-                <p>Best Photographer</p>
-                <div className="rating-stars">
-                  <TiStar />
-                  <TiStar />
-                  <TiStarOutline />
-                  <TiStarOutline />
-                  <TiStarOutline />
-                </div>
-              </div>
-            </div>
-          </div> */}
-          <h3>Write a Review</h3>
-          <Ratings />
-        </div>
+        ) : (
+          <></>
+        )}
       </div>
     </>
   );

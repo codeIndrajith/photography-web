@@ -28,6 +28,6 @@ router.get('/:id', getPhotographer);
 router.post('/add-booking', addBookingLocation);
 router.get('/get-booking/:photographerId', getBookingByPhotographer);
 router.get('/', getAllPhotographers);
-router.get('/get-rating/:id', getRatings);
+router.get('/get-rating/:photographerId', getRatings);
 
 export default router;

@@ -1,0 +1,18 @@
+/* src/StarRating.css */
+.star-rating {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+  }
+  
+  .star {
+    font-size: 3rem;
+    color: #535151;
+    cursor: pointer;
+  }
+  
+  .star.filled {
+    color: #fca708;
+  }
+  
