@@ -23,6 +23,7 @@ import Photographers from './screens/Photographers.jsx';
 import ClientDashBoard from './screens/ClientDashBoard.jsx';
 import PhotographerDashBoard from './screens/PhotographerDashBoard.jsx';
 import LocationOwnerDashBoard from './screens/LocationOwnerDashBoard.jsx';
+import ErrorPage from './screens/ErrorPage.jsx';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -34,6 +35,7 @@ const router = createBrowserRouter(
       <Route path="/locations/:id" element={<LocationPlaceScreen />} />
       <Route path="/photographers/:id" element={<PhotographerAbout />} />
       <Route path="/photographers" element={<Photographers />} />
+      <Route path="/error" element={<ErrorPage />} />
       <Route path="" element={<PrivateRoute />}>
         <Route path="/profile" element={<ProfileScreen />} />
         <Route path="/client-dashboard/:id" element={<ClientDashBoard />} />

@@ -34,9 +34,12 @@ const Header = () => {
           <LinkContainer to="/" className="logoSection">
             <img className="logo" src={logo} alt="Logo" />
           </LinkContainer>
-          <Navbar.Toggle className="toggle" aria-controls="basic-navbar-nav" />
+          <Navbar.Toggle
+            className="toggle mt-3"
+            aria-controls="basic-navbar-nav"
+          />
           <Navbar.Collapse className="linkSection" id="basic-navbar-nav">
-            <Nav className="ms-auto">
+            <Nav className="ms-auto mt-2">
               {userInfo ? (
                 <>
                   <Nav className="ms-auto">

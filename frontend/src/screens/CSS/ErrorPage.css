@@ -1,0 +1,22 @@
+
+.errorImage {
+    width: 50%;
+    object-fit: "cover";
+}
+
+.conImageError {
+    width: 100%;
+    height: 70vh;
+}
+
+@media (max-width: 1024px) {
+    .errorImage {
+        width: 50%;
+    }
+}
+
+@media (max-width: 728px) {
+    .errorImage {
+        width: 100%;
+    }
+}

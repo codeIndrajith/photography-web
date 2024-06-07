@@ -8,10 +8,10 @@
 }
 
 .content {
-    width: 50%;
+    width: 70%;
     position: absolute;
-    top: 90%; 
-    left: 30%; 
+    top: 80%; 
+    left: 40%; 
     transform: translate(-50%, -50%); 
     text-align: start;
     z-index: 1; 
@@ -24,27 +24,35 @@
 
 .content p {
     font-size: 1.2em;
-    color: rgb(144, 235, 235);
+    color: rgb(255, 255, 255);
 }
 
 @media(max-width: 768px) {
     .mainSection {
+        width: 100%;
         background-size: cover;
         background-position: -250px;
     }
     .content {
         margin-top: -50px;
-        width: 90%;
-        margin-left: 30%;
+        left: 25%;
+        width: 100%;
+        margin-left: 25%;
         padding: 19px;
     }
 
+    .search-bar {
+        width: 90%;
+    }
+
     .content h1 {
-        font-size: 35px;
+        font-size: 30px;
     }
 
     .content p {
         font-size: 16px;
     }
 }
+
+
 

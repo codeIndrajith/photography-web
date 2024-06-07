@@ -85,9 +85,10 @@
     max-width: 100%;
   }
 
-  .cardContainer {
-    margin-left: 35px;
+  .cardSection {
+    margin-left: 13%;
   }
+
 }
 
 @media (min-width: 1000px) {

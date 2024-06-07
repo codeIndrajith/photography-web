@@ -32,7 +32,7 @@ const LocationsSlider = () => {
       </div>
 
       {/* Card section */}
-      <div className="cards">
+      <div className="cards cardSection">
         <div className="cardContainer">
           <>
             {locationsData.slice(startIndex, endIndex).map((location) => (
