@@ -18,7 +18,8 @@ const Ratings = ({ refetch }) => {
   //   }
   // }, [userInfo._id]);
 
-  const handleRating = async () => {
+  const handleRating = async (e) => {
+    e.preventDefault();
     if (rating <= 0) {
       toast.error('Give stars');
       return;

@@ -7,11 +7,14 @@ import { useGetPhotographerQuery } from '../slices/photographerApiSlices';
 
 const BookingPhotographerForm = ({ clientId }) => {
   const [description, setDescription] = useState('');
-  const id = '66374ca898f0884c69a52efd';
-  const { data: photographer, isLoading, error } = useGetPhotographerQuery(id);
+  const id = useParams();
+  const {
+    data: photographer,
+    isLoading,
+    error,
+  } = useGetPhotographerQuery(id.id);
   const [booking, { isLoading: bookingLoading }] =
     useBookingPhotographerMutation();
-  // const params = useParams();
 
   const submitHandler = async (e) => {
     e.preventDefault();
@@ -26,7 +29,7 @@ const BookingPhotographerForm = ({ clientId }) => {
             photographer.firstName + ' ' + photographer.lastName,
           description,
           clientId: clientId,
-          photographerId: id,
+          photographerId: id.id,
         }).unwrap();
         setDescription('');
         toast.success('Booking success');

@@ -35,11 +35,11 @@ const RegisterScreen = () => {
 
   const { userInfo } = useSelector((state) => state.auth);
 
-  useEffect(() => {
-    if (userInfo) {
-      navigate('/');
-    }
-  }, [navigate, userInfo]);
+  // useEffect(() => {
+  //   if (userInfo) {
+  //     navigate('/');
+  //   }
+  // }, [navigate, userInfo]);
 
   const handlePhotographer = () => {
     setStatus('photographer');
@@ -85,7 +85,7 @@ const RegisterScreen = () => {
 
           const res = await register(formData).unwrap();
           dispatch(setCredentials({ ...res }));
-          navigate('/');
+          navigate(`/photographer-dashboard/${userInfo._id}`);
         } catch (err) {
           toast.error(err?.data?.message || err.error);
         }

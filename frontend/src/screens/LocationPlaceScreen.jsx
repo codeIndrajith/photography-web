@@ -155,7 +155,7 @@ const LocationPlaceScreen = () => {
             <p>{location.locationAddress}</p>
 
             {/* Request Location Booking Section */}
-            {userInfo.status === 'photographer' ? (
+            {userInfo && userInfo.status === 'photographer' ? (
               <div className="request-booking mt-4">
                 <h3>Request Location Booking</h3>
                 <form onSubmit={submitHandler}>

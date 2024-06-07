@@ -19,6 +19,7 @@ import RatingShow from '../components/RatingShow';
 
 const PhotographerAbout = () => {
   const [activeIndex, setActiveIndex] = useState(0);
+  const { userInfo } = useSelector((state) => state.auth);
   const id = useParams();
   const {
     data: photographer,
@@ -39,8 +40,6 @@ const PhotographerAbout = () => {
     refetch,
   } = useGetRatingsQuery(id.id);
 
-  const { userInfo } = useSelector((state) => state.auth);
-
   if (isLoading || portFolioLoading || ratingLoading) {
     return <Loader />;
   }
@@ -53,9 +52,9 @@ const PhotographerAbout = () => {
     return <p>Failed to fetch Portfolio data. Please try again later.</p>;
   }
 
-  if (ratingError) {
-    return <p>Failed to fetch Rating data. Please try again later.</p>;
-  }
+  // if (ratingError) {
+  //   console.log('Do you rate ?');
+  // }
 
   if (!photographer && !portFolio && !ratings) {
     return <NotFound />;
@@ -63,12 +62,17 @@ const PhotographerAbout = () => {
 
   const images = [];
   let average = 0;
-  let total = 0;
-  {
-    ratings.map((rating) => {
-      total = total + rating.ratingCount;
-    });
-    average = Math.max(0, Math.min(total / ratings.length, 5));
+
+  if (ratingError) {
+    console.log(ratingError);
+  } else {
+    let total = 0;
+    {
+      ratings.map((rating) => {
+        total = total + rating.ratingCount;
+      });
+      average = Math.max(0, Math.min(total / ratings.length, 5));
+    }
   }
 
   portFolio.forEach((element) => {
@@ -158,9 +162,15 @@ const PhotographerAbout = () => {
                 className="card-img-top"
                 alt=""
               />
-              <div className="card card-body">
-                <RatingShow starRatingCount={Math.round(average)} />
-              </div>
+              {ratingError ? (
+                <div className="card card-body">
+                  <RatingShow starRatingCount={0} />
+                </div>
+              ) : (
+                <div className="card card-body">
+                  <RatingShow starRatingCount={Math.round(average)} />
+                </div>
+              )}
             </div>
             <div className="aboutDetails">
               <h1>{photographer.firstName + ' ' + photographer.lastName}</h1>
@@ -204,7 +214,7 @@ const PhotographerAbout = () => {
       </div>
 
       <div>
-        {userInfo.status === 'client' ? (
+        {userInfo && userInfo.status === 'client' ? (
           <div className="container mt-5">
             <p className="rate">Ratings</p> <hr />
             <div className="cont">
