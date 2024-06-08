@@ -9,6 +9,7 @@ import { useLoginOwnerMutation } from '../slices/locationOwnerApiSlices';
 import { setCredentials } from '../slices/authSlice';
 import { toast } from 'react-toastify';
 import Loader from '../components/Loader';
+import loginImage from '../images/login.svg';
 import './CSS/LoginForm.css';
 
 const LoginScreen = () => {
@@ -66,9 +67,12 @@ const LoginScreen = () => {
 
   return (
     <div className="loginForm">
-      <FormContainer>
+      <div className="loginImage">
+        <img src={loginImage} alt="login_image" />
+      </div>
+      <div className="form-container">
         <h1>Sign In</h1>
-        <Row className="mb-4">
+        <Row className="mb-4 loginBody">
           <p>I'm signing as a</p>
           <Col>
             <input
@@ -125,7 +129,7 @@ const LoginScreen = () => {
             disabled={isLoading}
             type="submit"
             variant="primary"
-            className="mt-3"
+            className="loginBtn"
           >
             Sign In
           </Button>
@@ -135,12 +139,12 @@ const LoginScreen = () => {
         {loadingClient && <Loader />}
         {loadingOwner && <Loader />}
 
-        <Row className="py-3">
+        <Row className="py-3 registerBtn">
           <Col>
             New Customer? <Link to="/register">Register</Link>
           </Col>
         </Row>
-      </FormContainer>
+      </div>
     </div>
   );
 };
