@@ -9,6 +9,7 @@ import { useRegisterOwnerMutation } from '../slices/locationOwnerApiSlices';
 import { useRegisterClientMutation } from '../slices/clientApiSlices';
 import { setCredentials } from '../slices/authSlice';
 import { toast } from 'react-toastify';
+import registerImage from '../images/register.svg';
 import './CSS/RegisterForm.css';
 
 const RegisterScreen = () => {
@@ -134,7 +135,10 @@ const RegisterScreen = () => {
   };
   return (
     <div className="registerForm">
-      <FormContainer>
+      <div className="registerImage">
+        <img src={registerImage} alt="register-image" />
+      </div>
+      <div className="register-form-container">
         <h1>Register</h1>
         <Row className="mb-4">
           <p>I'm signing as a</p>
@@ -170,29 +174,25 @@ const RegisterScreen = () => {
         </Row>
         <Form onSubmit={submitHandler}>
           <Row>
-            <Col>
-              <Form.Group className="my-2" controlId="firstName">
-                <Form.Label>First Name</Form.Label>
-                <Form.Control
-                  type="firstName"
-                  placeholder="Enter first name"
-                  value={firstName}
-                  onChange={(e) => setFirstName(e.target.value)}
-                ></Form.Control>
-              </Form.Group>
-            </Col>
+            <Form.Group className="my-2" controlId="firstName">
+              <Form.Label>First Name</Form.Label>
+              <Form.Control
+                type="firstName"
+                placeholder="Enter first name"
+                value={firstName}
+                onChange={(e) => setFirstName(e.target.value)}
+              ></Form.Control>
+            </Form.Group>
 
-            <Col>
-              <Form.Group className="my-2" controlId="lastName">
-                <Form.Label>Last Name</Form.Label>
-                <Form.Control
-                  type="name"
-                  placeholder="Enter last name"
-                  value={lastName}
-                  onChange={(e) => setLastName(e.target.value)}
-                ></Form.Control>
-              </Form.Group>
-            </Col>
+            <Form.Group className="my-2" controlId="lastName">
+              <Form.Label>Last Name</Form.Label>
+              <Form.Control
+                type="name"
+                placeholder="Enter last name"
+                value={lastName}
+                onChange={(e) => setLastName(e.target.value)}
+              ></Form.Control>
+            </Form.Group>
           </Row>
 
           <Form.Group className="my-2" controlId="email">
@@ -205,29 +205,25 @@ const RegisterScreen = () => {
             ></Form.Control>
           </Form.Group>
           <Row>
-            <Col>
-              <Form.Group className="my-2" controlId="password">
-                <Form.Label>Password</Form.Label>
-                <Form.Control
-                  type="password"
-                  placeholder="Enter password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                ></Form.Control>
-              </Form.Group>
-            </Col>
+            <Form.Group className="my-2" controlId="password">
+              <Form.Label>Password</Form.Label>
+              <Form.Control
+                type="password"
+                placeholder="Enter password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              ></Form.Control>
+            </Form.Group>
 
-            <Col>
-              <Form.Group className="my-2" controlId="confirmPassword">
-                <Form.Label>Confirm Password</Form.Label>
-                <Form.Control
-                  type="password"
-                  placeholder="Confirm password"
-                  value={confirmPassword}
-                  onChange={(e) => setConfirmPassword(e.target.value)}
-                ></Form.Control>
-              </Form.Group>
-            </Col>
+            <Form.Group className="my-2" controlId="confirmPassword">
+              <Form.Label>Confirm Password</Form.Label>
+              <Form.Control
+                type="password"
+                placeholder="Confirm password"
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
+              ></Form.Control>
+            </Form.Group>
           </Row>
           {status !== 'client' && (
             <Row>
@@ -282,14 +278,7 @@ const RegisterScreen = () => {
           <Button
             type="submit"
             variant="primary"
-            style={{
-              backgroundColor: '#B77A5B',
-              color: 'FFFFFF',
-              borderRadius: '13px',
-              padding: '6px 17px 6px 17px',
-              border: 'none',
-            }}
-            className="mt-2"
+            className="mt-2 registerButton"
           >
             Register
           </Button>
@@ -299,12 +288,12 @@ const RegisterScreen = () => {
           {loadingClient && <Loader />}
         </Form>
 
-        <Row className="py-3">
+        <Row className="py-3 loginLink">
           <Col>
             Already have an account? <Link to={`/login`}>Login</Link>
           </Col>
         </Row>
-      </FormContainer>
+      </div>
     </div>
   );
 };
