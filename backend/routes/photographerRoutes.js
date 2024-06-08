@@ -10,6 +10,7 @@ import {
   getBookingByPhotographer,
   getAllPhotographers,
   getRatings,
+  updatePhotographer,
 } from '../controllers/photographerController.js';
 import upload from '../middleware/upload.js';
 
@@ -17,6 +18,11 @@ const router = express.Router();
 
 router.post('/', upload.single('profilePic'), registerPhotographer);
 router.post('/auth', authPhotographer);
+router.put(
+  '/update-photographer',
+  upload.single('profilePic'),
+  updatePhotographer
+);
 router.post('/logout', logoutPhotographer);
 router.post(
   '/addPortfolio',

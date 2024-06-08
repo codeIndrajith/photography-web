@@ -23,9 +23,9 @@ export const photographerApiSlice = apiSlice.injectEndpoints({
         body: data,
       }),
     }),
-    updateUser: builder.mutation({
+    updatePhotographer: builder.mutation({
       query: (data) => ({
-        url: `${PHOTOGRAPHER_URL}/profile`,
+        url: `${PHOTOGRAPHER_URL}/update-photographer`,
         method: 'PUT',
         body: data,
       }),
@@ -81,7 +81,7 @@ export const {
   useLoginMutation,
   useLogoutMutation,
   useRegisterMutation,
-  useUpdateUserMutation,
+  useUpdatePhotographerMutation,
   useAddPortfolioLMutation,
   useGetPortfolioQuery,
   useGetPhotographerQuery,

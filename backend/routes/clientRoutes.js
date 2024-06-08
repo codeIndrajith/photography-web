@@ -6,6 +6,7 @@ import {
   hirePhotographer,
   getAllHirePhotographers,
   addRating,
+  updateClient,
 } from '../controllers/clientController.js';
 
 const router = express.Router();
@@ -13,6 +14,7 @@ const router = express.Router();
 router.post('/', registerClient);
 router.post('/auth', authClient);
 router.post('/logout', logoutClient);
+router.put('/update-client', updateClient);
 router.post('/hire-photographer', hirePhotographer);
 router.get('/hire-photographers/:clientId', getAllHirePhotographers);
 router.post('/add-rating', addRating);

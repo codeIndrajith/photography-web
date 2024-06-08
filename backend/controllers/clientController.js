@@ -63,6 +63,36 @@ const registerClient = asyncHandler(async (req, res) => {
   }
 });
 
+// @desc    Update client
+// @route   POST /api/client/update-client
+// @access  Public
+const updateClient = asyncHandler(async (req, res) => {
+  const { _id, firstName, lastName, email, password } = req.body;
+
+  const client = await Client.findById(_id);
+  if (client) {
+    client.firstName = firstName || client.firstName;
+    client.lastName = lastName || client.lastName;
+    client.email = email || client.email;
+
+    if (password) {
+      client.password = password;
+    }
+
+    const updateClient = await client.save();
+
+    res.status(201).json({
+      _id: updateClient._id,
+      name: updateClient.firstName + ' ' + updateClient.lastName,
+      email: updateClient.email,
+      status: client.status,
+    });
+  } else {
+    res.status(404);
+    throw new Error('Client not found');
+  }
+});
+
 // @desc    Logout client / clear cookie
 // @route   POST /api/client/logout
 // @access  Public
@@ -144,6 +174,7 @@ const addRating = asyncHandler(async (req, res) => {
 export {
   authClient,
   registerClient,
+  updateClient,
   logoutClient,
   hirePhotographer,
   getAllHirePhotographers,

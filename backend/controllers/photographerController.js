@@ -84,6 +84,53 @@ const registerPhotographer = asyncHandler(async (req, res) => {
   }
 });
 
+// @desc    Update photographer
+// @route   PUT /api/photographers/update-photographer
+// @access  Public
+const updatePhotographer = asyncHandler(async (req, res) => {
+  const {
+    _id,
+    firstName,
+    lastName,
+    email,
+    password,
+    whatsAppNumber,
+    instagramLink,
+    faceBookLink,
+  } = req.body;
+
+  const image = req.file.path;
+  const result = await cloudinary.uploader.upload(image);
+  const profilePicUrl = result.secure_url;
+
+  const photographer = await Photographer.findById(_id);
+  if (photographer) {
+    photographer.firstName = firstName || photographer.firstName;
+    photographer.lastName = lastName || photographer.lastName;
+    photographer.email = email || photographer.email;
+    photographer.whatsAppNumber = whatsAppNumber || photographer.whatsAppNumber;
+    photographer.instagramLink = instagramLink || photographer.instagramLink;
+    photographer.faceBookLink = faceBookLink || photographer.faceBookLink;
+    photographer.profilePic = profilePicUrl;
+
+    if (password) {
+      photographer.password = password;
+    }
+
+    const updatePhotographer = await photographer.save();
+
+    res.status(201).json({
+      _id: updatePhotographer._id,
+      name: updatePhotographer.firstName + ' ' + updatePhotographer.lastName,
+      email: updatePhotographer.email,
+      status: photographer.status,
+    });
+  } else {
+    res.status(404);
+    throw new Error('Photographer not found');
+  }
+});
+
 // @desc    Logout photographer / clear cookie
 // @route   POST /api/photographer/logout
 // @access  Public
@@ -260,6 +307,7 @@ const getRatings = asyncHandler(async (req, res) => {
 export {
   authPhotographer,
   registerPhotographer,
+  updatePhotographer,
   logoutPhotographer,
   addPortfolioByPhotographer,
   getPortfolioByPhotographer,

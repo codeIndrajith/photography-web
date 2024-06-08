@@ -89,6 +89,49 @@ const registerLocationOwner = asyncHandler(async (req, res) => {
   }
 });
 
+// @desc    Update a owner
+// @route   POST /api/locationOwner/update-owner
+// @access  Public
+const updateOwner = asyncHandler(async (req, res) => {
+  const {
+    _id,
+    firstName,
+    lastName,
+    email,
+    password,
+    whatsAppNumber,
+    instagramLink,
+    faceBookLink,
+  } = req.body;
+
+  const locationOwner = await LocationOwner.findById(_id);
+  if (locationOwner) {
+    locationOwner.firstName = firstName || locationOwner.firstName;
+    locationOwner.lastName = lastName || locationOwner.lastName;
+    locationOwner.email = email || locationOwner.email;
+    locationOwner.whatsAppNumber =
+      whatsAppNumber || locationOwner.whatsAppNumber;
+    locationOwner.instagramLink = instagramLink || locationOwner.instagramLink;
+    locationOwner.faceBookLink = faceBookLink || locationOwner.faceBookLink;
+
+    if (password) {
+      locationOwner.password = password;
+    }
+
+    const updateLocationOwner = await locationOwner.save();
+
+    res.status(201).json({
+      _id: updateLocationOwner._id,
+      name: updateLocationOwner.firstName + ' ' + updateLocationOwner.lastName,
+      email: updateLocationOwner.email,
+      status: locationOwner.status,
+    });
+  } else {
+    res.status(404);
+    throw new Error('Location owner not found');
+  }
+});
+
 // @desc    Logout owner / clear cookie
 // @route   POST /api/locationOwner/logout
 // @access  Public
@@ -198,6 +241,7 @@ const getLocation = asyncHandler(async (req, res) => {
 export {
   authLocationOwner,
   registerLocationOwner,
+  updateOwner,
   logoutLocationOwner,
   addLocationByOwner,
   getLocationsByOwner,

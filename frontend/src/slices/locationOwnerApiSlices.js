@@ -25,7 +25,7 @@ export const locationOwnerApiSlice = apiSlice.injectEndpoints({
     }),
     updateOwner: builder.mutation({
       query: (data) => ({
-        url: `${LOCATION_OWNER_URL}/profile`,
+        url: `${LOCATION_OWNER_URL}/update-owner`,
         method: 'PUT',
         body: data,
       }),
