@@ -1,13 +1,15 @@
 import React from 'react';
-import { FaExclamationTriangle } from 'react-icons/fa';
-import { Link } from 'react-router-dom';
+import pageNotFoundImage from '../images/404.svg';
 
 const NotFound = () => {
   return (
     <div className="d-flex flex-column justify-content-center align-items-center mt-5">
-      <FaExclamationTriangle className="text-danger" size="5em" />
-      <h1>404</h1>
-      <p className="lead">Sorry, this page does not exist</p>
+      <img
+        src={pageNotFoundImage}
+        className="errorImage"
+        alt="Responsive image"
+      />
+      <h4>Oops, not found</h4>
     </div>
   );
 };
