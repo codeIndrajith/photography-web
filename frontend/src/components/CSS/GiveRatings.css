@@ -1,0 +1,23 @@
+.ratingContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+}
+
+.ratingBtn {
+    background-color: black;
+    color: white;
+    padding: 7px 30px;
+    border: none;
+}
+
+@media(max-width: 768px) {
+    .ratingContainer {
+        flex-direction: column;
+    }
+
+    .ratingBtn {
+        width: 100%;
+    }
+}

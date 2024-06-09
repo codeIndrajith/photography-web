@@ -1,6 +1,7 @@
 /* src/StarRating.css */
 .star-rating {
     display: flex;
+    border: none;
     align-items: center;
     justify-content: center;
     width: 100%;

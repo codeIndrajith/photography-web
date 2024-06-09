@@ -197,6 +197,7 @@ const PhotographerAbout = () => {
 
         <div className="contacts">
           <h4>Get in touch</h4>
+          <hr />
           <div className="social">
             <a href={photographer.instagramLink}>
               <img className="insta" src={instagramIcon} alt="instagram" />
@@ -214,12 +215,12 @@ const PhotographerAbout = () => {
         </div>
       </div>
 
-      <div>
+      <div className="ratingSection">
         {userInfo && userInfo.status === 'client' ? (
-          <div className="container mt-5">
+          <div className="container">
             <p className="rate">Ratings</p> <hr />
             <div className="cont">
-              <h3>Write a Review</h3>
+              <h3>What About My Service ?</h3>
               <Ratings refetch={refetch} />
             </div>
           </div>
