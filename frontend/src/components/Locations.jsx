@@ -56,7 +56,7 @@ const Locations = () => {
           {locationsData.slice(startIndex, endIndex).map((location) => (
             <Link
               to={`${location._id}`}
-              className="col-md-3"
+              className="col-md-3 cardSection"
               key={location._id}
             >
               <div
