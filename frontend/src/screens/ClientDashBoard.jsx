@@ -1,8 +1,12 @@
 import React, { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { Dropdown } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import { useGetHirePhotographersQuery } from '../slices/clientApiSlices';
 import Loader from '../components/Loader';
+import NotFound from '../components/NotFound';
+import './CSS/ClientDashBoard.css';
+import { FaUserCircle } from 'react-icons/fa';
 
 const ClientDashBoard = () => {
   const { userInfo } = useSelector((state) => state.auth);
@@ -29,46 +33,65 @@ const ClientDashBoard = () => {
   };
 
   return (
-    <div className="container mt-5">
-      <h1 className="mb-5">My Bookings</h1>
-      <div className="table-responsive">
-        <table className="table table-bordered table-hover">
-          <thead className="thead-dark">
-            <tr>
-              <th scope="col">Photographer Name</th>
-              <th scope="col">Booking Date & Time</th>
-            </tr>
-          </thead>
+    <>
+      {error ? (
+        <NotFound />
+      ) : (
+        <div className="container-fluid mt-5 p-5">
+          <div className="contentSection">
+            <h1 className="mb-5">My Bookings</h1>
+            <Dropdown>
+              <Dropdown.Toggle
+                variant="success"
+                id="dropdown-basic"
+                className="d-flex align-items-center dropdownBtn"
+              >
+                <FaUserCircle
+                  className="fa-circle"
+                  style={{ marginRight: '8px' }}
+                />
+                <span>{userInfo.name}</span>
+              </Dropdown.Toggle>
 
-          {isLoading ? (
-            <tbody>
-              <tr>
-                <td colSpan="2">
-                  <Loader />
-                </td>
-              </tr>
-            </tbody>
-          ) : error ? (
-            <tbody>
-              <tr>
-                <td colSpan="2">
-                  <p>Cannot fetch data</p>
-                </td>
-              </tr>
-            </tbody>
-          ) : (
-            <tbody>
-              {hirePhotographers.map((photographer) => (
-                <tr key={photographer._id}>
-                  <td>{photographer.photographerName}</td>
-                  <td>{formatDateTime(photographer.createdAt)}</td>
+              <Dropdown.Menu>
+                <Dropdown.Item>{userInfo.email}</Dropdown.Item>
+                <Dropdown.Item>{`${hirePhotographers.length} Booking`}</Dropdown.Item>
+              </Dropdown.Menu>
+            </Dropdown>
+          </div>
+          <hr className="mb-5" />
+          <div className="table-responsive">
+            <table className="table table-bordered table-hover">
+              <thead className="thead-dark">
+                <tr>
+                  <th scope="col">Photographer Name</th>
+                  <th scope="col">Booking Date & Time</th>
                 </tr>
-              ))}
-            </tbody>
-          )}
-        </table>
-      </div>
-    </div>
+              </thead>
+
+              {isLoading ? (
+                <tbody>
+                  <tr>
+                    <td colSpan="2">
+                      <Loader />
+                    </td>
+                  </tr>
+                </tbody>
+              ) : (
+                <tbody>
+                  {hirePhotographers.map((photographer) => (
+                    <tr key={photographer._id}>
+                      <td>{photographer.photographerName}</td>
+                      <td>{formatDateTime(photographer.createdAt)}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              )}
+            </table>
+          </div>
+        </div>
+      )}
+    </>
   );
 };
 

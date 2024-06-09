@@ -1,0 +1,42 @@
+
+.contentSection {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.user {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.fa-circle {
+    font-size: 1.6rem;
+}
+
+.dropdownBtn {
+    background-color: rgb(255, 136, 0);
+    border: none;
+    color: black;
+    font-weight: 600;
+    border-radius: 0;
+    padding: 10px;
+}
+
+@media(max-width: 768px) {
+    .contentSection {
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .contentSection h1 {
+        font-size: 3rem;
+        text-align: center;
+    }
+
+    .contentSection h3 {
+        font-size: 1.5rem;
+    }
+}
