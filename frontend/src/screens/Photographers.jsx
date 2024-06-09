@@ -4,6 +4,7 @@ import './CSS/Photographers.css';
 import { useGetAllPhotographersQuery } from '../slices/photographerApiSlices';
 import Loader from '../components/Loader';
 import NotFound from '../components/NotFound';
+import ErrorPage from '../screens/ErrorPage';
 
 const Photographers = () => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -22,7 +23,7 @@ const Photographers = () => {
   }
 
   if (photographerDataError) {
-    return <p>Failed to fetch photographer data. Please try again later.</p>;
+    return <ErrorPage />;
   }
 
   if (!photographerData || photographerData.length === 0) {
@@ -38,7 +39,7 @@ const Photographers = () => {
   };
 
   return (
-    <div className="container mt-5">
+    <div className="container-fluid mt-5">
       {/* Header */}
       <div className="row">
         <div className="col text-center">
@@ -79,20 +80,19 @@ const Photographers = () => {
               </div>
             </Link>
           ))}
-        </div>
-
-        <div className="row">
-          <div className="btnSection">
-            {startIndex > 0 && (
-              <button className="backBtnn" onClick={handleBackClick}>
-                Back
-              </button>
-            )}
-            {endIndex < photographerData.length && (
-              <button className="nextBtnn" onClick={handleNextClick}>
-                Next
-              </button>
-            )}
+          <div className="row mt-5 btnContainer">
+            <div className="btnSection">
+              {startIndex > 0 && (
+                <button className="backBtnn" onClick={handleBackClick}>
+                  Back
+                </button>
+              )}
+              {endIndex < photographerData.length && (
+                <button className="nextBtnn" onClick={handleNextClick}>
+                  Next
+                </button>
+              )}
+            </div>
           </div>
         </div>
       </div>

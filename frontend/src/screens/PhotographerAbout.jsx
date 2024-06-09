@@ -16,6 +16,7 @@ import Loader from '../components/Loader';
 import NotFound from '../components/NotFound';
 import Ratings from '../components/Ratings';
 import RatingShow from '../components/RatingShow';
+import ErrorPage from './ErrorPage';
 
 const PhotographerAbout = () => {
   const [activeIndex, setActiveIndex] = useState(0);
@@ -45,16 +46,12 @@ const PhotographerAbout = () => {
   }
 
   if (error) {
-    return <p>Failed to fetch photographer data. Please try again later.</p>;
+    return <ErrorPage />;
   }
 
   if (portFolioError) {
-    return <p>Failed to fetch Portfolio data. Please try again later.</p>;
+    return <ErrorPage />;
   }
-
-  // if (ratingError) {
-  //   console.log('Do you rate ?');
-  // }
 
   if (!photographer && !portFolio && !ratings) {
     return <NotFound />;
@@ -153,24 +150,28 @@ const PhotographerAbout = () => {
       </div>
 
       <div className="container mt-5">
-        <div className="col">
+        <div className="col aboutSection">
           <h1 className="aboutText">About Me</h1> <hr />
           <div className="aboutMe">
-            <div className="card">
-              <img
-                src={photographer.profilePic}
-                className="card-img-top"
-                alt=""
-              />
-              {ratingError ? (
-                <div className="card card-body">
-                  <RatingShow starRatingCount={0} />
-                </div>
-              ) : (
-                <div className="card card-body">
-                  <RatingShow starRatingCount={Math.round(average)} />
-                </div>
-              )}
+            <div className="image-rating">
+              <div className="imageSection">
+                <img
+                  src={photographer.profilePic}
+                  className="card-img-top profileImage"
+                  alt=""
+                />
+              </div>
+              <div>
+                {ratingError ? (
+                  <div className="card card-body">
+                    <RatingShow starRatingCount={0} />
+                  </div>
+                ) : (
+                  <div className="card card-body">
+                    <RatingShow starRatingCount={Math.round(average)} />
+                  </div>
+                )}
+              </div>
             </div>
             <div className="aboutDetails">
               <h1>{photographer.firstName + ' ' + photographer.lastName}</h1>

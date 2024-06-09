@@ -13,6 +13,7 @@
 .aboutMe {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     gap: 20px;
 }
 
@@ -22,6 +23,7 @@
     justify-content: start;
     align-items: start;
     width: 100%;
+    min-height: 60vh;
     border-radius: 40px;
     padding: 20px;
     background-color: rgb(233, 241, 241);
@@ -91,6 +93,29 @@
   .social a:hover img {
     transform: scale(1.1);
   }
+
+  .aboutSection {
+    width: 100%;
+    padding: 20px;
+  }
+
+  .image-rating {
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+  }
+
+  .imageSection {
+    width: 100%;
+    min-height: 50vh;
+    background-color: red;
+  }
+
+  .profileImage {
+    width: 100%;
+    height: 50vh;
+    object-fit: cover;
+  }
   
 
 .rate {
@@ -146,10 +171,33 @@
   
  
   @media screen and (max-width: 768px) {
+    .aboutMe {
+      align-items: center;
+    }
+    .aboutDetails {
+      align-items: center;
+      min-height: 50vh;
+    }
+    .aboutDetails h1 {
+      text-align: center;
+      font-size: 2.5rem;
+    }
     .rating-card {
       margin-left: auto; 
       margin-right: auto;
       max-width: 400px; 
+    }
+
+    .imageSection {
+      width: 100%;
+      min-height: 30vh;
+      background-color: red;
+    }
+  
+    .profileImage {
+      width: 100%;
+      height: 30vh;
+      object-fit: cover;
     }
   }
   

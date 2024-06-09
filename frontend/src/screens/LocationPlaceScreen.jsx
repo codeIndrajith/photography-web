@@ -7,6 +7,7 @@ import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import Loader from '../components/Loader';
+import ErrorPage from '../screens/ErrorPage';
 import NotFound from '../components/NotFound';
 
 const LocationPlaceScreen = () => {
@@ -54,7 +55,7 @@ const LocationPlaceScreen = () => {
   }
 
   if (locationFetchError) {
-    return <p>Failed to fetch photographer data. Please try again later.</p>;
+    return <ErrorPage />;
   }
 
   if (!location) {
@@ -139,14 +140,6 @@ const LocationPlaceScreen = () => {
           <span className="visually-hidden">Next</span>
         </button>
       </div>
-      {/* <div>
-        <img
-          className="card-img-top img-fluid"
-          src={locationImage}
-          alt=""
-          style={{ maxHeight: '600px', objectFit: 'cover' }}
-        />
-      </div> */}
 
       <div className="container">
         <div className="row mt-5 locationsDetails">
