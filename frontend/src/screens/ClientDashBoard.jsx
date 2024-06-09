@@ -36,6 +36,8 @@ const ClientDashBoard = () => {
     <>
       {error ? (
         <NotFound />
+      ) : isLoading ? (
+        <Loader />
       ) : (
         <div className="container-fluid mt-5 p-5">
           <div className="contentSection">
@@ -69,24 +71,14 @@ const ClientDashBoard = () => {
                 </tr>
               </thead>
 
-              {isLoading ? (
-                <tbody>
-                  <tr>
-                    <td colSpan="2">
-                      <Loader />
-                    </td>
+              <tbody>
+                {hirePhotographers.map((photographer) => (
+                  <tr key={photographer._id}>
+                    <td>{photographer.photographerName}</td>
+                    <td>{formatDateTime(photographer.createdAt)}</td>
                   </tr>
-                </tbody>
-              ) : (
-                <tbody>
-                  {hirePhotographers.map((photographer) => (
-                    <tr key={photographer._id}>
-                      <td>{photographer.photographerName}</td>
-                      <td>{formatDateTime(photographer.createdAt)}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              )}
+                ))}
+              </tbody>
             </table>
           </div>
         </div>
