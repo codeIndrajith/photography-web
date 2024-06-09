@@ -10,7 +10,7 @@ import {
   useGetPortfolioQuery,
 } from '../slices/photographerApiSlices';
 import PortfolioForms from '../components/PortfolioForms';
-import BookingDetails from '../components/BookingDetails';
+
 import { Dropdown } from 'react-bootstrap';
 import { FaUserCircle } from 'react-icons/fa';
 
@@ -23,11 +23,6 @@ const PhotographerDashBoard = () => {
     error,
     refetch,
   } = useGetPortfolioQuery(userInfo._id);
-  const {
-    data: bookingDetails,
-    isLoading: bookingDetailsLoading,
-    error: bookingError,
-  } = useGetBookingByPhotographerQuery(userInfo._id);
   const [files, setFiles] = useState([]);
   const [description, setDescription] = useState('');
 
@@ -66,83 +61,79 @@ const PhotographerDashBoard = () => {
 
   return (
     <>
-      {error && bookingError ? (
-        <NotFound />
-      ) : (
-        <div className="container-fluid mt-5 p-5">
-          <div className="contentSection">
-            <h1 className="mb-5">My Bookings</h1>
-            <Dropdown>
-              <Dropdown.Toggle
-                variant="success"
-                id="dropdown-basic"
-                className="d-flex align-items-center dropdownBtn"
-              >
-                <FaUserCircle
-                  className="fa-circle"
-                  style={{ marginRight: '8px' }}
-                />
-                <span>{userInfo.name}</span>
-              </Dropdown.Toggle>
+      <div className="container-fluid mt-5 p-5">
+        <div className="contentSection">
+          <h1 className="mb-5">My Bookings</h1>
+          <Dropdown>
+            <Dropdown.Toggle
+              variant="success"
+              id="dropdown-basic"
+              className="d-flex align-items-center dropdownBtn"
+            >
+              <FaUserCircle
+                className="fa-circle"
+                style={{ marginRight: '8px' }}
+              />
+              <span>
+                {userInfo.name || userInfo.firstName + ' ' + userInfo.lastName}
+              </span>
+            </Dropdown.Toggle>
 
-              <Dropdown.Menu>
-                <Dropdown.Item>{userInfo.email}</Dropdown.Item>
-                <Dropdown.Item>{`${bookingDetails.length} Booking`}</Dropdown.Item>
-              </Dropdown.Menu>
-            </Dropdown>
-          </div>
+            <Dropdown.Menu>
+              <Dropdown.Item>{userInfo.email}</Dropdown.Item>
+            </Dropdown.Menu>
+          </Dropdown>
+        </div>
+        <div>
+          {!getPhotographerDetails && (
+            <form onSubmit={submitHandler}>
+              <div className="form-group row mt-3">
+                <label className="col-sm-2 col-form-label">Add Photos</label>
+                <div className="col-sm-10">
+                  <input
+                    type="file"
+                    className="form-control"
+                    multiple
+                    onChange={fileHandler}
+                    placeholder="Portfolio"
+                  />
+                </div>
+              </div>
+              <div className="form-group row mt-3">
+                <label className="col-sm-2 col-form-label">
+                  Tell About you
+                </label>
+                <div className="col-sm-10">
+                  <input
+                    type="text"
+                    className="form-control"
+                    value={description}
+                    onChange={(e) => setDescription(e.target.value)}
+                    placeholder="Tell about you"
+                  />
+                </div>
+              </div>
+              <button className="addBtn" type="submit">
+                Add
+              </button>
+              {loadingPhotographerDetails && <Loader />}
+            </form>
+          )}
+        </div>
+
+        {/* Input details */}
+        <div className="mt-5 p-3">
+          <h3 className="text-center mb-4 border-bottom bg-secondary p-2 text-white">
+            Photographer Details
+          </h3>
+
           <div>
-            {!getPhotographerDetails && (
-              <form onSubmit={submitHandler}>
-                <div className="form-group row mt-3">
-                  <label className="col-sm-2 col-form-label">Add Photos</label>
-                  <div className="col-sm-10">
-                    <input
-                      type="file"
-                      className="form-control"
-                      multiple
-                      onChange={fileHandler}
-                      placeholder="Portfolio"
-                    />
-                  </div>
-                </div>
-                <div className="form-group row mt-3">
-                  <label className="col-sm-2 col-form-label">
-                    Tell About you
-                  </label>
-                  <div className="col-sm-10">
-                    <input
-                      type="text"
-                      className="form-control"
-                      value={description}
-                      onChange={(e) => setDescription(e.target.value)}
-                      placeholder="Tell about you"
-                    />
-                  </div>
-                </div>
-                <button className="addBtn" type="submit">
-                  Add
-                </button>
-                {loadingPhotographerDetails && <Loader />}
-              </form>
-            )}
-          </div>
-
-          {/* Input details */}
-          <div className="mt-5 p-3">
-            <h3 className="text-center mb-4 border-bottom bg-secondary p-2 text-white">
-              Photographer Details
-            </h3>
             {isLoading ? (
-              <>
-                <Loader />
-              </>
+              <Loader />
             ) : error ? (
-              <>
-                <NotFound />
-              </>
+              <NotFound />
             ) : (
-              <div>
+              <>
                 {getPhotographerDetails.map((photographerDetail) => (
                   <PortfolioForms
                     key={photographerDetail._id}
@@ -150,32 +141,11 @@ const PhotographerDashBoard = () => {
                     userInfo={userInfo}
                   />
                 ))}
-              </div>
-            )}
-          </div>
-
-          <div className="mt-5 p-3">
-            <h3 className="text-center mb-4 border-bottom bg-secondary p-2 text-white">
-              Booking details
-            </h3>
-            {bookingDetailsLoading ? (
-              <>
-                <Loader />
               </>
-            ) : bookingError ? (
-              <>
-                <NotFound />
-              </>
-            ) : (
-              <div>
-                {bookingDetails.map((bookings) => (
-                  <BookingDetails key={bookings._id} bookings={bookings} />
-                ))}
-              </div>
             )}
           </div>
         </div>
-      )}
+      </div>
     </>
   );
 };

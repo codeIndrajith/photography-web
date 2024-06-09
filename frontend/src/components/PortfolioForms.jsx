@@ -12,7 +12,9 @@ const PortfolioForms = ({ photographerDetail, userInfo }) => {
         </thead>
         <tbody>
           <tr>
-            <td>{userInfo.name}</td>
+            <td>
+              {userInfo.name || userInfo.firstName + ' ' + userInfo.lastName}
+            </td>
             <td>{photographerDetail.description}</td>
           </tr>
         </tbody>

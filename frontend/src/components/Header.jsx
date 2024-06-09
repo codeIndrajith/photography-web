@@ -66,11 +66,18 @@ const Header = () => {
                       <NavDropdown.Item>Profile</NavDropdown.Item>
                     </LinkContainer>
                     {userInfo.status === 'photographer' ? (
-                      <LinkContainer
-                        to={`/photographer-dashboard/${userInfo._id}`}
-                      >
-                        <NavDropdown.Item>Dashboard</NavDropdown.Item>
-                      </LinkContainer>
+                      <>
+                        <LinkContainer
+                          to={`/photographer-dashboard/${userInfo._id}`}
+                        >
+                          <NavDropdown.Item>Dashboard</NavDropdown.Item>
+                        </LinkContainer>
+                        <LinkContainer
+                          to={`/photographer-bookings/${userInfo._id}`}
+                        >
+                          <NavDropdown.Item>Bookings</NavDropdown.Item>
+                        </LinkContainer>
+                      </>
                     ) : userInfo.status === 'client' ? (
                       <LinkContainer to={`/client-dashboard/${userInfo._id}`}>
                         <NavDropdown.Item>Dashboard</NavDropdown.Item>

@@ -24,6 +24,7 @@ import ClientDashBoard from './screens/ClientDashBoard.jsx';
 import PhotographerDashBoard from './screens/PhotographerDashBoard.jsx';
 import LocationOwnerDashBoard from './screens/LocationOwnerDashBoard.jsx';
 import ErrorPage from './screens/ErrorPage.jsx';
+import PhotographerBookingScreen from './screens/PhotographerBookingScreen.jsx';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -42,6 +43,10 @@ const router = createBrowserRouter(
         <Route
           path="/photographer-dashboard/:id"
           element={<PhotographerDashBoard />}
+        />
+        <Route
+          path="/photographer-bookings/:id"
+          element={<PhotographerBookingScreen />}
         />
         <Route
           path="/owner-dashboard/:id"
