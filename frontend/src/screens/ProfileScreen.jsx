@@ -9,6 +9,8 @@ import { setCredentials } from '../slices/authSlice';
 import { useUpdatePhotographerMutation } from '../slices/photographerApiSlices';
 import { useUpdateClientMutation } from '../slices/clientApiSlices';
 import { useUpdateOwnerMutation } from '../slices/locationOwnerApiSlices';
+import updateImage from '../images/update.svg';
+import './CSS/ProfileScreen.css';
 
 const ProfileScreen = () => {
   const [firstName, setFirstName] = useState('');
@@ -148,256 +150,262 @@ const ProfileScreen = () => {
     }
   };
   return (
-    <FormContainer>
-      {userInfo.status === 'client' ? (
-        <div>
-          <h1>Update Client</h1>
-
-          <Form onSubmit={submitHandler}>
-            <Form.Group className="my-2" controlId="firstName">
-              <Form.Label>First Name</Form.Label>
-              <Form.Control
-                type="name"
-                placeholder="Enter First name"
-                value={firstName}
-                onChange={(e) => setFirstName(e.target.value)}
-              ></Form.Control>
-            </Form.Group>
-            <Form.Group className="my-2" controlId="lastName">
-              <Form.Label>Last Name</Form.Label>
-              <Form.Control
-                type="name"
-                placeholder="Enter Last name"
-                value={lastName}
-                onChange={(e) => setLastName(e.target.value)}
-              ></Form.Control>
-            </Form.Group>
-            <Form.Group className="my-2" controlId="email">
-              <Form.Label>Email Address</Form.Label>
-              <Form.Control
-                type="email"
-                placeholder="Enter email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                autoComplete="firstName"
-              ></Form.Control>
-            </Form.Group>
-            <Form.Group className="my-2" controlId="new-password">
-              <Form.Label>Password</Form.Label>
-              <Form.Control
-                type="password"
-                placeholder="Enter New password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                autoComplete="new-password"
-              ></Form.Control>
-            </Form.Group>
-
-            <Form.Group className="my-2" controlId="confirm-new-Password">
-              <Form.Label>Confirm Password</Form.Label>
-              <Form.Control
-                type="password"
-                placeholder="Confirm new password"
-                value={confirmPassword}
-                onChange={(e) => setConfirmPassword(e.target.value)}
-                autoComplete="confirm-new-password"
-              ></Form.Control>
-            </Form.Group>
-
-            <Button type="submit" variant="primary" className="mt-3">
-              Update Client
-            </Button>
-
-            {clientLoadingUpdate && <Loader />}
-          </Form>
+    <>
+      <div className="heading-update">
+        <h1>Update Profile</h1>
+      </div>
+      <div className="container-fluid p-5 section">
+        <div className="updateImage">
+          <img src={updateImage} alt="update-image" />
         </div>
-      ) : userInfo.status === 'photographer' ? (
-        <div>
-          <h1>Update Photographer</h1>
+        <div className="mt-2 formSection">
+          {userInfo.status === 'client' ? (
+            <div>
+              <div className="heading"></div>
 
-          <Form onSubmit={submitHandler}>
-            <Form.Group className="my-2" controlId="firstName">
-              <Form.Label>First Name</Form.Label>
-              <Form.Control
-                type="name"
-                placeholder="Enter First name"
-                value={firstName}
-                onChange={(e) => setFirstName(e.target.value)}
-              ></Form.Control>
-            </Form.Group>
-            <Form.Group className="my-2" controlId="lastName">
-              <Form.Label>Last Name</Form.Label>
-              <Form.Control
-                type="name"
-                placeholder="Enter Last name"
-                value={lastName}
-                onChange={(e) => setLastName(e.target.value)}
-              ></Form.Control>
-            </Form.Group>
-            <Form.Group className="my-2" controlId="email">
-              <Form.Label>Email Address</Form.Label>
-              <Form.Control
-                type="email"
-                placeholder="Enter email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                autoComplete="firstName"
-              ></Form.Control>
-            </Form.Group>
-            <Form.Group className="my-2" controlId="whatsAppNo">
-              <Form.Label>WhatsApp Number</Form.Label>
-              <Form.Control
-                type="number"
-                placeholder="Enter WhatsApp Number"
-                value={whatsAppNumber}
-                onChange={(e) => setWhatsAppNumber(e.target.value)}
-              ></Form.Control>
-            </Form.Group>
-            <Form.Group className="my-2" controlId="instagramLink">
-              <Form.Label>Instagram Link</Form.Label>
-              <Form.Control
-                type="name"
-                placeholder="Past your Instagram Link"
-                value={instagramLink}
-                onChange={(e) => setInstagramLink(e.target.value)}
-              ></Form.Control>
-            </Form.Group>
-            <Form.Group className="my-2" controlId="faceBookLink">
-              <Form.Label>Facebook Link</Form.Label>
-              <Form.Control
-                type="name"
-                placeholder="Past your Facebook Link"
-                value={faceBookLink}
-                onChange={(e) => setFaceBookLink(e.target.value)}
-              ></Form.Control>
-            </Form.Group>
-            <Form.Group className="my-2" controlId="new-password">
-              <Form.Label>Password</Form.Label>
-              <Form.Control
-                type="password"
-                placeholder="Enter New password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                autoComplete="new-password"
-              ></Form.Control>
-            </Form.Group>
+              <Form onSubmit={submitHandler}>
+                <Form.Group className="my-2" controlId="firstName">
+                  <Form.Label>First Name</Form.Label>
+                  <Form.Control
+                    type="name"
+                    placeholder="Enter First name"
+                    value={firstName}
+                    onChange={(e) => setFirstName(e.target.value)}
+                  ></Form.Control>
+                </Form.Group>
+                <Form.Group className="my-2" controlId="lastName">
+                  <Form.Label>Last Name</Form.Label>
+                  <Form.Control
+                    type="name"
+                    placeholder="Enter Last name"
+                    value={lastName}
+                    onChange={(e) => setLastName(e.target.value)}
+                  ></Form.Control>
+                </Form.Group>
+                <Form.Group className="my-2" controlId="email">
+                  <Form.Label>Email Address</Form.Label>
+                  <Form.Control
+                    type="email"
+                    placeholder="Enter email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    autoComplete="firstName"
+                  ></Form.Control>
+                </Form.Group>
+                <Form.Group className="my-2" controlId="new-password">
+                  <Form.Label>Password</Form.Label>
+                  <Form.Control
+                    type="password"
+                    placeholder="Enter New password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    autoComplete="new-password"
+                  ></Form.Control>
+                </Form.Group>
 
-            <Form.Group className="my-2" controlId="confirm-new-Password">
-              <Form.Label>Confirm Password</Form.Label>
-              <Form.Control
-                type="password"
-                placeholder="Confirm new password"
-                value={confirmPassword}
-                onChange={(e) => setConfirmPassword(e.target.value)}
-                autoComplete="confirm-new-password"
-              ></Form.Control>
-            </Form.Group>
+                <Form.Group className="my-2" controlId="confirm-new-Password">
+                  <Form.Label>Confirm Password</Form.Label>
+                  <Form.Control
+                    type="password"
+                    placeholder="Confirm new password"
+                    value={confirmPassword}
+                    onChange={(e) => setConfirmPassword(e.target.value)}
+                    autoComplete="confirm-new-password"
+                  ></Form.Control>
+                </Form.Group>
 
-            <Form.Group className="my-2" controlId="profilePic">
-              <Form.Label>Your Profile Picture</Form.Label>
-              <Form.Control
-                type="file"
-                onChange={(e) => setFile(e.target.files[0])}
-              />
-            </Form.Group>
+                <Button type="submit" variant="primary" className="mt-3 allBtn">
+                  Update Client
+                </Button>
 
-            <Button type="submit" variant="primary" className="mt-3">
-              Update Photographer
-            </Button>
+                {clientLoadingUpdate && <Loader />}
+              </Form>
+            </div>
+          ) : userInfo.status === 'photographer' ? (
+            <div>
+              <Form onSubmit={submitHandler}>
+                <Form.Group className="my-2" controlId="firstName">
+                  <Form.Label>First Name</Form.Label>
+                  <Form.Control
+                    type="name"
+                    placeholder="Enter First name"
+                    value={firstName}
+                    onChange={(e) => setFirstName(e.target.value)}
+                  ></Form.Control>
+                </Form.Group>
+                <Form.Group className="my-2" controlId="lastName">
+                  <Form.Label>Last Name</Form.Label>
+                  <Form.Control
+                    type="name"
+                    placeholder="Enter Last name"
+                    value={lastName}
+                    onChange={(e) => setLastName(e.target.value)}
+                  ></Form.Control>
+                </Form.Group>
+                <Form.Group className="my-2" controlId="email">
+                  <Form.Label>Email Address</Form.Label>
+                  <Form.Control
+                    type="email"
+                    placeholder="Enter email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    autoComplete="firstName"
+                  ></Form.Control>
+                </Form.Group>
+                <Form.Group className="my-2" controlId="whatsAppNo">
+                  <Form.Label>WhatsApp Number</Form.Label>
+                  <Form.Control
+                    type="number"
+                    placeholder="Enter WhatsApp Number"
+                    value={whatsAppNumber}
+                    onChange={(e) => setWhatsAppNumber(e.target.value)}
+                  ></Form.Control>
+                </Form.Group>
+                <Form.Group className="my-2" controlId="instagramLink">
+                  <Form.Label>Instagram Link</Form.Label>
+                  <Form.Control
+                    type="name"
+                    placeholder="Past your Instagram Link"
+                    value={instagramLink}
+                    onChange={(e) => setInstagramLink(e.target.value)}
+                  ></Form.Control>
+                </Form.Group>
+                <Form.Group className="my-2" controlId="faceBookLink">
+                  <Form.Label>Facebook Link</Form.Label>
+                  <Form.Control
+                    type="name"
+                    placeholder="Past your Facebook Link"
+                    value={faceBookLink}
+                    onChange={(e) => setFaceBookLink(e.target.value)}
+                  ></Form.Control>
+                </Form.Group>
+                <Form.Group className="my-2" controlId="new-password">
+                  <Form.Label>Password</Form.Label>
+                  <Form.Control
+                    type="password"
+                    placeholder="Enter New password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    autoComplete="new-password"
+                  ></Form.Control>
+                </Form.Group>
 
-            {photographerLoadingUpdate && <Loader />}
-          </Form>
+                <Form.Group className="my-2" controlId="confirm-new-Password">
+                  <Form.Label>Confirm Password</Form.Label>
+                  <Form.Control
+                    type="password"
+                    placeholder="Confirm new password"
+                    value={confirmPassword}
+                    onChange={(e) => setConfirmPassword(e.target.value)}
+                    autoComplete="confirm-new-password"
+                  ></Form.Control>
+                </Form.Group>
+
+                <Form.Group className="my-2" controlId="profilePic">
+                  <Form.Label>Your Profile Picture</Form.Label>
+                  <Form.Control
+                    type="file"
+                    onChange={(e) => setFile(e.target.files[0])}
+                  />
+                </Form.Group>
+
+                <Button type="submit" variant="primary" className="mt-3 allBtn">
+                  Update Photographer
+                </Button>
+
+                {photographerLoadingUpdate && <Loader />}
+              </Form>
+            </div>
+          ) : (
+            <div>
+              <Form onSubmit={submitHandler}>
+                <Form.Group className="my-2" controlId="firstName">
+                  <Form.Label>First Name</Form.Label>
+                  <Form.Control
+                    type="name"
+                    placeholder="Enter First name"
+                    value={firstName}
+                    onChange={(e) => setFirstName(e.target.value)}
+                  ></Form.Control>
+                </Form.Group>
+                <Form.Group className="my-2" controlId="lastName">
+                  <Form.Label>Last Name</Form.Label>
+                  <Form.Control
+                    type="name"
+                    placeholder="Enter Last name"
+                    value={lastName}
+                    onChange={(e) => setLastName(e.target.value)}
+                  ></Form.Control>
+                </Form.Group>
+                <Form.Group className="my-2" controlId="email">
+                  <Form.Label>Email Address</Form.Label>
+                  <Form.Control
+                    type="email"
+                    placeholder="Enter email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    autoComplete="firstName"
+                  ></Form.Control>
+                </Form.Group>
+                <Form.Group className="my-2" controlId="whatsAppNo">
+                  <Form.Label>WhatsApp Number</Form.Label>
+                  <Form.Control
+                    type="number"
+                    placeholder="Enter WhatsApp Number"
+                    value={whatsAppNumber}
+                    onChange={(e) => setWhatsAppNumber(e.target.value)}
+                  ></Form.Control>
+                </Form.Group>
+                <Form.Group className="my-2" controlId="instagramLink">
+                  <Form.Label>Instagram Link</Form.Label>
+                  <Form.Control
+                    type="name"
+                    placeholder="Past your Instagram Link"
+                    value={instagramLink}
+                    onChange={(e) => setInstagramLink(e.target.value)}
+                  ></Form.Control>
+                </Form.Group>
+                <Form.Group className="my-2" controlId="faceBookLink">
+                  <Form.Label>Facebook Link</Form.Label>
+                  <Form.Control
+                    type="name"
+                    placeholder="Past your Facebook Link"
+                    value={faceBookLink}
+                    onChange={(e) => setFaceBookLink(e.target.value)}
+                  ></Form.Control>
+                </Form.Group>
+                <Form.Group className="my-2" controlId="new-password">
+                  <Form.Label>Password</Form.Label>
+                  <Form.Control
+                    type="password"
+                    placeholder="Enter New password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    autoComplete="new-password"
+                  ></Form.Control>
+                </Form.Group>
+
+                <Form.Group className="my-2" controlId="confirm-new-Password">
+                  <Form.Label>Confirm Password</Form.Label>
+                  <Form.Control
+                    type="password"
+                    placeholder="Confirm new password"
+                    value={confirmPassword}
+                    onChange={(e) => setConfirmPassword(e.target.value)}
+                    autoComplete="confirm-new-password"
+                  ></Form.Control>
+                </Form.Group>
+
+                <Button type="submit" variant="primary" className="mt-3 allBtn">
+                  Update Location Owner
+                </Button>
+                {locationOwnerLoadingUpdate && <Loader />}
+              </Form>
+            </div>
+          )}
         </div>
-      ) : (
-        <div>
-          <h1>Update Location Owner</h1>
-
-          <Form onSubmit={submitHandler}>
-            <Form.Group className="my-2" controlId="firstName">
-              <Form.Label>First Name</Form.Label>
-              <Form.Control
-                type="name"
-                placeholder="Enter First name"
-                value={firstName}
-                onChange={(e) => setFirstName(e.target.value)}
-              ></Form.Control>
-            </Form.Group>
-            <Form.Group className="my-2" controlId="lastName">
-              <Form.Label>Last Name</Form.Label>
-              <Form.Control
-                type="name"
-                placeholder="Enter Last name"
-                value={lastName}
-                onChange={(e) => setLastName(e.target.value)}
-              ></Form.Control>
-            </Form.Group>
-            <Form.Group className="my-2" controlId="email">
-              <Form.Label>Email Address</Form.Label>
-              <Form.Control
-                type="email"
-                placeholder="Enter email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                autoComplete="firstName"
-              ></Form.Control>
-            </Form.Group>
-            <Form.Group className="my-2" controlId="whatsAppNo">
-              <Form.Label>WhatsApp Number</Form.Label>
-              <Form.Control
-                type="number"
-                placeholder="Enter WhatsApp Number"
-                value={whatsAppNumber}
-                onChange={(e) => setWhatsAppNumber(e.target.value)}
-              ></Form.Control>
-            </Form.Group>
-            <Form.Group className="my-2" controlId="instagramLink">
-              <Form.Label>Instagram Link</Form.Label>
-              <Form.Control
-                type="name"
-                placeholder="Past your Instagram Link"
-                value={instagramLink}
-                onChange={(e) => setInstagramLink(e.target.value)}
-              ></Form.Control>
-            </Form.Group>
-            <Form.Group className="my-2" controlId="faceBookLink">
-              <Form.Label>Facebook Link</Form.Label>
-              <Form.Control
-                type="name"
-                placeholder="Past your Facebook Link"
-                value={faceBookLink}
-                onChange={(e) => setFaceBookLink(e.target.value)}
-              ></Form.Control>
-            </Form.Group>
-            <Form.Group className="my-2" controlId="new-password">
-              <Form.Label>Password</Form.Label>
-              <Form.Control
-                type="password"
-                placeholder="Enter New password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                autoComplete="new-password"
-              ></Form.Control>
-            </Form.Group>
-
-            <Form.Group className="my-2" controlId="confirm-new-Password">
-              <Form.Label>Confirm Password</Form.Label>
-              <Form.Control
-                type="password"
-                placeholder="Confirm new password"
-                value={confirmPassword}
-                onChange={(e) => setConfirmPassword(e.target.value)}
-                autoComplete="confirm-new-password"
-              ></Form.Control>
-            </Form.Group>
-
-            <Button type="submit" variant="primary" className="mt-3">
-              Update Location Owner
-            </Button>
-            {locationOwnerLoadingUpdate && <Loader />}
-          </Form>
-        </div>
-      )}
-    </FormContainer>
+      </div>
+    </>
   );
 };
 
