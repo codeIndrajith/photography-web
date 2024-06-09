@@ -68,7 +68,7 @@ const LocationOwnerDashBoard = () => {
   };
 
   return (
-    <div className="container mt-5">
+    <div className="container-fluid mt-5 p-5">
       <div>
         <form onSubmit={submitHandler}>
           <div className="form-group row">
