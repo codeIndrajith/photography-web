@@ -141,9 +141,9 @@ const LocationPlaceScreen = () => {
         </button>
       </div>
 
-      <div className="container">
-        <div className="row mt-5 locationsDetails">
-          <div className="col-md-6 locationContent">
+      <div className="container locationSection">
+        <div className="container-fluid locationsDetails">
+          <div className="locationContent">
             <h1>{location.locationName}</h1>
             <p>{location.locationAddress}</p>
 
@@ -206,7 +206,7 @@ const LocationPlaceScreen = () => {
               <></>
             )}
           </div>
-          <div className="col-md-6 map">
+          <div className="map">
             <h1>Location map here</h1>
           </div>
         </div>
