@@ -129,6 +129,43 @@ const hirePhotographer = asyncHandler(async (req, res) => {
   }
 });
 
+// @desc    Remove Booking
+// @route   DELETE /api/delete-photographer
+// @access  Public
+const deleteBooking = asyncHandler(async (req, res) => {
+  const { clientId } = req.params;
+  const { photographerId } = req.body;
+
+  // const allBookingsByClient = await bookingPhotographer.find({
+  //   clientId: clientId,
+  // });
+
+  // if (allBookingsByClient.length === 0) {
+  //   res.status(404);
+  //   throw new Error('No bookings found for this client');
+  // } else {
+  //   const bookingWithPhotographer = allBookingsByClient.find(
+  //     (booking) => booking.photographerId == photographerId
+  //   );
+
+  // single query to delete one
+
+  const bookingWithPhotographer = await bookingPhotographer.findOneAndDelete({
+    clientId,
+    photographerId,
+  });
+
+  if (bookingWithPhotographer) {
+    await bookingWithPhotographer.deleteOne({
+      _id: bookingWithPhotographer._id,
+    });
+    res.status(200).json({ message: 'Booking delete success' });
+  } else {
+    res.status(404);
+    throw new Error('No bookings found for this photographer');
+  }
+});
+
 // @desc    Get hire a photographers by client
 // @route   GET /api/hire-photographer/:clientId
 // @access  Public
@@ -142,6 +179,7 @@ const getAllHirePhotographers = asyncHandler(async (req, res) => {
       photographers.map((photographer) => ({
         _id: photographer._id,
         photographerName: photographer.photographerName,
+        photographerId: photographer.photographerId,
         createdAt: photographer.createdAt,
       }))
     );
@@ -177,6 +215,7 @@ export {
   updateClient,
   logoutClient,
   hirePhotographer,
+  deleteBooking,
   getAllHirePhotographers,
   addRating,
 };

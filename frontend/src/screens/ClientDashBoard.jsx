@@ -2,11 +2,16 @@ import React, { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Dropdown } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
-import { useGetHirePhotographersQuery } from '../slices/clientApiSlices';
+import {
+  useDeleteHirePhotographerMutation,
+  useGetHirePhotographersQuery,
+} from '../slices/clientApiSlices';
 import Loader from '../components/Loader';
 import NotFound from '../components/NotFound';
 import './CSS/ClientDashBoard.css';
+import { toast } from 'react-toastify';
 import { FaUserCircle } from 'react-icons/fa';
+import { MdOutlineDeleteOutline } from 'react-icons/md';
 
 const ClientDashBoard = () => {
   const { userInfo } = useSelector((state) => state.auth);
@@ -14,7 +19,10 @@ const ClientDashBoard = () => {
     data: hirePhotographers,
     isLoading,
     error,
+    refetch,
   } = useGetHirePhotographersQuery(userInfo._id);
+  const [deleteBooking, { isLoading: deleteBookingLoading }] =
+    useDeleteHirePhotographerMutation();
 
   // Function to format date and time
   const formatDateTime = (isoString) => {
@@ -30,6 +38,15 @@ const ClientDashBoard = () => {
       second: '2-digit',
     });
     return `${formattedDate}  |  ${formattedTime}`;
+  };
+
+  const deleteHandler = async (photographerId) => {
+    const res = await deleteBooking({
+      photographerId: photographerId,
+      clientId: userInfo._id,
+    }).unwrap();
+    toast.success('Booking delete success');
+    refetch();
   };
 
   return (
@@ -76,6 +93,11 @@ const ClientDashBoard = () => {
                   <tr key={photographer._id}>
                     <td>{photographer.photographerName}</td>
                     <td>{formatDateTime(photographer.createdAt)}</td>
+                    <td
+                      onClick={() => deleteHandler(photographer.photographerId)}
+                    >
+                      <MdOutlineDeleteOutline />
+                    </td>
                   </tr>
                 ))}
               </tbody>

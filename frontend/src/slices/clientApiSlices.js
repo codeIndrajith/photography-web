@@ -43,6 +43,13 @@ export const clientApiSlice = apiSlice.injectEndpoints({
       }),
       keepUnusedDataFor: 5,
     }),
+    deleteHirePhotographer: builder.mutation({
+      query: ({ photographerId, clientId }) => ({
+        url: `${CLIENT_URL}/delete-booking/${clientId}`,
+        method: 'DELETE',
+        body: { photographerId },
+      }),
+    }),
     addRating: builder.mutation({
       query: (data) => ({
         url: `${CLIENT_URL}/add-rating`,
@@ -60,5 +67,6 @@ export const {
   useUpdateClientMutation,
   useBookingPhotographerMutation,
   useGetHirePhotographersQuery,
+  useDeleteHirePhotographerMutation,
   useAddRatingMutation,
 } = clientApiSlice;
