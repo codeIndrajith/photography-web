@@ -238,6 +238,26 @@ const getLocation = asyncHandler(async (req, res) => {
   }
 });
 
+// @desc    Delete Single Location
+// @route   DELETE /api/delete-location
+// @access  Public
+const deleteLocation = asyncHandler(async (req, res) => {
+  const { id } = req.body;
+
+  if (!id) {
+    res.status(400);
+    throw new Error('Id is required');
+  }
+
+  const locationDelete = await Locations.findByIdAndDelete(id);
+  if (locationDelete) {
+    res.status(200).json({ message: 'Location Delete success' });
+  } else {
+    res.status(404);
+    throw new Error('No found location');
+  }
+});
+
 export {
   authLocationOwner,
   registerLocationOwner,
@@ -247,4 +267,5 @@ export {
   getLocationsByOwner,
   getAllLocations,
   getLocation,
+  deleteLocation,
 };

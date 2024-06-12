@@ -8,6 +8,7 @@ import {
   getAllLocations,
   getLocation,
   updateOwner,
+  deleteLocation,
 } from '../controllers/locationOwnerController.js';
 import upload from '../middleware/upload.js';
 
@@ -21,5 +22,6 @@ router.post('/addLocation', upload.array('images', 5), addLocationByOwner);
 router.get('/getLocations/:locationOwnerId', getLocationsByOwner);
 router.get('/', getAllLocations);
 router.get('/:id', getLocation);
+router.delete('/delete-location', deleteLocation);
 
 export default router;

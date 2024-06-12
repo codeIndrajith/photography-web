@@ -126,7 +126,11 @@ const LocationOwnerDashBoard = () => {
         ) : (
           <>
             {locations.map((location) => (
-              <LocationForms key={location._id} location={location} />
+              <LocationForms
+                key={location._id}
+                location={location}
+                refetch={refetch}
+              />
             ))}
           </>
         )}
