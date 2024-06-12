@@ -289,6 +289,25 @@ const getBookingByPhotographer = asyncHandler(async (req, res) => {
   }
 });
 
+// @desc    Delete booking
+// @route   DELETE /api/photographer/delete-booking
+// @access  Public
+const deleteBooking = asyncHandler(async (req, res) => {
+  const { id } = req.body;
+
+  if (!id) {
+    res.status(400);
+    throw new Error('Id is required');
+  }
+
+  const deleteBookingLocation = await bookingLocation.findByIdAndDelete(id);
+  if (deleteBookingLocation) {
+    res.status(200).json({ message: 'Booking Location delete success' });
+  } else {
+    res.status(404);
+    throw new Error('No found booking location');
+  }
+});
 // @desc    Get All photographers
 // @route   GET /api/photographers
 // @access  Public
@@ -333,6 +352,7 @@ export {
   getPhotographer,
   addBookingLocation,
   getBookingByPhotographer,
+  deleteBooking,
   getAllPhotographers,
   getRatings,
 };

@@ -12,6 +12,7 @@ import {
   getRatings,
   updatePhotographer,
   deletePortfolio,
+  deleteBooking,
 } from '../controllers/photographerController.js';
 import upload from '../middleware/upload.js';
 
@@ -35,6 +36,7 @@ router.delete('/delete-portfolio', deletePortfolio);
 router.get('/:id', getPhotographer);
 router.post('/add-booking', addBookingLocation);
 router.get('/get-booking/:photographerId', getBookingByPhotographer);
+router.delete('/delete-booking', deleteBooking);
 router.get('/', getAllPhotographers);
 router.get('/get-rating/:photographerId', getRatings);
 

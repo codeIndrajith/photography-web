@@ -14,6 +14,7 @@ const PhotographerBookingScreen = () => {
     data: bookingDetails,
     isLoading: bookingDetailsLoading,
     error: bookingError,
+    refetch,
   } = useGetBookingByPhotographerQuery(userInfo._id);
   return (
     <>
@@ -57,7 +58,11 @@ const PhotographerBookingScreen = () => {
 
             <div>
               {bookingDetails.map((bookings) => (
-                <BookingDetails key={bookings._id} bookings={bookings} />
+                <BookingDetails
+                  key={bookings._id}
+                  bookings={bookings}
+                  refetch={refetch}
+                />
               ))}
             </div>
           </div>
