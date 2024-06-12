@@ -43,6 +43,13 @@ export const photographerApiSlice = apiSlice.injectEndpoints({
       }),
       keepUnusedDataFor: 5,
     }),
+    deletePortfolio: builder.mutation({
+      query: (id) => ({
+        url: `${PHOTOGRAPHER_URL}/delete-portfolio`,
+        method: 'DELETE',
+        body: { id },
+      }),
+    }),
     getPhotographer: builder.query({
       query: (id) => ({
         url: `${PHOTOGRAPHER_URL}/${id}`,
@@ -84,6 +91,7 @@ export const {
   useUpdatePhotographerMutation,
   useAddPortfolioLMutation,
   useGetPortfolioQuery,
+  useDeletePortfolioMutation,
   useGetPhotographerQuery,
   useAddBookingRequestMutation,
   useGetBookingByPhotographerQuery,

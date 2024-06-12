@@ -6,7 +6,6 @@ import Loader from '../components/Loader';
 import NotFound from '../components/NotFound';
 import {
   useAddPortfolioLMutation,
-  useGetBookingByPhotographerQuery,
   useGetPortfolioQuery,
 } from '../slices/photographerApiSlices';
 import PortfolioForms from '../components/PortfolioForms';
@@ -16,13 +15,14 @@ import { FaUserCircle } from 'react-icons/fa';
 
 const PhotographerDashBoard = () => {
   const { userInfo } = useSelector((state) => state.auth);
-
+  const [isDisable, setIsDisable] = useState(false);
   const {
     data: getPhotographerDetails,
     isLoading,
     error,
     refetch,
   } = useGetPortfolioQuery(userInfo._id);
+
   const [files, setFiles] = useState([]);
   const [description, setDescription] = useState('');
 
@@ -51,7 +51,7 @@ const PhotographerDashBoard = () => {
       });
 
       const res = await photographerDetails(formData).unwrap();
-      toast.success('Location details add success');
+      toast.success('Photographer details add success');
       setDescription('');
       refetch();
     } catch (error) {
@@ -63,7 +63,7 @@ const PhotographerDashBoard = () => {
     <>
       <div className="container-fluid mt-5 p-5">
         <div className="contentSection">
-          <h1 className="mb-5">My Bookings</h1>
+          <h1 className="mb-5">My Details</h1>
           <Dropdown>
             <Dropdown.Toggle
               variant="success"
@@ -96,6 +96,7 @@ const PhotographerDashBoard = () => {
                     multiple
                     onChange={fileHandler}
                     placeholder="Portfolio"
+                    disabled={isDisable}
                   />
                 </div>
               </div>
@@ -110,10 +111,11 @@ const PhotographerDashBoard = () => {
                     value={description}
                     onChange={(e) => setDescription(e.target.value)}
                     placeholder="Tell about you"
+                    disabled={isDisable}
                   />
                 </div>
               </div>
-              <button className="addBtn" type="submit">
+              <button className="addBtn" type="submit" disabled={isDisable}>
                 Add
               </button>
               {loadingPhotographerDetails && <Loader />}
@@ -123,10 +125,6 @@ const PhotographerDashBoard = () => {
 
         {/* Input details */}
         <div className="mt-5 p-3">
-          <h3 className="text-center mb-4 border-bottom bg-secondary p-2 text-white">
-            Photographer Details
-          </h3>
-
           <div>
             {isLoading ? (
               <Loader />
@@ -139,6 +137,7 @@ const PhotographerDashBoard = () => {
                     key={photographerDetail._id}
                     photographerDetail={photographerDetail}
                     userInfo={userInfo}
+                    refetch={refetch}
                   />
                 ))}
               </>

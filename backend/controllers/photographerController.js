@@ -201,6 +201,24 @@ const getPortfolioByPhotographer = asyncHandler(async (req, res) => {
   }
 });
 
+// @desc    Delete portfolio
+// @route   DELETE /api/photographer/delete-portfolio/:id
+// @access  Public
+const deletePortfolio = asyncHandler(async (req, res) => {
+  const { id } = req.body;
+  if (!id) {
+    res.status(400);
+    throw new Error('Portfolio ID is required');
+  }
+  const portfolio = await Portfolio.findByIdAndDelete(id);
+  if (portfolio) {
+    res.status(200).json({ message: 'Portfolio deleted successfully' });
+  } else {
+    res.status(404);
+    throw new Error('Portfolio not found');
+  }
+});
+
 // @desc    Get Photographer
 // @route   GET /api/photographers/:id
 // @access  Private
@@ -311,6 +329,7 @@ export {
   logoutPhotographer,
   addPortfolioByPhotographer,
   getPortfolioByPhotographer,
+  deletePortfolio,
   getPhotographer,
   addBookingLocation,
   getBookingByPhotographer,

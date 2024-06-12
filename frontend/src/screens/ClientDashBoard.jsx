@@ -96,7 +96,13 @@ const ClientDashBoard = () => {
                     <td
                       onClick={() => deleteHandler(photographer.photographerId)}
                     >
-                      <MdOutlineDeleteOutline />
+                      <MdOutlineDeleteOutline
+                        style={{
+                          fontSize: '2rem',
+                          cursor: 'pointer',
+                          color: 'red',
+                        }}
+                      />
                     </td>
                   </tr>
                 ))}
