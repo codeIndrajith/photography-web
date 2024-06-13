@@ -6,8 +6,12 @@
 
 
 .locationSec {
-  padding: 40px 20px;
-  border-radius: 8px;
+ display: flex;
+ flex-direction: column;
+ justify-content: center;
+ align-items: center;
+  width: 100%;
+  /* background-color: red; */
 }
 
 .locationSec h1 {
@@ -20,19 +24,32 @@
 
 .card {
   display: flex;
-  margin-left: -10px !important;
-  flex-wrap: wrap;
+  /* margin-left: -10px !important; */
+  /* flex-wrap: wrap; */
   justify-content: space-between;
+}
+
+.cardSection {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 
 .cardContainer {
   display: flex;
-  flex-wrap: wrap;
   gap: 25px;
   justify-content: center;
   align-items: center;
   width: 100%;
+}
+
+.cardBodySection {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 
@@ -71,29 +88,55 @@
 }
 
 @media (max-width: 1400px) {
-  .cardSection, .col-md-3 {
+  .cardSection{
     flex: 1 1 calc(50% - 20px);
-    max-width: calc(50% - 20px);
+    max-width: calc(90% - 10px);
+  }
+
+  .cardBodySection {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, auto);
+    gap: 10px;
+  }
+
+  .cardBodySection > * {
+    width: 100%; 
   }
 
 }
 
 @media (max-width: 768px) {
-  .cardSection, .col-md-3 {
-    flex: 1 1 100%;
-    max-width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-left: 30px;
+  .cardSection{
+    flex: 1 1 calc(50% - 20px);
+    max-width: calc(90% - 10px);
+    margin-left: auto;
+  }
+
+  .cardBodySection {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    grid-template-rows: repeat(1, auto);
+    gap: 10px; 
+  }
+
+  .cardBodySection > * {
+    width: 100%; 
+  }
+
+  .seeMore button {
+    width: 100%;
   }
 
 }
 
 
 .seeMore {
-  text-align: center;
-  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
 }
 
 .seeMore button {

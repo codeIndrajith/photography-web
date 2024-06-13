@@ -24,7 +24,7 @@ const LocationsSlider = () => {
   const startIndex = (currentPage - 1) * 4;
   const endIndex = Math.min(startIndex + 4, locationsData.length);
   return (
-    <div className="container mt-5 locationSec">
+    <div className="mt-5 locationSec">
       <div className="row">
         <div className="col">
           <h1>Explore Our Place</h1>
@@ -34,7 +34,7 @@ const LocationsSlider = () => {
       {/* Card section */}
       <div className="cards cardSection">
         <div className="cardContainer">
-          <>
+          <div className="cardBodySection">
             {locationsData.slice(startIndex, endIndex).map((location) => (
               <Link
                 to={`locations/${location._id}`}
@@ -42,7 +42,7 @@ const LocationsSlider = () => {
                 key={location._id}
               >
                 <div
-                  className="card-all card"
+                  className="card-all card locationCard"
                   style={{ backgroundImage: `url(${location.images[0]})` }}
                 >
                   <div className="information info-all">
@@ -52,7 +52,7 @@ const LocationsSlider = () => {
                 </div>
               </Link>
             ))}
-          </>
+          </div>
         </div>
       </div>
       <div className="seeMore">

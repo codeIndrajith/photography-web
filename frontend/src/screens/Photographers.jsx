@@ -39,9 +39,9 @@ const Photographers = () => {
   };
 
   return (
-    <div className="container-fluid mt-5">
+    <div className="container-fulid mt-5">
       {/* Header */}
-      <div className="row">
+      <div className="row phMainSection">
         <div className="col text-center">
           <h1 className="mb-4 display-4">
             <strong>Our Photographers</strong>
