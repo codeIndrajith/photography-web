@@ -9,6 +9,8 @@ import { toast } from 'react-toastify';
 import Loader from '../components/Loader';
 import ErrorPage from '../screens/ErrorPage';
 import NotFound from '../components/NotFound';
+import 'leaflet/dist/leaflet.css';
+import MapComponent from '../components/MapComponent';
 
 const LocationPlaceScreen = () => {
   const [activeIndex, setActiveIndex] = useState(0);
@@ -207,7 +209,7 @@ const LocationPlaceScreen = () => {
             )}
           </div>
           <div className="map">
-            <h1>Location map here</h1>
+            <MapComponent address={location.locationAddress} />
           </div>
         </div>
       </div>
