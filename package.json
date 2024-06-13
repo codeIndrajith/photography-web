@@ -1,8 +1,8 @@
 {
-  "name": "Photography_web",
+  "name": "Photogaphy web application",
   "version": "1.0.0",
   "type": "module",
-  "description": "Using MERN technology to develop application",
+  "description": "Using MERN Stack and develop by Indrajith Bodhinayaka",
   "main": "server.js",
   "scripts": {
     "start": "node backend/server.js",

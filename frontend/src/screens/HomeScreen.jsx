@@ -2,6 +2,7 @@
 import Hero from '../components/Hero';
 import Portfolio from '../components/Portfolio';
 import LocationsSlider from '../components/LocationsSlider';
+import Footer from '../components/Footer';
 
 const HomeScreen = () => {
   return (
@@ -9,6 +10,7 @@ const HomeScreen = () => {
       <Hero />
       <Portfolio />
       <LocationsSlider />
+      <Footer />
     </div>
   );
 };
