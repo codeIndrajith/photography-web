@@ -36,11 +36,17 @@ const RegisterScreen = () => {
 
   const { userInfo } = useSelector((state) => state.auth);
 
-  // useEffect(() => {
-  //   if (userInfo) {
-  //     navigate('/');
-  //   }
-  // }, [navigate, userInfo]);
+  useEffect(() => {
+    if (userInfo) {
+      if (userInfo.status === 'client') {
+        navigate('/');
+      } else if (userInfo.status === 'photographer') {
+        navigate(`/photographer-dashboard/${userInfo._id}`);
+      } else {
+        navigate(`/owner-dashboard/${userInfo._id}`);
+      }
+    }
+  }, [navigate, userInfo]);
 
   const handlePhotographer = () => {
     setStatus('photographer');
@@ -86,6 +92,7 @@ const RegisterScreen = () => {
 
           const res = await register(formData).unwrap();
           dispatch(setCredentials({ ...res }));
+          toast.success('Registration success');
           navigate(`/photographer-dashboard/${userInfo._id}`);
         } catch (err) {
           toast.error(err?.data?.message || err.error);
@@ -104,6 +111,7 @@ const RegisterScreen = () => {
             status,
           }).unwrap();
           dispatch(setCredentials({ ...res }));
+          toast.success('Registration success');
           navigate('/');
         } catch (err) {
           toast.error(err?.data?.message || err.error);
@@ -126,6 +134,7 @@ const RegisterScreen = () => {
             status,
           }).unwrap();
           dispatch(setCredentials({ ...res }));
+          toast.success('Registration success');
           navigate('/');
         } catch (err) {
           toast.error(err?.data?.message || err.error);
