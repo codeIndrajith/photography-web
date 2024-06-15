@@ -117,7 +117,7 @@ const PhotographerAbout = () => {
               }
             >
               <img
-                style={{ maxHeight: '600px', objectFit: 'cover' }}
+                style={{ maxHeight: '100vh', objectFit: 'cover' }}
                 src={image}
                 className="d-block w-100"
                 alt={`Slide ${index + 1}`}
