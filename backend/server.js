@@ -8,6 +8,7 @@ import { notFound, errorHandler } from './middleware/errorMiddleware.js';
 import photographerRoutes from './routes/photographerRoutes.js';
 import locationOwner from './routes/locationOwnerRoutes.js';
 import client from './routes/clientRoutes.js';
+import phClub from './routes/phClubRoute.js';
 import cloudinary from 'cloudinary';
 
 cloudinary.config({
@@ -32,6 +33,7 @@ app.use(cookieParser());
 app.use('/api/photographers', photographerRoutes);
 app.use('/api/client', client);
 app.use('/api/locationOwner', locationOwner);
+app.use('/api/phClub', phClub);
 
 if (process.env.NODE_ENV === 'production') {
   const __dirname = path.resolve();

@@ -3,6 +3,7 @@ import asyncHandler from 'express-async-handler';
 import Photographer from '../models/photographerModel.js';
 import Client from '../models/clientModel.js';
 import LocationOwner from '../models/locationOwnerModel.js';
+import PhClub from '../models/phClubModel.js';
 
 const protect = asyncHandler(async (req, res, next) => {
   let token;
@@ -36,6 +37,8 @@ const protect = asyncHandler(async (req, res, next) => {
         user = await LocationOwner.findById(decoded.userId).select('-password');
       } else if (decoded.userType === 'client') {
         user = await Client.findById(decoded.userId).select('-password');
+      } else if (decoded.userType === 'phClub') {
+        user = await PhClub.findById(decoded.userId).select('-password');
       }
 
       req.user = user;

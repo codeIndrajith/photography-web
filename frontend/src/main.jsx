@@ -25,6 +25,9 @@ import PhotographerDashBoard from './screens/PhotographerDashBoard.jsx';
 import LocationOwnerDashBoard from './screens/LocationOwnerDashBoard.jsx';
 import ErrorPage from './screens/ErrorPage.jsx';
 import PhotographerBookingScreen from './screens/PhotographerBookingScreen.jsx';
+import PhotographyRoute from './components/photographyRoute.jsx';
+import PhLoginScreen from './screens/PhLoginScreen.jsx';
+import PhRegisterScreen from './screens/PhRegisterScreen.jsx';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -32,6 +35,8 @@ const router = createBrowserRouter(
       <Route index={true} path="/" element={<HomeScreen />} />
       <Route path="/login" element={<LoginScreen />} />
       <Route path="/register" element={<RegisterScreen />} />
+      <Route path="/phClub-login" element={<PhLoginScreen />} />
+      <Route path="/phClub-register" element={<PhRegisterScreen />} />
       <Route path="/locations" element={<Locations />} />
       <Route path="/locations/:id" element={<LocationPlaceScreen />} />
       <Route path="/photographers/:id" element={<PhotographerAbout />} />
@@ -53,6 +58,7 @@ const router = createBrowserRouter(
           element={<LocationOwnerDashBoard />}
         />
       </Route>
+      <Route path="" element={<PhotographyRoute />}></Route>
     </Route>
   )
 );

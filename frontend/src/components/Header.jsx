@@ -54,6 +54,9 @@ const Header = () => {
                     <LinkContainer to="/locations">
                       <Nav.Link>Locations</Nav.Link>
                     </LinkContainer>
+                    <LinkContainer to="/phClub-login">
+                      <Nav.Link>Club</Nav.Link>
+                    </LinkContainer>
                   </Nav>
                   <NavDropdown
                     title={
