@@ -39,19 +39,18 @@ const Photographers = () => {
   };
 
   return (
-    <div className="container-fulid mt-5">
+    <div className="phContainer">
+      <div className="text-center bannerPhotographer">
+        <h1 className="mb-0 display-4">
+          <strong>Our Photographers</strong>
+        </h1>
+        <hr className="w-25 mx-auto mb-4" />
+        <p className="lead">
+          Discover your photographer and embark on a journey to success
+        </p>
+      </div>
       {/* Header */}
-      <div className="row phMainSection">
-        <div className="col text-center">
-          <h1 className="mb-4 display-4">
-            <strong>Our Photographers</strong>
-          </h1>
-          <hr className="w-25 mx-auto mb-4" />
-          <p className="lead">
-            Discover your photographer and embark on a journey to success
-          </p>
-        </div>
-
+      <div className="phMainSection">
         <div className="row mt-5 conSection">
           {photographerData.slice(startIndex, endIndex).map((photographer) => (
             <Link
@@ -80,20 +79,20 @@ const Photographers = () => {
               </div>
             </Link>
           ))}
-          <div className="row mt-5 btnContainer">
-            <div className="btnSection">
-              {startIndex > 0 && (
-                <button className="backBtnn" onClick={handleBackClick}>
-                  Back
-                </button>
-              )}
-              {endIndex < photographerData.length && (
-                <button className="nextBtnn" onClick={handleNextClick}>
-                  Next
-                </button>
-              )}
-            </div>
-          </div>
+        </div>
+      </div>
+      <div className="btnContainer">
+        <div className="btnSection">
+          {startIndex > 0 && (
+            <button className="backBtnn" onClick={handleBackClick}>
+              Back
+            </button>
+          )}
+          {endIndex < photographerData.length && (
+            <button className="nextBtnn" onClick={handleNextClick}>
+              Next
+            </button>
+          )}
         </div>
       </div>
     </div>
