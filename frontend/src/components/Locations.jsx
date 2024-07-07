@@ -52,7 +52,7 @@ const Locations = () => {
           </div>
         </div>
 
-        <div className="cardContainer row">
+        <div className="cardContainer">
           {locationsData.slice(startIndex, endIndex).map((location) => (
             <Link
               to={`${location._id}`}
